@@ -1,4 +1,5 @@
 import React from "react";
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import "./App.scss";
 import Provider from "react-redux/es/components/Provider";
 import { Dialogues } from "../../Utils/Dialogues";
@@ -9,7 +10,11 @@ function App() {
     <Provider store={store}>
       <div>
         {Dialogues.Wellcome}
-        <SignupForm/>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/signup" component={SignupForm}/>
+          </Switch>
+        </BrowserRouter>
       </div>
     </Provider>
   );
