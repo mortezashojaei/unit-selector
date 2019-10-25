@@ -1,9 +1,8 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import Provider from "react-redux/es/components/Provider";
-import { Dialogues } from "./Utils/Dialogues";
-import store from './Store'
+import { Dialogues } from "../../Utils/Dialogues";
+import store from "../../Store";
 function App() {
   return (
     <Provider store={store}>
