@@ -1,0 +1,14 @@
+.signupForm label{
+    text-align: center;
+    direction: rtl;
+    display: block;
+}
+.signupForm button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.error{
+    color: red;
+    text-align: center;
+}
