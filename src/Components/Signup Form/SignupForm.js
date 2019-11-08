@@ -1,6 +1,5 @@
 import React, { useState , useEffect} from 'react'
-import axios from 'axios'
-import SelectSearch from 'react-select-search'
+import fetchMajors from 'Utils/ApiCalls/FetchList'
 import Select from 'react-select';
 import style from './SignupForm.module.css'
 
@@ -23,7 +22,7 @@ const SignupForm = (props) => {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:3000/majors').then(response => {
+        fetchMajors.then(response => {
             //change response.data to response.data.data from radin code
             setMajors(response.data)
         }).catch(err => console.log(err))
