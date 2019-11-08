@@ -1,5 +1,9 @@
 import {get,post} from './API';
 
-export default function login(data) {
+export function login(data) {
     return post('user/login',data)
+}
+
+export function signup(data) {
+    return post('users',data)
 }

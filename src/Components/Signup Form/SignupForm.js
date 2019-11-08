@@ -1,5 +1,6 @@
 import React, { useState , useEffect} from 'react'
 import fetchMajors from 'Utils/ApiCalls/FetchList'
+import {signup} from 'Utils/ApiCalls/Auth'
 import Select from 'react-select';
 import style from './SignupForm.module.css'
 
@@ -72,8 +73,7 @@ const SignupForm = (props) => {
     const onFormSubmit = (e) => {
         e.preventDefault()
         if(!error){
-            console.log(major)
-            axios.post('http://localhost:3000/users',{
+            signup({
                 username,
                 password,
                 semester,
@@ -82,7 +82,6 @@ const SignupForm = (props) => {
             }).then((res) => {
                 let status = res.status
                 if(status === 200 || status === 201){
-                    console.log(res)
                     alert('done')
                 }else if(status === 409){
                     setError('حساب کاربری با این نام کاربری موجود است')

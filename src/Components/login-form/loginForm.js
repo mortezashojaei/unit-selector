@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./style.scss";
-import login from "Utils/ApiCalls/Auth";
+import {login} from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 const LoginForm = props => {
   const [username, setUsername] = useState("");
