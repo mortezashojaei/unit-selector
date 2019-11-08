@@ -1,13 +1,22 @@
 import React, { useState , useEffect} from 'react'
+import axios from 'axios'
 import style from './SignupForm.module.css'
 
 const SignupForm = (props) => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
+    const [majors,setMajors] = useState([])
     const [major, setMajor] = useState()
-    const [term,setTerm] = useState()
+    const [semester,setSemester] = useState()
     const [fullName, setFullName] = useState()
     const [error, setError] = useState(null)
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/majors').then(response => {
+            setMajors(response.data)
+        }).catch(err => console.log(err))
+    },[])
+
     const handleUsernameChange = (e) => {
         e.persist()
         const username = e.target.value
@@ -28,7 +37,7 @@ const SignupForm = (props) => {
         }
         setPassword(password)
     }
-    const handleTermChange = (e) => {
+    const handleSemesterChange = (e) => {
         e.persist()
         const term = e.target.value
         if(term < 0 || term > 12){
@@ -36,7 +45,7 @@ const SignupForm = (props) => {
         }else{
             setError(null)
         }
-        setTerm(term)
+        setSemester(term)
     }
     const handleFullNameChange = (e) => {
         const name = e.target.value 
@@ -50,7 +59,16 @@ const SignupForm = (props) => {
     const onFormSubmit = (e) => {
         e.preventDefault()
         if(!error){
-            alert(`${username} Done`)
+            axios.post('http://localhost:3000/users',{
+                username,
+                password,
+                semester,
+                major,
+                full_name: fullName
+            }).then(() => {
+                console.log('done')
+                alert('done')
+            }).catch(err => console.log(err))
         }else{
             alert('error')
         }
@@ -75,16 +93,14 @@ const SignupForm = (props) => {
                 <label>ترم
                 <input
                 type="number"
-                value={term}
-                onChange={handleTermChange}
+                value={semester}
+                onChange={handleSemesterChange}
                 />
                 </label>
                 <label>رشته
-                <input
-                type="text"
-                value={major}
-                onChange={handleMajorChange}
-                />
+                <select onChange={handleMajorChange}>
+                    {majors.map(major => <option value={major.id}>{major.name}</option>)}
+                </select>
                 </label>
                 <label>نام و نام خانوادگی
                 <input

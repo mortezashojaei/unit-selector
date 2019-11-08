@@ -1,0 +1,33 @@
+{
+  "majors": [
+    {
+      "id": 1,
+      "name": "Computer"
+    },
+    {
+      "id": 2,
+      "name": "Mechanic"
+    },
+    {
+      "id": 3,
+      "name": "Science"
+    }
+  ],
+  "users": [
+    {
+      "username": "sajjad",
+      "password": "1234",
+      "semester": "5",
+      "full_name": "sajjad mashhadi",
+      "id": 1
+    },
+    {
+      "username": "ali alialai",
+      "password": "1234",
+      "semester": "5",
+      "major": "3",
+      "full_name": "ali ali",
+      "id": 2
+    }
+  ]
+}
