@@ -1,37 +1,40 @@
 import React, { useState , useEffect} from 'react'
 import style from './style.scss'
-
-
+import API from '../../Utils/API'
+import {Dialogues} from '../../Utils/Dialogues'
+const {userinstance}=API;
 const LoginForm = (props) => {
-    const [username, setUsername]=useState(null)
-    const [password,setPassword]=useState(null)
-    const [error,setError]=useState(null);
-    const handlePasswordChange = (e) => {
+    const [username, setUsername]=useState('')
+    const [password,setPassword]=useState('')
+    const [error,setError]=useState('');
+    const handleSubmit = (e) => {
         e.persist()
-        const password = e.target.value 
-        if(password.length < 4){
-            setError('برای رمز عبور بیشتر از 4 کاراکتر وارد کنید')
-        }else{
-            setError(null)
+        e.preventDefault();
+        if(!username || !password ){
+            setError(Dialogues.inputemptyerr)
         }
-        setPassword(password)
-    }
-    const handleUsernameChange = (e) => {
-        e.persist()
-        const username = e.target.value
-        if(username.length < 5 ){
-            setError(' برای نام کاربری بیشتر از 5 کاراکتر وارد کنید')
-        }else{
-            setError(null)
+        else{
+            const req={username , password};
+            userinstance.post('/login',req)
+              .then(function (response) {
+                console.log(response);
+                if(response.body.StatusCode==200)
+                    setError(Dialogues.loginokerr)
+                else
+                    setError(Dialogues.loginfielderr)
+              })
+              .catch(function (error) {
+                setError(Dialogues.haveproblemerr);
+              });
         }
-            setUsername(username)
     }
 
         return (
        <form>
-           <input id="usernme" value={username} placeholder="input username..." onChange={(e)=>{setUsername(e.target.value)}}></input>
-           <input id="password" value={password} placeholder="input password..." onChange={(e)=>{setPassword(e.target.value)}}></input>
-           <button type="submit">submit</button>
+           <input id="usernme" value={username} placeholder={Dialogues.usernameplc} onChange={(e)=>{setUsername(e.target.value)}}></input>
+           <input id="password" value={password} placeholder={Dialogues.passwordplc} onChange={(e)=>{setPassword(e.target.value)}}></input>
+           <button type="submit" onClick={handleSubmit}>{Dialogues.submitbtn}</button>
+           <p>{error}</p>
        </form>
         );
 
