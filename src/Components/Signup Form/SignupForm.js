@@ -4,7 +4,7 @@ import style from './SignupForm.module.css'
 const SignupForm = (props) => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
-    const [telNumber,setTelNumber] = useState(null)
+    const [telNumber,setTelNumber] = useState('')
     const [studentId,setStudentId] = useState(null)
     const [uniName,setUniName] = useState(null)
     const [error, setError] = useState(null)
@@ -29,7 +29,7 @@ const SignupForm = (props) => {
         setPassword(password)
     }
     const handleTelNumber = (e) => {
-        e.persist()
+        // e.persist()
         const tel = e.target.value 
         if(tel.length !== 11 || isNaN(tel)){
             setError('شماره تلفن معتبر وارد کنید')
