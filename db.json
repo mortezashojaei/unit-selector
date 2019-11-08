@@ -1,0 +1,92 @@
+{
+  "majors": [
+    {
+      "id": 1,
+      "name": "Computer"
+    },
+    {
+      "id": 2,
+      "name": "Mechanic"
+    },
+    {
+      "id": 3,
+      "name": "Science"
+    }
+  ],
+  "users": [
+    {
+      "username": "sajjad",
+      "password": "1234",
+      "semester": "5",
+      "full_name": "sajjad mashhadi",
+      "id": 1
+    },
+    {
+      "username": "ali alialai",
+      "password": "1234",
+      "semester": "5",
+      "major": "3",
+      "full_name": "ali ali",
+      "id": 2
+    },
+    {
+      "username": "ali ali aliali",
+      "password": "445555",
+      "semester": "5",
+      "major": "3",
+      "full_name": "dfdf",
+      "id": 3
+    },
+    {
+      "username": "ali1111",
+      "password": "111111",
+      "semester": "2",
+      "full_name": "dfdfdfd",
+      "id": 4
+    },
+    {
+      "username": "mahdidddd",
+      "password": "dfdfdfdf3",
+      "semester": "3",
+      "full_name": "dfdfdf",
+      "id": 5
+    },
+    {
+      "username": "ffffffff",
+      "password": "4444444",
+      "semester": "2",
+      "major": "2",
+      "full_name": "dfffffffff",
+      "id": 6
+    },
+    {
+      "username": null,
+      "password": null,
+      "id": 7
+    },
+    {
+      "username": "hhhhhhhhhhh",
+      "password": "44444444",
+      "semester": "5",
+      "major": 2,
+      "full_name": "dfddfdfdfdfddfddfd",
+      "id": 8
+    },
+    {
+      "username": "aaaaaaaaaa",
+      "password": "1111111111",
+      "semester": "5",
+      "major": 2,
+      "full_name": "aaaaaaa",
+      "id": 9
+    },
+    {
+      "username": "qqqqqqqqqqqq",
+      "password": "55555555555",
+      "semester": "1",
+      "major": 3,
+      "full_name": "dfdfdfdfdf",
+      "id": 10
+    }
+  ]
+}

@@ -1,17 +1,38 @@
 import React, { useState , useEffect} from 'react'
+import axios from 'axios'
+import SelectSearch from 'react-select-search'
+import Select from 'react-select';
 import style from './SignupForm.module.css'
 
 const SignupForm = (props) => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
-    const [telNumber,setTelNumber] = useState('')
-    const [studentId,setStudentId] = useState(null)
-    const [uniName,setUniName] = useState(null)
+    const [majors,setMajors] = useState([])
+    const [major, setMajor] = useState()
+    const [semester,setSemester] = useState()
+    const [fullName, setFullName] = useState()
     const [error, setError] = useState(null)
+
+    const toSelectForm = (majors) => {
+        const majorsCopy = []
+         majors.map(major => {
+                console.log(majorsCopy)
+                return majorsCopy.push({label: major.name, value: major.id})
+            })
+            return majorsCopy
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/majors').then(response => {
+            //change response.data to response.data.data from radin code
+            setMajors(response.data)
+        }).catch(err => console.log(err))
+    },[])
+
     const handleUsernameChange = (e) => {
         e.persist()
         const username = e.target.value
-        if(username.length < 5 ){
+        if(username.length < 2 ){
             setError(' برای نام کاربری بیشتر از 5 کاراکتر وارد کنید')
         }else{
             setError(null)
@@ -28,35 +49,53 @@ const SignupForm = (props) => {
         }
         setPassword(password)
     }
-    const handleTelNumber = (e) => {
-        // e.persist()
-        const tel = e.target.value 
-        if(tel.length !== 11 || isNaN(tel)){
-            setError('شماره تلفن معتبر وارد کنید')
+    const handleSemesterChange = (e) => {
+        e.persist()
+        const term = e.target.value
+        if(term < 0 || term > 12){
+            setError('شماره ترم را اصلاح کنید')
         }else{
             setError(null)
         }
-        setTelNumber(tel)
+        setSemester(term)
     }
-    const handleStudentId = (e) => {
+    const handleFullNameChange = (e) => {
         e.persist()
-        const id = e.target.value
-        if(id.length !== 9 || isNaN(id)){
-            setError('شماره دانشجویی معتبر وارد کنید')
-        }else{
-            setError(null)
-        }
-        setStudentId(id)
+        const name = e.target.value 
+        setFullName(name)
     }
-    const handleUniName = (e) => {
-        e.persist()
-        const uni = e.target.value 
-        setUniName(uni)
+    const handleMajorChange = (e) => {
+        const major = e.value
+        setMajor(major)
+        console.log(e)
     }
     
     const onFormSubmit = (e) => {
         e.preventDefault()
-        alert(`${username} Done`)
+        if(!error){
+            console.log(major)
+            axios.post('http://localhost:3000/users',{
+                username,
+                password,
+                semester,
+                major,
+                full_name: fullName
+            }).then((res) => {
+                let status = res.status
+                if(status === 200 || status === 201){
+                    console.log(res)
+                    alert('done')
+                }else if(status === 409){
+                    setError('حساب کاربری با این نام کاربری موجود است')
+                }else if(status === 406){
+                    setError('خطا در سرور ! لطفا بعدا اقدام کنید')
+                }else if(status === 404 || status === 400){
+                    setError('رشته وارد شده صحیح نمیباشد')
+                }
+            }).catch(err => console.log(err))
+        }else{
+            alert('error')
+        }
     }
 
     return (
@@ -75,20 +114,27 @@ const SignupForm = (props) => {
                 value={password}
                 onChange={handlePasswordChange}/>
                 </label>
-                <label>شماره تلفن 
+                <label>ترم
                 <input
-                value={telNumber}
-                onChange={handleTelNumber}/>
+                type="number"
+                value={semester}
+                onChange={handleSemesterChange}
+                />
                 </label>
-                <label>شماره دانشجویی 
-                <input
-                value={studentId}
-                onChange={handleStudentId}/>
+                <label>رشته
+                <Select
+                className={style.selectSearch}
+                placeholder="انتخاب کنید"
+                options={toSelectForm(majors)}
+                onChange={handleMajorChange}
+                />
                 </label>
-                <label>نام دانشگاه 
+                <label>نام و نام خانوادگی
                 <input
-                value={uniName}
-                onChange={handleUniName}/>
+                type="text"
+                value={fullName}
+                onChange={handleFullNameChange}
+                />
                 </label>
                 <button type="submit">ثبت</button>                
             </form>
