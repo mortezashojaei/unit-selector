@@ -4,9 +4,9 @@ import style from './SignupForm.module.css'
 const SignupForm = (props) => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
-    const [telNumber,setTelNumber] = useState(null)
-    const [studentId,setStudentId] = useState(null)
-    const [uniName,setUniName] = useState(null)
+    const [major, setMajor] = useState()
+    const [term,setTerm] = useState()
+    const [fullName, setFullName] = useState()
     const [error, setError] = useState(null)
     const handleUsernameChange = (e) => {
         e.persist()
@@ -28,35 +28,32 @@ const SignupForm = (props) => {
         }
         setPassword(password)
     }
-    const handleTelNumber = (e) => {
+    const handleTermChange = (e) => {
         e.persist()
-        const tel = e.target.value 
-        if(tel.length !== 11 || isNaN(tel)){
-            setError('شماره تلفن معتبر وارد کنید')
+        const term = e.target.value
+        if(term < 0 || term > 12){
+            setError('شماره ترم را اصلاح کنید')
         }else{
             setError(null)
         }
-        setTelNumber(tel)
+        setTerm(term)
     }
-    const handleStudentId = (e) => {
-        e.persist()
-        const id = e.target.value
-        if(id.length !== 9 || isNaN(id)){
-            setError('شماره دانشجویی معتبر وارد کنید')
-        }else{
-            setError(null)
-        }
-        setStudentId(id)
+    const handleFullNameChange = (e) => {
+        const name = e.target.value 
+        setFullName(name)
     }
-    const handleUniName = (e) => {
-        e.persist()
-        const uni = e.target.value 
-        setUniName(uni)
+    const handleMajorChange = (e) => {
+        const major = e.target.value
+        setMajor(major)
     }
     
     const onFormSubmit = (e) => {
         e.preventDefault()
-        alert(`${username} Done`)
+        if(!error){
+            alert(`${username} Done`)
+        }else{
+            alert('error')
+        }
     }
 
     return (
@@ -75,20 +72,26 @@ const SignupForm = (props) => {
                 value={password}
                 onChange={handlePasswordChange}/>
                 </label>
-                <label>شماره تلفن 
+                <label>ترم
                 <input
-                value={telNumber}
-                onChange={handleTelNumber}/>
+                type="number"
+                value={term}
+                onChange={handleTermChange}
+                />
                 </label>
-                <label>شماره دانشجویی 
+                <label>رشته
                 <input
-                value={studentId}
-                onChange={handleStudentId}/>
+                type="text"
+                value={major}
+                onChange={handleMajorChange}
+                />
                 </label>
-                <label>نام دانشگاه 
+                <label>نام و نام خانوادگی
                 <input
-                value={uniName}
-                onChange={handleUniName}/>
+                type="text"
+                value={fullName}
+                onChange={handleFullNameChange}
+                />
                 </label>
                 <button type="submit">ثبت</button>                
             </form>
