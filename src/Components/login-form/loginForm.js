@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from 'react'
 import style from './style.scss'
-import API from '../../Utils/API'
-import {Dialogues} from '../../Utils/Dialogues'
+import API from 'Utils/API'
+import {Dialogues} from 'Utils/Dialogues'
 const {userinstance}=API;
 const LoginForm = (props) => {
     const [username, setUsername]=useState('')
