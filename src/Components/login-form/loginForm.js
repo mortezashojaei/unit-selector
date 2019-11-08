@@ -14,17 +14,36 @@ const LoginForm = (props) => {
             setError(Dialogues.inputemptyerr)
         }
         else{
-            const req={username , password};
-            userinstance.post('/login',req)
+            const data={
+                username , password
+            };
+            userinstance.post('/login/',data)
               .then(function (response) {
-                console.log(response);
-                if(response.body.StatusCode==200)
-                    setError(Dialogues.loginokerr)
-                else
-                    setError(Dialogues.loginfielderr)
+                if(response.data.StatusCode==200)
+                    setError(Dialogues.loginokerr)    
               })
               .catch(function (error) {
-                setError(Dialogues.haveproblemerr);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    //console.log(error.response.data);
+                    //console.log(error.response.status);
+                    //console.log(error.response.headers);
+                    if(error.response.status==403){
+                        setError(Dialogues.loginfielderr)
+                    }
+                  } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    //console.log(error.request);
+                    setError(Dialogues.haveproblemerr);
+                  } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                    setError(Dialogues.haveproblemerr);
+                  }
+                
               });
         }
     }
