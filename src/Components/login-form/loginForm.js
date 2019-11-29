@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-import style from "./style.scss";
+import styles from "./LoginForm.module.scss";
 import { login } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 const LoginForm = props => {
@@ -48,24 +47,28 @@ const LoginForm = props => {
   };
 
   return (
-    <div>
+    <div className={styles.loginForm}>
       <form>
-        <input
-          id="usernme"
-          value={username}
-          placeholder={Dialogues.usernameplc}
-          onChange={e => {
-            setUsername(e.target.value);
-          }}
-        ></input>
-        <input
-          id="password"
-          value={password}
-          placeholder={Dialogues.passwordplc}
-          onChange={e => {
-            setPassword(e.target.value);
-          }}
-        ></input>
+        <fieldset>
+          <input
+            id="usernme"
+            value={username}
+            placeholder={Dialogues.usernameplc}
+            onChange={e => {
+              setUsername(e.target.value);
+            }}
+            type="email"
+          ></input>
+          <input
+            id="password"
+            value={password}
+            placeholder={Dialogues.passwordplc}
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
+            type="password"
+          ></input>
+        </fieldset>
         <button type="submit" onClick={handleSubmit}>
           {Dialogues.submitbtn}
         </button>

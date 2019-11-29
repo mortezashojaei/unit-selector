@@ -1,0 +1,36 @@
+@import "../../assets/styles/libs/placeholders";
+.loginForm {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    fieldset {
+      border: none;
+    }
+    button {
+      @extend %buttonGradientColor;
+      outline: none;
+
+      margin-top: 25px;
+      border: none;
+      height: 50px;
+      border-radius: 35px;
+      width: 270px;
+      color: white;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+  }
+  @extend %inputStyles;
+  input {
+    &:first-of-type {
+      margin-left: 20px;
+    }
+  }
+}

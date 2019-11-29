@@ -3,3 +3,33 @@
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
 }
+
+%inputStyles {
+  input {
+    border: none;
+    border-bottom: 1.5px solid #96939b;
+    outline: none;
+    padding: 7px 0;
+  }
+}
+
+%buttonGradientColor {
+  background: linear-gradient(
+    90deg,
+    rgba(232, 232, 232, 1) 0%,
+    rgba(86, 66, 86, 1) 20%,
+    rgba(86, 66, 86, 1) 35%,
+    rgba(252, 129, 74, 1) 65%,
+    rgba(252, 129, 74, 1) 80%,
+    rgba(232, 232, 232, 1) 100%
+  );
+  @media screen and (hover: hover) {
+    &:hover {
+      background: linear-gradient(
+        90deg,
+        rgba(252, 129, 74, 1) 25%,
+        rgba(86, 66, 86, 1) 75%
+      );
+    }
+  }
+}
