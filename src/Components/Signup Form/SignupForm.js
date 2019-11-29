@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import Select from "react-select";
-import style from "./SignupForm.module.css";
+import styles from "./SignupForm.module.scss";
+import { Dialogues } from "Utils/Dialogues";
 
 const SignupForm = props => {
   const [username, setUsername] = useState(null);
@@ -104,43 +105,60 @@ const SignupForm = props => {
   };
 
   return (
-    <div>
-      <form className={style.signupForm} onSubmit={onFormSubmit}>
-        {error && <p className={style.error}>{error}</p>}
-        <label>
-          نام کاربری
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <label>
-          رمز عبور
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </label>
-        <label>
-          ترم
-          <input
-            type="number"
-            value={semester}
-            onChange={handleSemesterChange}
-          />
-        </label>
-        <label>
-          رشته
-          <Select
-            className={style.selectSearch}
-            placeholder="انتخاب کنید"
-            options={toSelectForm(majors)}
-            onChange={handleMajorChange}
-          />
-        </label>
-        <label>
-          نام و نام خانوادگی
-          <input type="text" value={fullName} onChange={handleFullNameChange} />
-        </label>
-        <button type="submit">ثبت</button>
+    <div className={styles.signupForm}>
+      <form onSubmit={onFormSubmit}>
+        <div>
+          {error && <p className={styles.error}>{error}</p>}
+          <label>
+            {fullName && <span>{Dialogues.fullnamePlaceholder}</span>}
+            <input
+              type="text"
+              value={fullName}
+              onChange={handleFullNameChange}
+              placeholder={Dialogues.fullnamePlaceholder}
+            />
+          </label>
+
+          <label>
+            {password && <span>{Dialogues.passwordPlaceholder}</span>}
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder={Dialogues.passwordPlaceholder}
+            />
+          </label>
+          <label>
+            {major && <span>{Dialogues.majorPlaceholder}</span>}
+            <Select
+              className={styles.selectSearch}
+              options={toSelectForm(majors)}
+              onChange={handleMajorChange}
+              placeholder={Dialogues.majorPlaceholder}
+            />
+          </label>
+          <label>
+            {semester && <span>{Dialogues.semesterPlaceholder}</span>}
+            <input
+              type="number"
+              value={semester}
+              onChange={handleSemesterChange}
+              placeholder={Dialogues.semesterPlaceholder}
+            />
+          </label>
+          {/* looks like we don't need this field right now */}
+          {/* <label>
+            نام کاربری
+            <input
+              type="text"
+              value={username}
+              onChange={handleUsernameChange}
+              placeholder={Dialogues.passwordPlaceholder}
+
+            />
+          </label> */}
+        </div>
+        <button type="submit">تکمیل عضویت</button>
       </form>
       <Link to="/">خانه</Link>
     </div>

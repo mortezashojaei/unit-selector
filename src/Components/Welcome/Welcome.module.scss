@@ -9,12 +9,15 @@
   justify-content: center;
   background: $backgroundColor;
   user-select: none;
+  figure + * {
+    flex-grow: 1;
+  }
   figure {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 5rem 0 2rem 0;
     img {
       width: 135px;
       height: auto;
@@ -27,7 +30,7 @@
         font-size: 1.7rem;
         margin-bottom: 0;
       }
-      color: #5f5f5f;
+      color: $basicGray;
     }
   }
 }
@@ -44,12 +47,11 @@
     align-items: center;
     padding: 5px 15px;
     font-size: 1.1rem;
-    // transition: transform 0.2s ease-in-out;
-    @extend %normalBoxShadow;
+    animation-name: appear;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
     @media screen and(hover:hover) {
       &:hover {
-        border: 1px solid rgb(51, 50, 50);
-        // transform: scale(1.08);
         text-decoration: none;
       }
     }
@@ -63,9 +65,15 @@
     }
   }
   .logIn {
+    @extend %normalBoxShadow;
     border-top-right-radius: $buttonBorderRadius;
     border-bottom-left-radius: $buttonBorderRadius;
     justify-content: flex-end;
+    @media screen and(hover:hover) {
+      &:hover {
+        border: 1px solid rgb(51, 50, 50);
+      }
+    }
     embed {
       margin-right: 12px;
     }
@@ -76,9 +84,16 @@
     }
   }
   .signUp {
+    @extend %normalBoxShadow--orange;
     border-top-left-radius: $buttonBorderRadius;
     border-bottom-right-radius: $buttonBorderRadius;
     justify-content: flex-start;
+    @media screen and(hover:hover) {
+      &:hover {
+        border: 1px solid $basicOrange;
+        text-decoration: none;
+      }
+    }
     embed {
       margin-left: 12px;
     }
@@ -87,5 +102,14 @@
       width: 50px;
       height: 50px;
     }
+  }
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }

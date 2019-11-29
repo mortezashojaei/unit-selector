@@ -1,19 +1,57 @@
 %normalBoxShadow {
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.568);
+  -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.568);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.568);
+}
+%normalBoxShadow--orange {
+  -webkit-box-shadow: 0px 2px 4px 0px #fc824ac0;
+  -moz-box-shadow: 0px 2px 4px 0px #fc824ac0;
+  box-shadow: 0px 2px 4px 0px #fc824ac0;
 }
 
 %inputStyles {
-  input {
-    border: none;
-    border-bottom: 1.5px solid #96939b;
-    outline: none;
-    padding: 7px 0;
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: start;
+    color: $labelGray;
+    min-height: 70px;
+    span {
+      animation-name: riseToTop;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+    }
+    input {
+      border: none;
+      border-bottom: 1.5px solid $labelGray;
+      padding: 7px 0;
+      background: transparent;
+    }
+    input:not([value=""]) {
+      border-bottom: 1.5px solid $basicOrange;
+    }
+  }
+
+  @keyframes riseToTop {
+    from {
+      transform: translateY(31px);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
 }
 
 %buttonGradientColor {
+  margin-top: 25px;
+  border: none;
+  height: 50px;
+  border-radius: 35px;
+  width: 270px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
   background: linear-gradient(
     90deg,
     rgba(232, 232, 232, 1) 0%,

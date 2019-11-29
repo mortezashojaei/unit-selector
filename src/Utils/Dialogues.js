@@ -6,5 +6,9 @@ export const Dialogues = {
   passwordplc: "گذرواژه",
   haveproblemerr: "have a problem",
   loginokerr: "all right, you logged in now!",
-  loginfielderr: "login failed. please check inputs."
+  loginfielderr: "login failed. please check inputs.",
+  fullnamePlaceholder: "نام و نام خانوادگی",
+  passwordPlaceholder: "گذرواژه",
+  majorPlaceholder: " رشته تحصیلی",
+  semesterPlaceholder: "ترم تحصیلی"
 };

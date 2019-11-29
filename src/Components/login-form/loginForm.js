@@ -49,26 +49,32 @@ const LoginForm = props => {
   return (
     <div className={styles.loginForm}>
       <form>
-        <fieldset>
-          <input
-            id="usernme"
-            value={username}
-            placeholder={Dialogues.usernameplc}
-            onChange={e => {
-              setUsername(e.target.value);
-            }}
-            type="email"
-          ></input>
-          <input
-            id="password"
-            value={password}
-            placeholder={Dialogues.passwordplc}
-            onChange={e => {
-              setPassword(e.target.value);
-            }}
-            type="password"
-          ></input>
-        </fieldset>
+        <div>
+          <label>
+            {username && <span>{Dialogues.usernameplc}</span>}
+            <input
+              id="usernme"
+              value={username}
+              placeholder={Dialogues.usernameplc}
+              onChange={e => {
+                setUsername(e.target.value);
+              }}
+              type="email"
+            ></input>
+          </label>
+          <label>
+            {password && <span>{Dialogues.passwordplc}</span>}
+            <input
+              id="password"
+              value={password}
+              placeholder={Dialogues.passwordplc}
+              onChange={e => {
+                setPassword(e.target.value);
+              }}
+              type="password"
+            ></input>
+          </label>
+        </div>
         <button type="submit" onClick={handleSubmit}>
           {Dialogues.submitbtn}
         </button>
