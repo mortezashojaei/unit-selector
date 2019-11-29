@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import Select from "react-select";
@@ -22,7 +23,8 @@ const SignupForm = props => {
     return majorsCopy;
   };
   function setMajorsInSelectSearch() {
-    fetchMajors().then(response => {
+    fetchMajors()
+      .then(response => {
         setMajors(response.data);
       })
       .catch(err => console.log(err));
@@ -140,6 +142,7 @@ const SignupForm = props => {
         </label>
         <button type="submit">ثبت</button>
       </form>
+      <Link to="/">خانه</Link>
     </div>
   );
 };

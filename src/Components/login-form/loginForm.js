@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import style from "./style.scss";
-import {login} from "Utils/ApiCalls/Auth";
+import { login } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 const LoginForm = props => {
   const [username, setUsername] = useState("");
@@ -46,28 +48,31 @@ const LoginForm = props => {
   };
 
   return (
-    <form>
-      <input
-        id="usernme"
-        value={username}
-        placeholder={Dialogues.usernameplc}
-        onChange={e => {
-          setUsername(e.target.value);
-        }}
-      ></input>
-      <input
-        id="password"
-        value={password}
-        placeholder={Dialogues.passwordplc}
-        onChange={e => {
-          setPassword(e.target.value);
-        }}
-      ></input>
-      <button type="submit" onClick={handleSubmit}>
-        {Dialogues.submitbtn}
-      </button>
-      <p>{error}</p>
-    </form>
+    <div>
+      <form>
+        <input
+          id="usernme"
+          value={username}
+          placeholder={Dialogues.usernameplc}
+          onChange={e => {
+            setUsername(e.target.value);
+          }}
+        ></input>
+        <input
+          id="password"
+          value={password}
+          placeholder={Dialogues.passwordplc}
+          onChange={e => {
+            setPassword(e.target.value);
+          }}
+        ></input>
+        <button type="submit" onClick={handleSubmit}>
+          {Dialogues.submitbtn}
+        </button>
+        <p>{error}</p>
+      </form>
+      <Link to="/">خانه</Link>
+    </div>
   );
 };
 export default LoginForm;
