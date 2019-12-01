@@ -7,6 +7,7 @@ import styles from "./SignupForm.module.scss";
 import { Dialogues } from "Utils/Dialogues";
 
 const SignupForm = props => {
+  const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [majors, setMajors] = useState([]);
@@ -14,10 +15,38 @@ const SignupForm = props => {
   const [semester, setSemester] = useState();
   const [fullName, setFullName] = useState();
   const [error, setError] = useState(null);
+  const [wrongCredentials, setWrongCredentials] = useState({
+    email: false,
+    password: false,
+    fullName: false,
+    semester: false
+  });
+  const [emptyFields, setEmptyFields] = useState({
+    email: false,
+    password: false,
+    fullName: false,
+    semester: false
+  });
+
+  /* change the empty fields whenever the inputs change */
+  useEffect(() => {
+    if (email) {
+      setEmptyFieldToFalse("email");
+    }
+    if (password) {
+      setEmptyFieldToFalse("password");
+    }
+    if (fullName) {
+      setEmptyFieldToFalse("fullName");
+    }
+    if (semester) {
+      setEmptyFieldToFalse("semester");
+    }
+  }, [email, password, fullName, semester]);
 
   const toSelectForm = majors => {
     const majorsCopy = [];
-    majors.map(major => {
+    majors.forEach(major => {
       console.log(majorsCopy);
       return majorsCopy.push({ label: major.name, value: major.id });
     });
@@ -48,11 +77,7 @@ const SignupForm = props => {
   const handlePasswordChange = e => {
     e.persist();
     const password = e.target.value;
-    if (password.length < 4) {
-      setError("برای رمز عبور بیشتر از 4 کاراکتر وارد کنید");
-    } else {
-      setError(null);
-    }
+    setError(null);
     setPassword(password);
   };
   const handleSemesterChange = e => {
@@ -76,9 +101,34 @@ const SignupForm = props => {
     console.log(e);
   };
 
+  const setEmptyFieldToTrue = key => {
+    /* we pass a callback to the setState to get the latest state */
+    setEmptyFields(emptyFields => ({ ...emptyFields, [key]: true }));
+  };
+
+  const setEmptyFieldToFalse = key => {
+    setEmptyFields(emptyFields => ({
+      ...emptyFields,
+      [key]: false
+    }));
+  };
+
   const onFormSubmit = e => {
     e.preventDefault();
-    if (!error) {
+    if (!semester) {
+      setEmptyFieldToTrue("semester");
+    }
+    if (!fullName) {
+      setEmptyFieldToTrue("fullName");
+    }
+    if (!password) {
+      setEmptyFieldToTrue("password");
+    } else if (password.length < 4) {
+      setError("برای رمز عبور بیشتر از 4 کاراکتر وارد کنید");
+    } else {
+      setError(null);
+    }
+    if (!error && semester && fullName && password) {
       signup({
         username,
         password,
@@ -112,21 +162,43 @@ const SignupForm = props => {
           <label>
             {fullName && <span>{Dialogues.fullnamePlaceholder}</span>}
             <input
+              className={
+                (emptyFields.fullName || wrongCredentials.fullName) &&
+                styles.error
+              }
               type="text"
               value={fullName}
               onChange={handleFullNameChange}
               placeholder={Dialogues.fullnamePlaceholder}
             />
+            {emptyFields.fullName ? (
+              <p>{`${Dialogues.fullnamePlaceholder} نمی تواند خالی باشد`}</p>
+            ) : (
+              wrongCredentials.fullName && (
+                <p>{`${Dialogues.fullnamePlaceholder} اشتباه است`}</p>
+              )
+            )}
           </label>
 
           <label>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
+              className={
+                (emptyFields.password || wrongCredentials.password) &&
+                styles.error
+              }
               type="password"
               value={password}
               onChange={handlePasswordChange}
               placeholder={Dialogues.passwordPlaceholder}
             />
+            {emptyFields.password ? (
+              <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+            ) : (
+              wrongCredentials.password && (
+                <p>{`${Dialogues.passwordPlaceholder} اشتباه است`}</p>
+              )
+            )}
           </label>
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
@@ -140,11 +212,22 @@ const SignupForm = props => {
           <label>
             {semester && <span>{Dialogues.semesterPlaceholder}</span>}
             <input
+              className={
+                (emptyFields.semester || wrongCredentials.semester) &&
+                styles.error
+              }
               type="number"
               value={semester}
               onChange={handleSemesterChange}
               placeholder={Dialogues.semesterPlaceholder}
             />
+            {emptyFields.semester ? (
+              <p>{`${Dialogues.semesterPlaceholder} نمی تواند خالی باشد`}</p>
+            ) : (
+              wrongCredentials.semester && (
+                <p>{`${Dialogues.semesterPlaceholder} اشتباه است`}</p>
+              )
+            )}
           </label>
           {/* looks like we don't need this field right now */}
           {/* <label>

@@ -23,7 +23,8 @@
       border-bottom: 1.5px solid red;
     }
     span {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 500;
       animation-name: riseToTop;
       animation-duration: 0.3s;
       animation-timing-function: ease-out;
@@ -42,7 +43,7 @@
       padding: 7px 0;
       background: transparent;
     }
-    input:not([value=""]) {
+    input:focus {
       border-bottom: 1.5px solid $basicOrange;
     }
   }

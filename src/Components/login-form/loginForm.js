@@ -7,31 +7,41 @@ const LoginForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [wrongInputs, setWrongInputs] = useState({
+  const [wrongCredentials, setWrongCredentials] = useState({
     email: false,
     password: false
   });
-
+  const [emptyFields, setEmptyFields] = useState({
+    email: false,
+    password: false
+  });
+  /* change the empty fields whenever the inputs change */
   useEffect(() => {
     if (email) {
-      setWrongInputs(wrongInputs => ({ ...wrongInputs, email: false }));
+      setEmptyFields(emptyFields => ({
+        ...emptyFields,
+        email: false
+      }));
     }
     if (password) {
-      setWrongInputs(wrongInputs => ({ ...wrongInputs, password: false }));
+      setEmptyFields(emptyFields => ({
+        ...emptyFields,
+        password: false
+      }));
     }
   }, [email, password]);
 
   const handleSubmit = e => {
     e.persist();
     e.preventDefault();
-    if (!email && password) {
-      setWrongInputs({ ...wrongInputs, email: true });
-    } else if (!password && email) {
-      setWrongInputs({ ...wrongInputs, password: true });
-    } else if (!password && !email) {
-      setWrongInputs({ email: true, password: true });
-    } else {
-      setWrongInputs({ email: false, password: false });
+    if (!email) {
+      setEmptyFields(emptyFields => ({ ...emptyFields, email: true }));
+    }
+    if (!password) {
+      setEmptyFields(emptyFields => ({ ...emptyFields, password: true }));
+    }
+    if (password && email) {
+      setEmptyFields({ email: false, password: false });
       const data = {
         email,
         password
@@ -72,7 +82,9 @@ const LoginForm = props => {
           <label>
             {email && <span>{Dialogues.emailPlaceholder}</span>}
             <input
-              className={wrongInputs.email && styles.error}
+              className={
+                (emptyFields.email || wrongCredentials.email) && styles.error
+              }
               id="usernme"
               value={email}
               placeholder={Dialogues.emailPlaceholder}
@@ -81,16 +93,22 @@ const LoginForm = props => {
               }}
               type="email"
             ></input>
-            {wrongInputs.email && (
-              <p
-                className={styles.wrongInputs}
-              >{`${Dialogues.emailPlaceholder} اشتباه است`}</p>
+
+            {emptyFields.email ? (
+              <p>{`${Dialogues.emailPlaceholder} نمی تواند خالی باشد`}</p>
+            ) : (
+              wrongCredentials.email && (
+                <p>{`${Dialogues.emailPlaceholder} اشتباه است`}</p>
+              )
             )}
           </label>
           <label>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
-              className={wrongInputs.password && styles.error}
+              className={
+                (emptyFields.password || wrongCredentials.password) &&
+                styles.error
+              }
               id="password"
               value={password}
               placeholder={Dialogues.passwordPlaceholder}
@@ -99,10 +117,13 @@ const LoginForm = props => {
               }}
               type="password"
             ></input>
-            {wrongInputs.password && (
-              <p
-                className={styles.wrongInputs}
-              >{`${Dialogues.passwordPlaceholder} اشتباه است`}</p>
+
+            {emptyFields.password ? (
+              <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+            ) : (
+              wrongCredentials.password && (
+                <p>{`${Dialogues.passwordPlaceholder} اشتباه است`}</p>
+              )
             )}
           </label>
         </div>
