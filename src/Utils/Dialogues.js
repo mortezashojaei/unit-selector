@@ -2,7 +2,7 @@ export const Dialogues = {
   Wellcome: "خوش آمدید",
   inputemptyerr: "inputs empty",
   submitbtn: "ورود",
-  usernameplc: "پست الکترونیکی",
+  emailPlaceholder: "پست الکترونیکی",
   passwordplc: "گذرواژه",
   haveproblemerr: "have a problem",
   loginokerr: "all right, you logged in now!",
