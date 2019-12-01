@@ -82,9 +82,8 @@ const LoginForm = props => {
           <label>
             {email && <span>{Dialogues.emailPlaceholder}</span>}
             <input
-              className={
-                (emptyFields.email || wrongCredentials.email) && styles.error
-              }
+              className={`${(emptyFields.email || wrongCredentials.email) &&
+                styles.error}`}
               id="usernme"
               value={email}
               placeholder={Dialogues.emailPlaceholder}
@@ -105,10 +104,9 @@ const LoginForm = props => {
           <label>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
-              className={
-                (emptyFields.password || wrongCredentials.password) &&
-                styles.error
-              }
+              className={`${(emptyFields.password ||
+                wrongCredentials.password) &&
+                styles.error}`}
               id="password"
               value={password}
               placeholder={Dialogues.passwordPlaceholder}

@@ -5,6 +5,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
+  // top: -1rem;
   form {
     display: flex;
     flex-direction: column;
@@ -14,7 +16,7 @@
   @extend %inputStyles;
 
   button {
-    @extend %buttonGradientColor;
+    @extend %gradientButton;
   }
   div {
     border: none;
@@ -23,7 +25,13 @@
     // grid-template-rows:
     //   auto
     //   auto auto;
-    column-gap: 20px;
-    row-gap: 20px;
+    gap: 15px;
+    @media screen and(max-width:460px) {
+      grid-template-columns: 95%;
+      column-gap: unset;
+      row-gap: 7px;
+    }
+  }
+  @media screen and(max-width:460px) {
   }
 }

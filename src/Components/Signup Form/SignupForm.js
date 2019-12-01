@@ -9,7 +9,7 @@ import { Dialogues } from "Utils/Dialogues";
 const SignupForm = props => {
   const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [password, setPassword] = useState(undefined);
   const [majors, setMajors] = useState([]);
   const [major, setMajor] = useState();
   const [semester, setSemester] = useState();
@@ -162,10 +162,9 @@ const SignupForm = props => {
           <label>
             {fullName && <span>{Dialogues.fullnamePlaceholder}</span>}
             <input
-              className={
-                (emptyFields.fullName || wrongCredentials.fullName) &&
-                styles.error
-              }
+              className={`${(emptyFields.fullName ||
+                wrongCredentials.fullName) &&
+                styles.error}`}
               type="text"
               value={fullName}
               onChange={handleFullNameChange}
@@ -183,10 +182,9 @@ const SignupForm = props => {
           <label>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
-              className={
-                (emptyFields.password || wrongCredentials.password) &&
-                styles.error
-              }
+              className={`${(emptyFields.password ||
+                wrongCredentials.password) &&
+                styles.error}`}
               type="password"
               value={password}
               onChange={handlePasswordChange}
@@ -212,10 +210,9 @@ const SignupForm = props => {
           <label>
             {semester && <span>{Dialogues.semesterPlaceholder}</span>}
             <input
-              className={
-                (emptyFields.semester || wrongCredentials.semester) &&
-                styles.error
-              }
+              className={`${(emptyFields.semester ||
+                wrongCredentials.semester) &&
+                styles.error}`}
               type="number"
               value={semester}
               onChange={handleSemesterChange}
