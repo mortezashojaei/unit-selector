@@ -121,6 +121,31 @@ const SignupForm = props => {
   const setEmptyFieldToFalse = key => {
     setEmptyFields(emptyFields => ({...emptyFields,[key]: false}))
   }
+  const toSubmit = () => {
+    signup({
+      password,
+      studentNumber,
+      semester,
+      major,
+      full_name: fullName
+    })
+      .then(res => {
+        let status = res.status;
+        if (status === 200 || status === 201) {
+          alert("done");
+        }
+      })
+      .catch(err => {
+        let status = err.status
+        if (status === 409) {
+          setError("حساب کاربری با این نام کاربری موجود است");
+        } else if (status === 406) {
+          setError("خطا در سرور ! لطفا بعدا اقدام کنید");
+        } else if (status === 404 || status === 400) {
+          setError("رشته وارد شده صحیح نمیباشد");
+        }
+      });
+  }
 
   const onFormSubmit = e => {
     e.preventDefault();
@@ -132,34 +157,13 @@ const SignupForm = props => {
     password && !passwordConfirm ? setEmptyFieldToTrue('passwordConfirm') : setEmptyFieldToFalse('passwordConfirm')
     password && password !== passwordConfirm ? setWrongCredentialsToTrue('passwordConfirm') : setWrongCredentialsToFalse('passwordConfirm')
     studentNumber && isNaN(studentNumber) ? setWrongCredentialsToTrue('studentNumber') : setWrongCredentialsToFalse('studentNumber')
-     
-    let err = Object.keys(wrongCredentials).some(key => wrongCredentials[key] === true)
-
+    let err
+    if( isNaN(studentNumber) || password.length < 4 || password !== passwordConfirm){
+       err = true
+     }
     if (!err && (fullName && password && semester && studentNumber && passwordConfirm)) {
       console.log('submited')
-      signup({
-        password,
-        studentNumber,
-        semester,
-        major,
-        full_name: fullName
-      })
-        .then(res => {
-          let status = res.status;
-          if (status === 200 || status === 201) {
-            alert("done");
-          }
-        })
-        .catch(err => {
-          let status = err.status
-          if (status === 409) {
-            setError("حساب کاربری با این نام کاربری موجود است");
-          } else if (status === 406) {
-            setError("خطا در سرور ! لطفا بعدا اقدام کنید");
-          } else if (status === 404 || status === 400) {
-            setError("رشته وارد شده صحیح نمیباشد");
-          }
-        });
+      toSubmit()
     }else {
       alert("error");
     }
