@@ -15,7 +15,6 @@ const SignupForm = props => {
   const [semester, setSemester] = useState();
   const [fullName, setFullName] = useState();
   const [error, setError] = useState(null);
-  const [problem, setProblem] = useState(true)
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
     passwordConfirm: false,
@@ -68,23 +67,9 @@ const SignupForm = props => {
       .catch(err => console.log(err));
   }
 
-  // useEffect(() => {
-  //   setMajorsInSelectSearch();
-  // }, []);
-
   useEffect(() => {
-    let err = Object.keys(wrongCredentials).some(key => wrongCredentials[key] === true)
-    let empty = Object.keys(emptyFields).some(key => emptyFields[key] === true)
-    if(empty){
-      setProblem(true)
-    }else{
-      if(err){
-        setProblem(true)
-      }else{
-        setProblem(false)
-      }
-    }
-  },[wrongCredentials, emptyFields])
+    setMajorsInSelectSearch();
+  }, []);
 
   const handlePasswordChange = e => {
     e.persist();
@@ -137,11 +122,6 @@ const SignupForm = props => {
     setEmptyFields(emptyFields => ({...emptyFields,[key]: false}))
   }
 
-      // const err = Object.keys(wrongCredentials).some(key => wrongCredentials[key] === true)
-      // const empty = Object.keys(emptyFields).some(key => emptyFields[key] === true)
-      
-  
-
   const onFormSubmit = e => {
     e.preventDefault();
     fullName ? setEmptyFieldToFalse('fullName') : setEmptyFieldToTrue('fullName')
@@ -152,10 +132,10 @@ const SignupForm = props => {
     password && !passwordConfirm ? setEmptyFieldToTrue('passwordConfirm') : setEmptyFieldToFalse('passwordConfirm')
     password && password !== passwordConfirm ? setWrongCredentialsToTrue('passwordConfirm') : setWrongCredentialsToFalse('passwordConfirm')
     studentNumber && isNaN(studentNumber) ? setWrongCredentialsToTrue('studentNumber') : setWrongCredentialsToFalse('studentNumber')
+     
+    let err = Object.keys(wrongCredentials).some(key => wrongCredentials[key] === true)
 
-    //this if statement has a problem !!!!
-    if (!problem) {
-      console.log(problem)
+    if (!err && (fullName && password && semester && studentNumber && passwordConfirm)) {
       console.log('submited')
       signup({
         password,
