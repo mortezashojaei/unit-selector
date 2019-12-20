@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    
   }
   @extend %inputStyles;
 
@@ -35,3 +36,4 @@
   @media screen and(max-width:460px) {
   }
 }
+

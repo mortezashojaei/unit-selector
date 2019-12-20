@@ -20,16 +20,16 @@ const SignupForm = props => {
     passwordConfirm: false,
     fullName: false,
     semester: false,
-    studentNumber: false
-    // major: false
+    studentNumber: false,
+    major: false
   });
   const [emptyFields, setEmptyFields] = useState({
     password: false,
     passwordConfirm: false,
     fullName: false,
     semester: false,
-    studentNumber: false
-    // major: false
+    studentNumber: false,
+    major: false
   });
 
   /* change the empty fields whenever the inputs change */
@@ -51,7 +51,7 @@ const SignupForm = props => {
     }
   }, [password, passwordConfirm, fullName, semester,studentNumber]);
 
-  const toSelectForm = majors => {
+  const toSelectForm = (majors) => {
     const majorsCopy = [];
     majors.forEach(major => {
       console.log(majorsCopy);
@@ -63,8 +63,9 @@ const SignupForm = props => {
     fetchMajors()
       .then(response => {
         setMajors(response.data);
+        // console.log(response)
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log('couldnt fetch'));
   }
 
   useEffect(() => {
@@ -150,6 +151,7 @@ const SignupForm = props => {
   const onFormSubmit = e => {
     e.preventDefault();
     fullName ? setEmptyFieldToFalse('fullName') : setEmptyFieldToTrue('fullName')
+    major ? setEmptyFieldToFalse('major') : setEmptyFieldToTrue('major')
     semester ? setEmptyFieldToFalse('semester') : setEmptyFieldToTrue('semester')
     password ? setEmptyFieldToFalse('password') : setEmptyFieldToTrue('password')
     studentNumber ? setEmptyFieldToFalse('studentNumber') : setEmptyFieldToTrue('studentNumber')
@@ -161,7 +163,7 @@ const SignupForm = props => {
     if( isNaN(studentNumber) || password.length < 4 || password !== passwordConfirm){
        err = true
      }
-    if (!err && (fullName && password && semester && studentNumber && passwordConfirm)) {
+    if (!err && (fullName && major && password && semester && studentNumber && passwordConfirm)) {
       console.log('submited')
       toSubmit()
     }else {
@@ -265,6 +267,13 @@ const SignupForm = props => {
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
             />
+            {emptyFields.major ? (
+              <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
+            ) : (
+              wrongCredentials.major && (
+                <p>{`${Dialogues.majorPlaceholder} اشتباه است`}</p>
+              )
+            )}
           </label>
           <label>
             {semester && <span>{Dialogues.semesterPlaceholder}</span>}
