@@ -1,5 +1,5 @@
-@import "../../assets/styles/libs/vars";
-@import "../../assets/styles/libs/placeholders";
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/placeholders";
 .signupForm {
   display: flex;
   flex-direction: column;
@@ -12,7 +12,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    
   }
   @extend %inputStyles;
 
@@ -36,4 +35,3 @@
   @media screen and(max-width:460px) {
   }
 }
-
