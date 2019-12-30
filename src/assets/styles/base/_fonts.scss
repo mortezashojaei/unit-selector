@@ -121,11 +121,10 @@ This set of fonts are used in this project under the license: (.....)
 /* vazir font */
 @font-face {
   font-family: Vazir;
-  src: url("/assets/fonts/fonts/Vazir/Vazir.eot");
-  src: url("/assets/fonts/fonts/Vazir/Vazir.eot?#iefix")
-      format("embedded-opentype"),
-    url("/assets/fonts/fonts/Vazir/Vazir.woff") format("woff"),
-    url("/assets/fonts/fonts/Vazir/Vazir.ttf") format("truetype");
+  src: url("/assets/fonts/Vazir/Vazir.eot");
+  src: url("/assets/fonts/Vazir/Vazir.eot?#iefix") format("embedded-opentype"),
+    url("/assets/fonts/Vazir/Vazir.woff") format("woff"),
+    url("/assets/fonts/Vazir/Vazir.ttf") format("truetype");
   font-weight: normal;
 }
 

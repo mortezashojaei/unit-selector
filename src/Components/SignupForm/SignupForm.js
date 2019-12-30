@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Select from "react-select";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
-import Select from "react-select";
-import styles from "./SignupForm.module.scss";
 import { Dialogues } from "Utils/Dialogues";
+import styles from "./SignupForm.module.scss";
 
 const SignupForm = props => {
-  const [studentNumber, setStudentNumber] = useState()
-  const [password, setPassword] = useState(undefined)
-  const [passwordConfirm, setPasswordCongirm] = useState()
+  const [studentNumber, setStudentNumber] = useState();
+  const [password, setPassword] = useState(undefined);
+  const [passwordConfirm, setPasswordCongirm] = useState();
   const [majors, setMajors] = useState([]);
   const [major, setMajor] = useState();
   const [semester, setSemester] = useState();
@@ -37,21 +37,21 @@ const SignupForm = props => {
     if (password) {
       setEmptyFieldToFalse("password");
     }
-    if(passwordConfirm) {
-      setEmptyFieldToFalse("passwordConfirm")
+    if (passwordConfirm) {
+      setEmptyFieldToFalse("passwordConfirm");
     }
     if (fullName) {
       setEmptyFieldToFalse("fullName");
     }
-    if(studentNumber) {
-      setEmptyFieldToFalse("studentNumber")
+    if (studentNumber) {
+      setEmptyFieldToFalse("studentNumber");
     }
     if (semester) {
       setEmptyFieldToFalse("semester");
     }
-  }, [password, passwordConfirm, fullName, semester,studentNumber]);
+  }, [password, passwordConfirm, fullName, semester, studentNumber]);
 
-  const toSelectForm = (majors) => {
+  const toSelectForm = majors => {
     const majorsCopy = [];
     majors.forEach(major => {
       console.log(majorsCopy);
@@ -65,7 +65,7 @@ const SignupForm = props => {
         setMajors(response.data);
         // console.log(response)
       })
-      .catch(err => console.log('couldnt fetch'));
+      .catch(err => console.log("couldnt fetch"));
   }
 
   useEffect(() => {
@@ -79,23 +79,23 @@ const SignupForm = props => {
     setPassword(password);
   };
   const handlePasswordConfirmChange = e => {
-    e.persist()
-    const passwordConfirm = e.target.value
-    setPasswordCongirm(passwordConfirm)
-  }
+    e.persist();
+    const passwordConfirm = e.target.value;
+    setPasswordCongirm(passwordConfirm);
+  };
   const handleSemesterChange = e => {
     e.persist();
     const term = e.target.value;
-    if( !term || (term > 0 && term < 8)) {
-      setSemester(term)
+    if (!term || (term > 0 && term < 8)) {
+      setSemester(term);
     }
   };
 
   const handleStudentNumberChange = e => {
-    e.persist()
-    const studentNumber = e.target.value
-    setStudentNumber(studentNumber)
-  }
+    e.persist();
+    const studentNumber = e.target.value;
+    setStudentNumber(studentNumber);
+  };
   const handleFullNameChange = e => {
     e.persist();
     const name = e.target.value;
@@ -108,20 +108,20 @@ const SignupForm = props => {
 
   const setEmptyFieldToTrue = key => {
     /* we pass a callback to the setState to get the latest state */
-    setEmptyFields(emptyFields => ({ ...emptyFields, [key]: true }))
-  }
+    setEmptyFields(emptyFields => ({ ...emptyFields, [key]: true }));
+  };
 
   const setWrongCredentialsToFalse = key => {
-    setWrongCredentials(credentials => ({...credentials, [key]: false}))
-  }
+    setWrongCredentials(credentials => ({ ...credentials, [key]: false }));
+  };
 
   const setWrongCredentialsToTrue = key => {
-    setWrongCredentials(credentials => ({...credentials, [key]: true}))
-  }
+    setWrongCredentials(credentials => ({ ...credentials, [key]: true }));
+  };
 
   const setEmptyFieldToFalse = key => {
-    setEmptyFields(emptyFields => ({...emptyFields,[key]: false}))
-  }
+    setEmptyFields(emptyFields => ({ ...emptyFields, [key]: false }));
+  };
   const toSubmit = () => {
     signup({
       password,
@@ -137,7 +137,7 @@ const SignupForm = props => {
         }
       })
       .catch(err => {
-        let status = err.status
+        let status = err.status;
         if (status === 409) {
           setError("حساب کاربری با این نام کاربری موجود است");
         } else if (status === 406) {
@@ -146,27 +146,55 @@ const SignupForm = props => {
           setError("رشته وارد شده صحیح نمیباشد");
         }
       });
-  }
+  };
 
   const onFormSubmit = e => {
     e.preventDefault();
-    fullName ? setEmptyFieldToFalse('fullName') : setEmptyFieldToTrue('fullName')
-    major ? setEmptyFieldToFalse('major') : setEmptyFieldToTrue('major')
-    semester ? setEmptyFieldToFalse('semester') : setEmptyFieldToTrue('semester')
-    password ? setEmptyFieldToFalse('password') : setEmptyFieldToTrue('password')
-    studentNumber ? setEmptyFieldToFalse('studentNumber') : setEmptyFieldToTrue('studentNumber')
-    password && password.length < 4 ? setWrongCredentialsToTrue('password') : setWrongCredentialsToFalse('password')
-    password && !passwordConfirm ? setEmptyFieldToTrue('passwordConfirm') : setEmptyFieldToFalse('passwordConfirm')
-    password && password !== passwordConfirm ? setWrongCredentialsToTrue('passwordConfirm') : setWrongCredentialsToFalse('passwordConfirm')
-    studentNumber && isNaN(studentNumber) ? setWrongCredentialsToTrue('studentNumber') : setWrongCredentialsToFalse('studentNumber')
-    let err
-    if( isNaN(studentNumber) || password.length < 4 || password !== passwordConfirm){
-       err = true
-     }
-    if (!err && (fullName && major && password && semester && studentNumber && passwordConfirm)) {
-      console.log('submited')
-      toSubmit()
-    }else {
+    fullName
+      ? setEmptyFieldToFalse("fullName")
+      : setEmptyFieldToTrue("fullName");
+    major ? setEmptyFieldToFalse("major") : setEmptyFieldToTrue("major");
+    semester
+      ? setEmptyFieldToFalse("semester")
+      : setEmptyFieldToTrue("semester");
+    password
+      ? setEmptyFieldToFalse("password")
+      : setEmptyFieldToTrue("password");
+    studentNumber
+      ? setEmptyFieldToFalse("studentNumber")
+      : setEmptyFieldToTrue("studentNumber");
+    password && password.length < 4
+      ? setWrongCredentialsToTrue("password")
+      : setWrongCredentialsToFalse("password");
+    password && !passwordConfirm
+      ? setEmptyFieldToTrue("passwordConfirm")
+      : setEmptyFieldToFalse("passwordConfirm");
+    password && password !== passwordConfirm
+      ? setWrongCredentialsToTrue("passwordConfirm")
+      : setWrongCredentialsToFalse("passwordConfirm");
+    studentNumber && isNaN(studentNumber)
+      ? setWrongCredentialsToTrue("studentNumber")
+      : setWrongCredentialsToFalse("studentNumber");
+    let err;
+    if (
+      isNaN(studentNumber) ||
+      password.length < 4 ||
+      password !== passwordConfirm
+    ) {
+      err = true;
+    }
+    if (
+      !err &&
+      fullName &&
+      major &&
+      password &&
+      semester &&
+      studentNumber &&
+      passwordConfirm
+    ) {
+      console.log("submited");
+      toSubmit();
+    } else {
       alert("error");
     }
   };
@@ -216,8 +244,6 @@ const SignupForm = props => {
             )}
           </label>
 
-
-
           <label>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
@@ -239,7 +265,9 @@ const SignupForm = props => {
           </label>
 
           <label>
-            {passwordConfirm && <span>{Dialogues.passwordConfirmPlaceholder}</span>}
+            {passwordConfirm && (
+              <span>{Dialogues.passwordConfirmPlaceholder}</span>
+            )}
             <input
               className={`${(emptyFields.passwordConfirm ||
                 wrongCredentials.passwordConfirm) &&
@@ -257,7 +285,6 @@ const SignupForm = props => {
               )
             )}
           </label>
-
 
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
