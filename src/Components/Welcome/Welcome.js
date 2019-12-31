@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
 import SignupForm from "Components/SignupForm/SignupForm";
+import SignupContainer from '../../Components/SignupContainer/SignupContainer'
 import LoginForm from "Components/LoginForm/LoginForm";
 import styles from "./Welcome.module.scss";
 import TabBar from "Components/TabBar/TabBar";
@@ -18,7 +19,7 @@ const Welcome = () => (
           برای دانشجویان : دانشگاه خوارزمی
         </figcaption>
       </figure>
-      <Route path="/signup" exact component={SignupForm} />
+      <Route path="/signup" exact component={SignupContainer} />
       <Route path="/login" exact component={LoginForm} />
     </main>
   </>
