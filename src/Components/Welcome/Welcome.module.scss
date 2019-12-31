@@ -27,11 +27,13 @@
     }
     figcaption {
       width: 100%;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       h1 {
         font-weight: 500;
-        font-size: 1.4em;
+        font-size: 1.5em;
         margin-bottom: 0;
+        color: $mainTextColor;
+        // color: $basicGray !important;
       }
       color: $basicGray;
     }

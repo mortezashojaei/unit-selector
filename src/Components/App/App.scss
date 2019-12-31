@@ -9,11 +9,13 @@
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
+  color: $mainTextColor;
+
   * {
     box-sizing: border-box;
   }
 }
 
 .container {
-  padding: 3rem 2rem;
+  padding: 1rem 2rem 3rem 2rem;
 }

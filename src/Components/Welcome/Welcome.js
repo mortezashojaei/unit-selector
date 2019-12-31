@@ -18,8 +18,6 @@ const Welcome = () => (
           برای دانشجویان : دانشگاه خوارزمی
         </figcaption>
       </figure>
-      {/* show the navigation buttons if we're on the home route */}
-
       <Route path="/signup" exact component={SignupForm} />
       <Route path="/login" exact component={LoginForm} />
     </main>
