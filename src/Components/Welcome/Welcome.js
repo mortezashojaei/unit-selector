@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import SignupForm from "../Signup Form/SignupForm";
-import LoginForm from "../login-form/LoginForm";
+import SignupForm from "Components/SignupForm/SignupForm";
+import LoginForm from "Components/LoginForm/LoginForm";
 import styles from "./Welcome.module.scss";
 
 const Welcome = () => (
