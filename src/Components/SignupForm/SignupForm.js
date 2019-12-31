@@ -335,7 +335,7 @@ const SignupForm = props => {
         </div>
         <button type="submit">تکمیل عضویت</button>
       </form>
-      <Link to="/">خانه</Link>
+      {/* <Link to="/">خانه</Link> */}
     </div>
   );
 };

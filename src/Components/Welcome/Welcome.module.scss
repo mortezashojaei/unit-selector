@@ -1,5 +1,6 @@
 @import "~assets/styles/libs/vars";
 @import "~assets/styles/libs/placeholders";
+@import "~assets/styles/libs/animations";
 
 .welcome {
   width: 100%;
@@ -7,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: $backgroundColor;
   user-select: none;
   // figure + * {
@@ -52,110 +53,5 @@
         font-size: 0.7rem;
       }
     }
-  }
-}
-.navLink {
-  display: flex;
-
-  //   flex-direction: row-reverse;
-  a:last-of-type {
-    margin-right: 1.5rem;
-  }
-  a {
-    height: 57px;
-    width: 230px;
-    display: flex;
-    align-items: center;
-    padding: 5px 15px;
-    font-size: 1.1rem;
-    animation-name: appear;
-    animation-duration: 0.3s;
-    animation-timing-function: ease-out;
-    @media screen and(hover:hover) {
-      &:hover {
-        text-decoration: none;
-      }
-    }
-    span {
-      font-weight: 500;
-      font-size: 1.3em;
-    }
-    embed {
-      width: 30px;
-      height: auto;
-    }
-  }
-  .logIn {
-    @extend %normalBoxShadow;
-    border-top-right-radius: $buttonBorderRadius;
-    border-bottom-left-radius: $buttonBorderRadius;
-    justify-content: flex-end;
-    @media screen and(hover:hover) {
-      &:hover {
-        border: 1px solid rgb(51, 50, 50);
-      }
-    }
-    embed {
-      margin-right: 12px;
-    }
-    .loginIcon {
-      background: url("/assets/images/loginicon.svg");
-      width: 50px;
-      height: 50px;
-    }
-  }
-  .signUp {
-    @extend %normalBoxShadow--orange;
-    border-top-left-radius: $buttonBorderRadius;
-    border-bottom-right-radius: $buttonBorderRadius;
-    justify-content: flex-start;
-    @media screen and(hover:hover) {
-      &:hover {
-        border: 1px solid $basicOrange;
-        text-decoration: none;
-      }
-    }
-    embed {
-      margin-left: 12px;
-    }
-    .signupIcon {
-      background: url("/assets/images/registericon.svg");
-      width: 50px;
-      height: 50px;
-    }
-  }
-
-  @media screen and (max-width: 560px) {
-    a {
-      height: 47px;
-      width: 182px;
-      font-size: 0.9rem;
-    }
-  }
-  @media screen and (max-width: 415px) {
-    a {
-      width: 170px;
-      font-size: 0.8rem;
-    }
-  }
-  @media screen and (max-width: 390px) {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    a:last-of-type {
-      margin: 1rem 0 0 0;
-    }
-    a {
-      border-radius: $buttonBorderRadius;
-    }
-  }
-}
-
-@keyframes appear {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
   }
 }

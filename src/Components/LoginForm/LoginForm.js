@@ -131,7 +131,7 @@ const LoginForm = props => {
         </button>
         <p>{message}</p>
       </form>
-      <Link to="/">خانه</Link>
+      {/* <Link to="/">خانه</Link> */}
     </div>
   );
 };
