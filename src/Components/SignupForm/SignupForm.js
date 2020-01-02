@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
 import Select from "react-select";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
@@ -128,7 +127,8 @@ const SignupForm = props => {
       studentNumber,
       semester,
       major,
-      full_name: fullName
+      full_name: fullName,
+      user_name: props.userName
     })
       .then(res => {
         let status = res.status;
