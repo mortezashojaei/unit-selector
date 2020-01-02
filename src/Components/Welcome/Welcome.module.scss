@@ -6,53 +6,72 @@
   width: 100%;
   min-height: 100%;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background: $backgroundColor;
   user-select: none;
   // figure + * {
   //   // flex-grow: 1;
   // }
-  figure {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    // margin: 4rem 0 2rem 0;
-    img {
-      width: 100%;
-      max-width: 125px;
-      height: auto;
-    }
-    figcaption {
-      width: 100%;
-      font-size: 1.1rem;
-      h1 {
-        font-weight: 500;
-        font-size: 1.5em;
-        margin-bottom: 0;
-        color: $mainTextColor;
-        // color: $basicGray !important;
-      }
-      color: $basicGray;
-    }
-    @media screen and(max-width:560px) {
-      img {
-        max-width: 100px;
+  section {
+    width: 650px;
+    figure {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      // margin: 4rem 0 2rem 0;
+      .logo {
+        width: 100%;
+        height: 100px;
+        font-size: 2em;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       figcaption {
-        font-size: 1rem;
+        width: 100%;
+        font-size: 1.1rem;
+        h1 {
+          font-weight: 500;
+          font-size: 1.25em;
+          margin-bottom: 0.1em;
+          color: $mainTextColor;
+          // color: $basicGray !important;
+        }
+        color: $basicGray;
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 500;
+          img {
+            width: 30px;
+            // max-width: 125px;
+            margin-right: 0.5em;
+            height: auto;
+          }
+        }
       }
-    }
-    @media screen and(max-width:415px) {
-      figcaption {
-        font-size: 0.8rem;
+      @media screen and(max-width:560px) {
+        img {
+          max-width: 100px;
+        }
+        figcaption {
+          font-size: 1rem;
+        }
       }
-    }
-    @media screen and(max-width:360px) {
-      figcaption {
-        font-size: 0.7rem;
+      @media screen and(max-width:415px) {
+        figcaption {
+          font-size: 0.8rem;
+        }
+      }
+      @media screen and(max-width:360px) {
+        figcaption {
+          font-size: 0.7rem;
+        }
       }
     }
   }

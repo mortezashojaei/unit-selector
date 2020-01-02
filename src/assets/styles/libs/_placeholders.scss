@@ -1,14 +1,14 @@
 @import "~assets/styles/libs/vars";
 
 %normalBoxShadow {
-  -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.568);
-  -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.568);
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.568);
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+  -moz-box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+  box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
 }
 %normalBoxShadow--orange {
-  -webkit-box-shadow: 0px 1px 2px 0px #fc824ac0;
-  -moz-box-shadow: 0px 1px 2px 0px #fc824ac0;
-  box-shadow: 0px 1px 2px 0px #fc824ac0;
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  -moz-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
 }
 
 %inputStyles {
@@ -25,7 +25,7 @@
     text-align: start;
     color: $labelGray;
     min-height: 72px;
-    width: 220px;
+    width: 275px;
     position: relative;
     margin-bottom: 25px;
     @media screen and (max-width: 495px) {

@@ -7,13 +7,13 @@
   background: $backgroundColor;
   justify-content: center;
   align-items: center;
-  padding: 3rem 0;
+  padding: 1em 0;
   //   flex-direction: row-reverse;
   a:last-of-type {
-    margin-right: 0.8rem;
+    margin-right: 0.5rem;
   }
   a {
-    height: 57px;
+    height: 53px;
     width: 230px;
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@
       font-size: 1.3em;
     }
     embed {
-      width: 30px;
+      width: 33px;
       height: auto;
     }
     @media screen and(hover:hover) {
