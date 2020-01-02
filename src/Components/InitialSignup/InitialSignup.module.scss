@@ -7,8 +7,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  label {
-  }
+  margin-top: 1em;
   button {
     @extend %gradientButton;
     margin: 0 1em 0 0;

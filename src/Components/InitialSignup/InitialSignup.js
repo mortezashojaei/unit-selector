@@ -28,29 +28,27 @@ const InitialSignup = props => {
     }
   };
   return (
-    <div>
-      <form onSubmit={onSubmit} className={styles.initialSignupForm}>
-        <label>
-          {email && <span>{Dialogues.emailPlaceholder}</span>}
-          <input
-            className={`${(isEmpty || doesExist || !isEmailFormatValid) &&
-              styles.error}`}
-            value={email}
-            onChange={onEmailNameChange}
-            placeholder={Dialogues.emailPlaceholder}
-            type="email"
-          />
-          {isEmpty ? (
-            <p>{`${Dialogues.emailPlaceholder} نمیتواند خالی باشد`}</p>
-          ) : !isEmailFormatValid ? (
-            <p>{Dialogues.emailFormatError}</p>
-          ) : (
-            doesExist && <p>'کاربر با این ایمیل موجود است'</p>
-          )}
-        </label>
-        <button>{Dialogues.signup}</button>
-      </form>
-    </div>
+    <form onSubmit={onSubmit} className={styles.initialSignupForm}>
+      <label>
+        {email && <span>{Dialogues.emailPlaceholder}</span>}
+        <input
+          className={`${(isEmpty || doesExist || !isEmailFormatValid) &&
+            styles.error}`}
+          value={email}
+          onChange={onEmailNameChange}
+          placeholder={Dialogues.emailPlaceholder}
+          type="email"
+        />
+        {isEmpty ? (
+          <p>{`${Dialogues.emailPlaceholder} نمیتواند خالی باشد`}</p>
+        ) : !isEmailFormatValid ? (
+          <p>{Dialogues.emailFormatError}</p>
+        ) : (
+          doesExist && <p>'کاربر با این ایمیل موجود است'</p>
+        )}
+      </label>
+      <button>{Dialogues.signup}</button>
+    </form>
   );
 };
 
