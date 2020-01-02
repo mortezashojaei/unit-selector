@@ -19,7 +19,7 @@ const InitialSignup = props => {
       setIsEmpty(false);
       setDoesExist(false);
       if (isEmailValid(email)) {
-        props.submitted();
+        props.submitted(email);
       } else {
         setIsEmailFormatValid(false);
       }
