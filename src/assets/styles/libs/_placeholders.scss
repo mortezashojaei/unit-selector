@@ -12,12 +12,6 @@
 }
 
 %inputStyles {
-  input {
-    font-weight: 500;
-    &::placeholder {
-      color: $labelGray;
-    }
-  }
   label {
     display: flex;
     flex-direction: column;
@@ -54,8 +48,20 @@
       border: none;
       border-bottom: 1.5px solid $labelGray;
       padding: 7px 3px;
-      background: transparent;
+      background: $backgroundColor;
+
+      font-weight: 500;
+      &::placeholder {
+        color: $labelGray;
+      }
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px $backgroundColor inset !important;
+      }
     }
+
     input:focus {
       border-bottom: 1.5px solid $basicOrange;
     }
