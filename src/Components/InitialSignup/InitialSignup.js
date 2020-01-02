@@ -1,49 +1,59 @@
-import React, { useState } from 'react'
-import { Dialogues } from '../../Utils/Dialogues'
-import styles from './InitialSignup.module.scss'
+import React, { useState, useCallback } from "react";
+import { Dialogues } from "../../Utils/Dialogues";
+import styles from "./InitialSignup.module.scss";
+import { isEmailValid } from "Utils/formValidators";
 
-const InitialSignup = (props) => {
-    const [userName, setUserName] = useState()
-    const [isEmpty, setIsEmpty] = useState(false)
-    const [isWrong, setIsWrong] = useState(false)
-    const onUserNameChange = (e) => {
-        setUserName(e.target.value)
+const InitialSignup = props => {
+  const [email, setEmail] = useState("");
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [doesExist, setDoesExist] = useState(false);
+  const [isEmailFormatValid, setIsEmailFormatValid] = useState(true);
+  const onEmailNameChange = useCallback(e => {
+    setEmail(e.target.value);
+    setIsEmpty(false);
+    setIsEmailFormatValid(true);
+  }, []);
+  const onSubmit = e => {
+    e.preventDefault();
+    if (email && email.trim().length > 0) {
+      setIsEmpty(false);
+      setDoesExist(false);
+      if (isEmailValid(email)) {
+        props.submitted();
+      } else {
+        setIsEmailFormatValid(false);
+      }
+    } else if (!email || (email && !email.trim().length > 0)) {
+      setIsEmpty(true);
     }
-    const onSubmit = e => {
-        e.preventDefault()
-        if(userName && userName.trim().length > 0) {
-            setIsEmpty(false)
-            setIsWrong(false)
-            props.submitted()
-        }else if(!userName || (userName && !userName.trim().length > 0)){
-            setIsEmpty(true)
-        }
-    }
-    return (
-        <div className={styles.initialSignupForm}>
-        <form onSubmit={onSubmit} >
-            <div>
-            <label>
-                {userName && <span>{Dialogues.emailPlaceholder}</span>}
-                <input
-                className={`${(isEmpty || isWrong) && styles.error}`}
-                value={userName}
-                onChange={onUserNameChange}
-                placeholder={Dialogues.emailPlaceholder}
-                type='text'
-                />
-                {isEmpty ? (
-                    <p>{`${Dialogues.emailPlaceholder} نمیتواند خالی باشد`}</p>
-                 ) : (
-                     isWrong && (<p>'کاربر با این ایمیل موجود است'</p>)
-                 )}
-            </label>
-            </div>
-            <button>{Dialogues.signup}</button>
-            
-        </form>
+  };
+  return (
+    <div className={styles.initialSignupForm}>
+      <form onSubmit={onSubmit}>
+        <div>
+          <label>
+            {email && <span>{Dialogues.emailPlaceholder}</span>}
+            <input
+              className={`${(isEmpty || doesExist || !isEmailFormatValid) &&
+                styles.error}`}
+              value={email}
+              onChange={onEmailNameChange}
+              placeholder={Dialogues.emailPlaceholder}
+              type="email"
+            />
+            {isEmpty ? (
+              <p>{`${Dialogues.emailPlaceholder} نمیتواند خالی باشد`}</p>
+            ) : !isEmailFormatValid ? (
+              <p>{Dialogues.emailFormatError}</p>
+            ) : (
+              doesExist && <p>'کاربر با این ایمیل موجود است'</p>
+            )}
+          </label>
         </div>
-    )
-}
+        <button>{Dialogues.signup}</button>
+      </form>
+    </div>
+  );
+};
 
-export default InitialSignup
+export default InitialSignup;

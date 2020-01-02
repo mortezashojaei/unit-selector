@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
@@ -7,13 +7,13 @@ import { Dialogues } from "Utils/Dialogues";
 import styles from "./SignupForm.module.scss";
 
 const SignupForm = props => {
-  const [studentNumber, setStudentNumber] = useState();
-  const [password, setPassword] = useState(undefined);
-  const [passwordConfirm, setPasswordCongirm] = useState();
+  const [studentNumber, setStudentNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState([]);
   const [major, setMajor] = useState();
-  const [semester, setSemester] = useState();
-  const [fullName, setFullName] = useState();
+  const [semester, setSemester] = useState("");
+  const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
@@ -72,39 +72,39 @@ const SignupForm = props => {
     setMajorsInSelectSearch();
   }, []);
 
-  const handlePasswordChange = e => {
+  const handlePasswordChange = useCallback(e => {
     e.persist();
     const password = e.target.value;
     setError(null);
     setPassword(password);
-  };
-  const handlePasswordConfirmChange = e => {
+  }, []);
+  const handlePasswordConfirmChange = useCallback(e => {
     e.persist();
     const passwordConfirm = e.target.value;
     setPasswordCongirm(passwordConfirm);
-  };
-  const handleSemesterChange = e => {
+  }, []);
+  const handleSemesterChange = useCallback(e => {
     e.persist();
     const term = e.target.value;
-    if (!term || (term > 0 && term < 8)) {
+    if (!term || (term > 0 && term <= 8)) {
       setSemester(term);
     }
-  };
+  }, []);
 
-  const handleStudentNumberChange = e => {
+  const handleStudentNumberChange = useCallback(e => {
     e.persist();
     const studentNumber = e.target.value;
     setStudentNumber(studentNumber);
-  };
-  const handleFullNameChange = e => {
+  }, []);
+  const handleFullNameChange = useCallback(e => {
     e.persist();
     const name = e.target.value;
     setFullName(name);
-  };
-  const handleMajorChange = e => {
+  }, []);
+  const handleMajorChange = useCallback(e => {
     const major = e.value;
     setMajor(major);
-  };
+  }, []);
 
   const setEmptyFieldToTrue = key => {
     /* we pass a callback to the setState to get the latest state */
@@ -230,7 +230,7 @@ const SignupForm = props => {
               className={`${(emptyFields.studentNumber ||
                 wrongCredentials.studentNumber) &&
                 styles.error}`}
-              type="text"
+              type="number"
               value={studentNumber}
               onChange={handleStudentNumberChange}
               placeholder={Dialogues.studentNumberPlaceholder}
