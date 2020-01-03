@@ -27,7 +27,7 @@ const SelectSearch = ({
             // alert(name.includes(inputValue));
             if (name.includes(inputValue)) {
               return (
-                <li key={value} onClick={onChange} value={name}>
+                <li key={value} onClick={onChange}>
                   {name}
                 </li>
               );
