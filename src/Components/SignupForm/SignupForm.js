@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Select from "react-select";
+import React, { useState, useEffect, useCallback } from "react";
+// import Select from "react-select";
+// import SelectSearch from "react-select-search";
+import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import styles from "./SignupForm.module.scss";
+import "./reactSelect.scss";
 
 const SignupForm = props => {
-  const [studentNumber, setStudentNumber] = useState();
-  const [password, setPassword] = useState(undefined);
-  const [passwordConfirm, setPasswordCongirm] = useState();
+  const [studentNumber, setStudentNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState([]);
-  const [major, setMajor] = useState();
-  const [semester, setSemester] = useState();
-  const [fullName, setFullName] = useState();
+  const [major, setMajor] = useState("");
+  const [semester, setSemester] = useState("");
+  const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
@@ -55,7 +57,10 @@ const SignupForm = props => {
     const majorsCopy = [];
     majors.forEach(major => {
       console.log(majorsCopy);
-      return majorsCopy.push({ label: major.name, value: major.id });
+      return majorsCopy.push({
+        name: major.persianName,
+        value: major.id
+      });
     });
     return majorsCopy;
   };
@@ -72,39 +77,40 @@ const SignupForm = props => {
     setMajorsInSelectSearch();
   }, []);
 
-  const handlePasswordChange = e => {
+  const handlePasswordChange = useCallback(e => {
     e.persist();
     const password = e.target.value;
     setError(null);
     setPassword(password);
-  };
-  const handlePasswordConfirmChange = e => {
+  }, []);
+  const handlePasswordConfirmChange = useCallback(e => {
     e.persist();
     const passwordConfirm = e.target.value;
     setPasswordCongirm(passwordConfirm);
-  };
-  const handleSemesterChange = e => {
+  }, []);
+  const handleSemesterChange = useCallback(e => {
     e.persist();
     const term = e.target.value;
-    if (!term || (term > 0 && term < 8)) {
+    if (!term || (term > 0 && term <= 8)) {
       setSemester(term);
     }
-  };
+  }, []);
 
-  const handleStudentNumberChange = e => {
+  const handleStudentNumberChange = useCallback(e => {
     e.persist();
     const studentNumber = e.target.value;
     setStudentNumber(studentNumber);
-  };
-  const handleFullNameChange = e => {
+  }, []);
+  const handleFullNameChange = useCallback(e => {
     e.persist();
     const name = e.target.value;
     setFullName(name);
-  };
-  const handleMajorChange = e => {
-    const major = e.value;
+  }, []);
+  const handleMajorChange = useCallback(e => {
+    const major = e.target.value !== 0 ? e.target.value : e.target.innerHTML;
+
     setMajor(major);
-  };
+  }, []);
 
   const setEmptyFieldToTrue = key => {
     /* we pass a callback to the setState to get the latest state */
@@ -128,7 +134,8 @@ const SignupForm = props => {
       studentNumber,
       semester,
       major,
-      full_name: fullName
+      full_name: fullName,
+      user_name: props.userName
     })
       .then(res => {
         let status = res.status;
@@ -230,7 +237,7 @@ const SignupForm = props => {
               className={`${(emptyFields.studentNumber ||
                 wrongCredentials.studentNumber) &&
                 styles.error}`}
-              type="text"
+              type="number"
               value={studentNumber}
               onChange={handleStudentNumberChange}
               placeholder={Dialogues.studentNumberPlaceholder}
@@ -288,8 +295,21 @@ const SignupForm = props => {
 
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
-            <Select
-              className={styles.selectSearch}
+            {/* <Select
+              className={"majorSelectSearch"}
+              classNamePrefix={"majorSelectSearch"}
+              options={toSelectForm(majors)}
+              onChange={handleMajorChange}
+              placeholder={Dialogues.majorPlaceholder}
+            /> */}
+            {/* <SelectSearch
+              className={"majorSelectSearch"}
+              options={toSelectForm(majors)}
+              placeholder={Dialogues.majorPlaceholder}
+              onChange={handleMajorChange}
+            /> */}
+            <SelectSearch
+              value={major}
               options={toSelectForm(majors)}
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
@@ -335,7 +355,7 @@ const SignupForm = props => {
         </div>
         <button type="submit">تکمیل عضویت</button>
       </form>
-      <Link to="/">خانه</Link>
+      {/* <Link to="/">خانه</Link> */}
     </div>
   );
 };

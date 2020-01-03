@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styles from "./LoginForm.module.scss";
 import { login } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
+import { isEmailValid } from "Utils/formValidators";
 
 const LoginForm = props => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,22 @@ const LoginForm = props => {
     email: false,
     password: false
   });
+
+  /*  with usecallback hook react remembers this function between rerenders,
+  and avoids creating a new function every time the compoenent rerenders,
+  therefore the rerendering of the child components are avoided */
+  const onEmailChange = useCallback(e => {
+    setEmail(e.target.value);
+    setWrongCredentials(wrongCredentials => ({
+      ...wrongCredentials,
+      email: false
+    }));
+  }, []);
+
+  const onPasswordChange = useCallback(e => {
+    setPassword(e.target.value);
+  }, []);
+
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
     if (email) {
@@ -43,36 +60,47 @@ const LoginForm = props => {
     }
     if (password && email) {
       setEmptyFields({ email: false, password: false });
-      const data = {
-        email,
-        password
-      };
-      login(data)
-        .then(function(response) {
-          if (response.data.StatusCode == 200) setMessage(Dialogues.loginokerr);
-        })
-        .catch(function(error) {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            //console.log(error.response.data);
-            //console.log(error.response.status);
-            //console.log(error.response.headers);
-            if (error.response.status == 403) {
-              setMessage(Dialogues.loginfielderr);
+      const isEmailFormattedCorrectly = isEmailValid(email);
+
+      if (!isEmailFormattedCorrectly) {
+        setWrongCredentials(wrongCredentials => ({
+          ...wrongCredentials,
+          email: true
+        }));
+      } else {
+        setWrongCredentials({ email: false, password: false });
+        const data = {
+          email,
+          password
+        };
+        login(data)
+          .then(function(response) {
+            if (response.data.StatusCode == 200)
+              setMessage(Dialogues.loginokerr);
+          })
+          .catch(function(error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              //console.log(error.response.data);
+              //console.log(error.response.status);
+              //console.log(error.response.headers);
+              if (error.response.status == 403) {
+                setMessage(Dialogues.loginfielderr);
+              }
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              //console.log(error.request);
+              setMessage(Dialogues.haveproblemerr);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log("Error", error.message);
+              setMessage(Dialogues.haveproblemerr);
             }
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            //console.log(error.request);
-            setMessage(Dialogues.haveproblemerr);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log("Error", error.message);
-            setMessage(Dialogues.haveproblemerr);
-          }
-        });
+          });
+      }
     }
   };
 
@@ -88,18 +116,14 @@ const LoginForm = props => {
               id="usernme"
               value={email}
               placeholder={Dialogues.emailPlaceholder}
-              onChange={e => {
-                setEmail(e.target.value);
-              }}
+              onChange={onEmailChange}
               type="email"
             ></input>
 
             {emptyFields.email ? (
               <p>{`${Dialogues.emailPlaceholder} نمی تواند خالی باشد`}</p>
             ) : (
-              wrongCredentials.email && (
-                <p>{`${Dialogues.emailPlaceholder} اشتباه است`}</p>
-              )
+              wrongCredentials.email && <p>{Dialogues.emailFormatError}</p>
             )}
           </label>
           <label>
@@ -111,9 +135,7 @@ const LoginForm = props => {
               id="password"
               value={password}
               placeholder={Dialogues.passwordPlaceholder}
-              onChange={e => {
-                setPassword(e.target.value);
-              }}
+              onChange={onPasswordChange}
               type="password"
             ></input>
 
@@ -131,7 +153,7 @@ const LoginForm = props => {
         </button>
         <p>{message}</p>
       </form>
-      <Link to="/">خانه</Link>
+      {/* <Link to="/">خانه</Link> */}
     </div>
   );
 };

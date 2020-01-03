@@ -1,0 +1,25 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/placeholders";
+.initialSignupForm {
+  @extend %inputStyles;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  button {
+    @extend %gradientButton;
+    margin: 0 1em 0 0;
+    // width: 255px;
+  }
+  // border: none;
+  @media screen and(max-width:685px) {
+    flex-direction: column;
+    button {
+      margin: 1.5em 0 0 0;
+    }
+  }
+  @media screen and(max-width:460px) {
+  }
+}

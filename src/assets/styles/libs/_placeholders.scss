@@ -1,12 +1,14 @@
+@import "~assets/styles/libs/vars";
+
 %normalBoxShadow {
-  -webkit-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.568);
-  -moz-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.568);
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.568);
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+  -moz-box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+  box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
 }
 %normalBoxShadow--orange {
-  -webkit-box-shadow: 0px 2px 4px 0px #fc824ac0;
-  -moz-box-shadow: 0px 2px 4px 0px #fc824ac0;
-  box-shadow: 0px 2px 4px 0px #fc824ac0;
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  -moz-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
 }
 
 %inputStyles {
@@ -17,13 +19,27 @@
     text-align: start;
     color: $labelGray;
     min-height: 72px;
+    width: 260px;
     position: relative;
     margin-bottom: 25px;
+    @media screen and (max-width: 610px) {
+      width: 245px;
+    }
+    @media screen and (max-width: 560px) {
+      width: 195px;
+    }
+    @media screen and (max-width: 480px) {
+      width: 185px;
+    }
+    @media screen and (max-width: 415px) {
+      width: 175px;
+    }
+
     .error {
-      border-bottom: 1.5px solid red;
+      border-color: red;
     }
     span {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 500;
       animation-name: riseToTop;
       animation-duration: 0.3s;
@@ -33,19 +49,31 @@
       position: absolute;
       bottom: -44px;
       margin: 0.3rem 0 0 0;
-      font-weight: bold;
+      font-weight: 500;
       color: black;
       font-size: 0.68rem;
       height: 40px;
     }
     input {
       border: none;
-      border-bottom: 1.5px solid $labelGray;
+      border-bottom: 2px solid $labelGray;
       padding: 7px 3px;
-      background: transparent;
+      background: $backgroundColor;
+      font-size: 16px;
+      font-weight: 500;
+      &::placeholder {
+        color: $labelGray;
+      }
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px $backgroundColor inset !important;
+      }
     }
+
     input:focus {
-      border-bottom: 1.5px solid $basicOrange;
+      border-color: $basicOrange;
     }
   }
 
@@ -60,11 +88,17 @@
 }
 
 %gradientButton {
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
   margin-top: 25px;
   border: none;
-  height: 50px;
+  height: 45px;
   border-radius: 35px;
-  width: 270px;
+  // width: 240px;
+  width: 265px;
+  transition: box-shadow 0.1s linear;
+
   color: white;
   cursor: pointer;
   font-size: 1.1rem;
@@ -84,10 +118,16 @@
         rgba(252, 129, 74, 1) 25%,
         rgba(86, 66, 86, 1) 75%
       );
+      -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
     }
   }
-
-  @media screen and(max-width:395px) {
-    width: 220px;
+  @media screen and (max-width: 560px) {
+    width: 195px;
   }
+
+  // @media screen and(max-width:395px) {
+  //   width: 220px;
+  // }
 }

@@ -2,15 +2,44 @@
   "majors": [
     {
       "id": 1,
-      "name": "Computer"
+      "persianName": "مهندسی کامپیوتر",
+      "englishName": "Computer Engineering"
     },
     {
       "id": 2,
-      "name": "Mechanic"
+      "persianName": "مهندسی مکانیک",
+
+      "englishName": "Mechanical Engineering"
     },
     {
       "id": 3,
-      "name": "Science"
+      "persianName": "علوم کامپیوتر",
+
+      "englishName": "Computer Science"
+    },
+    {
+      "id": 4,
+      "persianName": "مهندسی شیمی",
+
+      "englishName": "Chemical Engineering"
+    },
+    {
+      "id": 5,
+      "persianName": "علوم کامپیوتر",
+
+      "englishName": "Computer Science"
+    },
+    {
+      "id": 6,
+      "persianName": "علوم کامپیوتر",
+
+      "englishName": "Computer Science"
+    },
+    {
+      "id": 7,
+      "persianName": "علوم کامپیوتر",
+
+      "englishName": "Computer Science"
     }
   ],
   "users": [

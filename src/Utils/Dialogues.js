@@ -3,6 +3,8 @@ export const Dialogues = {
   inputemptyerr: "inputs empty",
   submitbtn: "ورود",
   emailPlaceholder: "پست الکترونیکی",
+  emailFormatError: "مشکلی در فرمت پست الکترونیکی وجود دارد",
+  signup: "ثبت نام",
   passwordplc: "گذرواژه",
   passwordConfirmPlaceholder: "تکرار گذرواژه",
   haveproblemerr: "have a problem",

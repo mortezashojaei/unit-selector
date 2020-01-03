@@ -32,6 +32,16 @@
       row-gap: 7px;
     }
   }
-  @media screen and(max-width:460px) {
+  .selectSearch {
+    display: flex;
+
+    div {
+      display: block;
+      @extend %inputStyles;
+    }
+  }
+  .selectSearch__control {
+    width: 100%;
+    display: none;
   }
 }
