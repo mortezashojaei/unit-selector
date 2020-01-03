@@ -24,7 +24,9 @@
     animation-timing-function: ease-out;
     // border: 1px solid $basicOrange;
     @extend %normalBoxShadow--orange;
+    transition: box-shadow 0.1s linear;
     filter: grayscale(100%);
+
     span {
       font-weight: 500;
       font-size: 1.3em;
@@ -36,7 +38,9 @@
     @media screen and(hover:hover) {
       &:hover {
         text-decoration: none;
-        border: 1px solid $basicOrange;
+        -webkit-box-shadow: 0px 1px 2.5px 2px #fc824ac0;
+        -moz-box-shadow: 0px 1px 2.5px 2px #fc824ac0;
+        box-shadow: 0px 1px 2.5px 2px #fc824ac0;
       }
     }
   }

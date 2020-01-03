@@ -1,0 +1,12 @@
+.majorList {
+  position: absolute;
+  // z-index: 15;
+  bottom: -90px;
+  left: 0;
+  background: red;
+  width: 100%;
+  display: none;
+}
+.show {
+  display: initial;
+}

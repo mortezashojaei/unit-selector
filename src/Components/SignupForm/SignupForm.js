@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Select from "react-select";
+// import Select from "react-select";
+// import SelectSearch from "react-select-search";
+import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import styles from "./SignupForm.module.scss";
+import "./reactSelect.scss";
 
 const SignupForm = props => {
   const [studentNumber, setStudentNumber] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState([]);
-  const [major, setMajor] = useState();
+  const [major, setMajor] = useState("");
   const [semester, setSemester] = useState("");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
@@ -54,7 +57,10 @@ const SignupForm = props => {
     const majorsCopy = [];
     majors.forEach(major => {
       console.log(majorsCopy);
-      return majorsCopy.push({ label: major.name, value: major.id });
+      return majorsCopy.push({
+        name: major.persianName,
+        value: major.id
+      });
     });
     return majorsCopy;
   };
@@ -101,7 +107,8 @@ const SignupForm = props => {
     setFullName(name);
   }, []);
   const handleMajorChange = useCallback(e => {
-    const major = e.value;
+    const major = e.target.innerHTML;
+
     setMajor(major);
   }, []);
 
@@ -288,8 +295,21 @@ const SignupForm = props => {
 
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
-            <Select
-              className={styles.selectSearch}
+            {/* <Select
+              className={"majorSelectSearch"}
+              classNamePrefix={"majorSelectSearch"}
+              options={toSelectForm(majors)}
+              onChange={handleMajorChange}
+              placeholder={Dialogues.majorPlaceholder}
+            /> */}
+            {/* <SelectSearch
+              className={"majorSelectSearch"}
+              options={toSelectForm(majors)}
+              placeholder={Dialogues.majorPlaceholder}
+              onChange={handleMajorChange}
+            /> */}
+            <SelectSearch
+              value={major}
               options={toSelectForm(majors)}
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
