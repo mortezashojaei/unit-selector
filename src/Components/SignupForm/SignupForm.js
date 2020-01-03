@@ -107,7 +107,7 @@ const SignupForm = props => {
     setFullName(name);
   }, []);
   const handleMajorChange = useCallback(e => {
-    const major = e.target.innerHTML;
+    const major = e.target.value !== 0 ? e.target.value : e.target.innerHTML;
 
     setMajor(major);
   }, []);

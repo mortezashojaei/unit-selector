@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SelectSearch.module.scss";
 
 const SelectSearch = ({
@@ -10,24 +10,50 @@ const SelectSearch = ({
   const [isInputFocused, setIsInputFocused] = useState(false);
   console.log(onChange);
   console.log("selectsearch ", options);
+  // useEffect(() => {
+  //   const majorInputParent = document.getElementById("majorInput")
+  //     .parentElement;
+  //   const changeFocus = () => {
+  //     setIsInputFocused(isInputFocused => !isInputFocused);
+  //   };
+  //   majorInputParent.addEventListener("focusin", changeFocus);
+  //   majorInputParent.addEventListener("focusout", changeFocus);
+  //   return () => {
+  //     majorInputParent.removeEventListener("focusin", changeFocus);
+  //     majorInputParent.removeEventListener("focusout", changeFocus);
+  //   };
+  // }, []);
   return (
     <>
       <input
         type="text"
         placeholder={placeholder}
-        onClick={() => setIsInputFocused(true)}
         onChange={onChange}
+        onFocus={() =>
+          setIsInputFocused(isInputFocused => {
+            if (!isInputFocused) return true;
+          })
+        }
         value={inputValue}
+        id="majorInput"
       />
       {options.length === 0 ? (
         <p>loading...</p>
       ) : (
-        <ul className={`${styles.majorList} ${isInputFocused && styles.show}`}>
+        <ul
+          className={`${styles.majorList} ${isInputFocused && styles.visible}`}
+        >
           {options.map(({ name, value }) => {
             // alert(name.includes(inputValue));
             if (name.includes(inputValue)) {
               return (
-                <li key={value} onClick={onChange}>
+                <li
+                  key={value}
+                  onClick={e => {
+                    onChange(e);
+                    setIsInputFocused(false);
+                  }}
+                >
                   {name}
                 </li>
               );
