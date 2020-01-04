@@ -15,7 +15,7 @@ const SignupContainer = props => {
   ) : (
     <InitialSignup submitted={initialSubmit} />
   );
-  return <SignupForm />;
+  return (form)
 };
 
 export default SignupContainer;
