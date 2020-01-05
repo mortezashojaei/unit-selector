@@ -7,21 +7,21 @@ import "./SignupContainerAnimations.scss";
 
 const SignupContainer = props => {
   const [isFirstSignupDone, setIsFirstSignupDone] = useState(false);
-  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [shouldRenderInitialSignup, setShouldRenderInitialSignup] = useState(
     false
   );
-  const initialSubmit = userName => {
+  const initialSubmit = email => {
     setIsFirstSignupDone(true);
-    setUserName(userName);
-    console.log(userName);
+    setEmail(email);
+    console.log(email);
   };
   let form = undefined;
   if (!isFirstSignupDone) {
     form = <InitialSignup key="initialSignUp" submitted={initialSubmit} />;
   } else {
     form = shouldRenderInitialSignup ? (
-      <SignupForm key="signupForm" userName={userName} />
+      <SignupForm key="signupForm" email={email} />
     ) : (
       undefined
     );

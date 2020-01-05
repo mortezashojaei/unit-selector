@@ -137,7 +137,7 @@ const SignupForm = props => {
       semester,
       major,
       full_name: fullName,
-      user_name: props.userName
+      email: props.email
     })
       .then(res => {
         let status = res.status;
