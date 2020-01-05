@@ -1,0 +1,28 @@
+@import "~assets/styles/libs/animations";
+
+.signupContainer-appear {
+  opacity: 0;
+  //   display: none;
+}
+.signupContainer-appear.signupContainer-appear-active {
+  opacity: 1;
+  animation: fadeIn 0.4s ease-in-out;
+}
+.signupContainer-enter {
+  transform: translateX(100%);
+}
+.signupContainer-enter.signupContainer-enter-active {
+  transform: translateX(0);
+
+  animation: moveIn 0.4s ease-in-out;
+}
+
+.signupContainer-leave {
+  //   opacity: 1;
+}
+
+.signupContainer-leave.signupContainer-leave-active {
+  //   opacity: 0;
+
+  animation: moveOut 0.4s ease-in-out;
+}

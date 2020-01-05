@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import axios from 'axios'
 import { Dialogues } from "../../Utils/Dialogues";
 import styles from "./InitialSignup.module.scss";
 import { isEmailValid } from "Utils/formValidators";
@@ -17,8 +18,21 @@ const InitialSignup = props => {
     e.preventDefault();
     if (email && email.trim().length > 0) {
       setIsEmpty(false);
-      setDoesExist(false);
       if (isEmailValid(email)) {
+
+        //nedd route for check email
+
+        // axios.post('',{userName: email}).then(res => {
+        //   if(res.data.statusCode === 200){
+        //     setDoesExist(false)
+        //     props.submitted()
+        //   }
+        // }).catch(e => {
+        //   if(e.data.statusCode === 400){
+        //     setDoesExist(true)
+        //   }
+        // })
+        
         props.submitted(email);
       } else {
         setIsEmailFormatValid(false);
@@ -37,7 +51,7 @@ const InitialSignup = props => {
           value={email}
           onChange={onEmailNameChange}
           placeholder={Dialogues.emailPlaceholder}
-          type="email"
+          type="text"
         />
         {isEmpty ? (
           <p>{`${Dialogues.emailPlaceholder} نمیتواند خالی باشد`}</p>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 // import Select from "react-select";
 // import SelectSearch from "react-select-search";
+import { CSSTransitionGroup } from "react-transition-group";
+
 import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
@@ -207,6 +209,21 @@ const SignupForm = props => {
   };
 
   return (
+    // <CSSTransitionGroup
+    //   transitionName={{
+    //     enter: styles.enter,
+    //     enterActive: styles.enterActive,
+    //     appear: styles.appear,
+    //     appearActive: styles.appearActive,
+    //     leave: styles.leave,
+    //     leaveActive: styles.leaveActive
+    //   }}
+    //   transitionEnterTimeout={700}
+    //   transitionLeave={true}
+    //   transitionLeaveTimeout={3000}
+    //   transitionAppearTimeout={1000}
+    //   transitionAppear={true}
+    // >
     <div className={styles.signupForm}>
       <form onSubmit={onFormSubmit}>
         <div>
@@ -357,6 +374,7 @@ const SignupForm = props => {
       </form>
       {/* <Link to="/">خانه</Link> */}
     </div>
+    // </CSSTransitionGroup>
   );
 };
 

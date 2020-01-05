@@ -1,8 +1,36 @@
-@keyframes appear {
+@keyframes moveIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes moveOut {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes popUp {
   from {
     transform: scale(0);
   }
+
   to {
-    transform: scale(1);
+    transfrom: scale(1);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
