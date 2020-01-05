@@ -7,6 +7,7 @@
   align-items: center;
   position: relative;
   // top: -1rem;
+  transition-delay: 500ms;
   form {
     display: flex;
     flex-direction: column;
@@ -17,6 +18,7 @@
 
   button {
     @extend %gradientButton;
+    margin-bottom: 25px;
   }
   div {
     border: none;
@@ -44,4 +46,26 @@
     width: 100%;
     display: none;
   }
+}
+
+.appear {
+  opacity: 0;
+  // width: 0;
+  // height: 0;
+  visibility: hidden;
+}
+.appearActive {
+  opacity: 1;
+  visibility: visible;
+  // height: unset;
+  // width: unset;
+  transition: all 0.7s ease-in-out;
+}
+.leave {
+  opacity: 1;
+}
+
+.leaveActive {
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
 }

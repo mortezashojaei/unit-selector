@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
+
+import { CSSTransitionGroup } from "react-transition-group";
+
 import { Link } from "react-router-dom";
 import styles from "./LoginForm.module.scss";
 import { login } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import { isEmailValid } from "Utils/formValidators";
+import "./LoginFormAnimations.scss";
 
 const LoginForm = props => {
   const [email, setEmail] = useState("");
@@ -105,56 +109,65 @@ const LoginForm = props => {
   };
 
   return (
-    <div className={styles.loginForm}>
-      <form>
-        <div>
-          <label>
-            {email && <span>{Dialogues.emailPlaceholder}</span>}
-            <input
-              className={`${(emptyFields.email || wrongCredentials.email) &&
-                styles.error}`}
-              id="usernme"
-              value={email}
-              placeholder={Dialogues.emailPlaceholder}
-              onChange={onEmailChange}
-              type="email"
-            ></input>
+    <CSSTransitionGroup
+      transitionName="loginForm"
+      transitionEnterTimeout={500}
+      transitionLeave={true}
+      transitionLeaveTimeout={500}
+      transitionAppearTimeout={500}
+      transitionAppear={true}
+    >
+      <div className={styles.loginForm}>
+        <form>
+          <div>
+            <label>
+              {email && <span>{Dialogues.emailPlaceholder}</span>}
+              <input
+                className={`${(emptyFields.email || wrongCredentials.email) &&
+                  styles.error}`}
+                id="usernme"
+                value={email}
+                placeholder={Dialogues.emailPlaceholder}
+                onChange={onEmailChange}
+                type="email"
+              ></input>
 
-            {emptyFields.email ? (
-              <p>{`${Dialogues.emailPlaceholder} نمی تواند خالی باشد`}</p>
-            ) : (
-              wrongCredentials.email && <p>{Dialogues.emailFormatError}</p>
-            )}
-          </label>
-          <label>
-            {password && <span>{Dialogues.passwordPlaceholder}</span>}
-            <input
-              className={`${(emptyFields.password ||
-                wrongCredentials.password) &&
-                styles.error}`}
-              id="password"
-              value={password}
-              placeholder={Dialogues.passwordPlaceholder}
-              onChange={onPasswordChange}
-              type="password"
-            ></input>
+              {emptyFields.email ? (
+                <p>{`${Dialogues.emailPlaceholder} نمی تواند خالی باشد`}</p>
+              ) : (
+                wrongCredentials.email && <p>{Dialogues.emailFormatError}</p>
+              )}
+            </label>
+            <label>
+              {password && <span>{Dialogues.passwordPlaceholder}</span>}
+              <input
+                className={`${(emptyFields.password ||
+                  wrongCredentials.password) &&
+                  styles.error}`}
+                id="password"
+                value={password}
+                placeholder={Dialogues.passwordPlaceholder}
+                onChange={onPasswordChange}
+                type="password"
+              ></input>
 
-            {emptyFields.password ? (
-              <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
-            ) : (
-              wrongCredentials.password && (
-                <p>{`${Dialogues.passwordPlaceholder} اشتباه است`}</p>
-              )
-            )}
-          </label>
-        </div>
-        <button type="submit" onClick={handleSubmit}>
-          {Dialogues.submitbtn}
-        </button>
-        <p>{message}</p>
-      </form>
-      {/* <Link to="/">خانه</Link> */}
-    </div>
+              {emptyFields.password ? (
+                <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+              ) : (
+                wrongCredentials.password && (
+                  <p>{`${Dialogues.passwordPlaceholder} اشتباه است`}</p>
+                )
+              )}
+            </label>
+          </div>
+          <button type="submit" onClick={handleSubmit}>
+            {Dialogues.submitbtn}
+          </button>
+          <p>{message}</p>
+        </form>
+        {/* <Link to="/">خانه</Link> */}
+      </div>
+    </CSSTransitionGroup>
   );
 };
 export default LoginForm;

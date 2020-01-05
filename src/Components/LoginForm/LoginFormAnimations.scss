@@ -1,0 +1,22 @@
+@import "~assets/styles/libs/animations";
+
+.loginForm-appear {
+}
+.loginForm-appear.loginForm-appear-active {
+  animation: fadeIn 0.5s ease-in-out;
+}
+.loginForm-enter {
+  transform: translateX(100%);
+}
+.loginForm-enter.loginForm-enter-active {
+  transform: translateX(0);
+
+  animation: moveIn 0.5s ease-in-out;
+}
+
+.loginForm-leave {
+}
+
+.loginForm-leave.loginForm-leave-active {
+  animation: moveOut 0.5s ease-in-out;
+}
