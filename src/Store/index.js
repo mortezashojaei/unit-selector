@@ -2,6 +2,7 @@ import * as reduxModule from 'redux';
 import {applyMiddleware, compose, createStore} from 'redux';
 import createReducer from './Reducers';
 import thunk from 'redux-thunk';
+import {coursesReducer} from './Reducers/coursesReducer'
 
 
 
