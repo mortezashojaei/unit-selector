@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
 import { CSSTransitionGroup } from "react-transition-group";
-import SignupForm from "Components/SignupForm/SignupForm";
-import SignupContainer from "../../Components/SignupContainer/SignupContainer";
-import LoginForm from "Components/LoginForm/LoginForm";
+import SignupForm from "Components/Welcome/SignupContainer/SignupForm/SignupForm";
+import SignupContainer from "./SignupContainer/SignupContainer";
+import LoginForm from "Components/Welcome/SignupContainer/LoginForm/LoginForm";
 import styles from "./Welcome.module.scss";
-import TabBar from "Components/TabBar/TabBar";
+import TabBar from "Components/Welcome/TabBar/TabBar";
 
 const Welcome = () => {
   return (

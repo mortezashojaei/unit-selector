@@ -19,9 +19,9 @@
     align-items: center;
     padding: 5px 15px;
     font-size: 1.1rem;
-    animation-name: popUp;
-    animation-duration: 0.3s;
-    animation-timing-function: ease-out;
+    // animation-name: popUp;
+    // animation-duration: 0.4s;
+    // animation-timing-function: ease-out;
     // border: 1px solid $basicOrange;
     @extend %normalBoxShadow--orange;
     transition: box-shadow 0.1s linear;
@@ -49,7 +49,7 @@
     border-top-right-radius: $buttonBorderRadius;
     border-bottom-left-radius: $buttonBorderRadius;
     justify-content: flex-end;
-
+    animation: moveIn 0.5s ease-in-out;
     embed {
       margin-right: 12px;
     }
@@ -64,6 +64,7 @@
     border-top-left-radius: $buttonBorderRadius;
     border-bottom-right-radius: $buttonBorderRadius;
     justify-content: flex-start;
+    animation: moveRight 0.5s ease-in-out;
 
     embed {
       margin-left: 12px;

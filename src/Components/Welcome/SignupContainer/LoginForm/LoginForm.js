@@ -111,10 +111,10 @@ const LoginForm = props => {
   return (
     <CSSTransitionGroup
       transitionName="loginForm"
-      transitionEnterTimeout={500}
+      transitionEnterTimeout={600}
       transitionLeave={true}
-      transitionLeaveTimeout={500}
-      transitionAppearTimeout={500}
+      transitionLeaveTimeout={600}
+      transitionAppearTimeout={600}
       transitionAppear={true}
     >
       <div className={styles.loginForm}>

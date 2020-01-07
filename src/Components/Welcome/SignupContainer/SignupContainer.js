@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import InitialSignup from "../InitialSignup/InitialSignup";
+import InitialSignup from "./InitialSignup/InitialSignup";
 import { CSSTransitionGroup } from "react-transition-group";
-import SignupForm from "../SignupForm/SignupForm";
+import SignupForm from "./SignupForm/SignupForm";
 import styles from "./SignupContainer.module.scss";
 import "./SignupContainerAnimations.scss";
 
@@ -28,16 +28,16 @@ const SignupContainer = props => {
 
     setTimeout(() => {
       setShouldRenderInitialSignup(true);
-    }, 400);
+    }, 600);
   }
   return (
     <>
       <CSSTransitionGroup
         transitionName="signupContainer"
-        transitionEnterTimeout={400}
+        transitionEnterTimeout={600}
         transitionLeave={true}
-        transitionLeaveTimeout={400}
-        transitionAppearTimeout={400}
+        transitionLeaveTimeout={600}
+        transitionAppearTimeout={600}
         transitionAppear={true}
       >
         {/* {!isFirstSignupDone && (
