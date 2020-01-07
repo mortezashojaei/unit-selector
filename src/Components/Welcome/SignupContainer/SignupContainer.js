@@ -32,25 +32,26 @@ const SignupContainer = props => {
   }
   return (
     <>
-      <CSSTransitionGroup
-        transitionName="signupContainer"
-        transitionEnterTimeout={600}
-        transitionLeave={true}
-        transitionLeaveTimeout={600}
-        transitionAppearTimeout={600}
-        transitionAppear={true}
-      >
-        {/* {!isFirstSignupDone && (
+      <div className={styles.signupContainer}>
+        <CSSTransitionGroup
+          transitionName="signupContainer"
+          transitionEnterTimeout={600}
+          transitionLeave={true}
+          transitionLeaveTimeout={600}
+          transitionAppearTimeout={600}
+          transitionAppear={true}
+        >
+          {/* {!isFirstSignupDone && (
           <InitialSignup key="initialSignUp" submitted={initialSubmit} />
         )}
         {isFirstSignupDone && (
           <SignupForm key="signupForm" userName={userName} />
         )} */}
 
-        {form}
-      </CSSTransitionGroup>
+          {form}
+        </CSSTransitionGroup>
 
-      {/* <CSSTransitionGroup
+        {/* <CSSTransitionGroup
         transitionName="example"
         transitionEnterTimeout={500}
         transitionLeave={true}
@@ -60,6 +61,7 @@ const SignupContainer = props => {
       >
       
       </CSSTransitionGroup> */}
+      </div>
     </>
   );
 };

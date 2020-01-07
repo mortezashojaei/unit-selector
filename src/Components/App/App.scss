@@ -5,6 +5,7 @@
 @import "~assets/styles/base/fonts";
 
 #root {
+  background: $backgroundColor;
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
@@ -18,4 +19,8 @@
 
 .container {
   padding: 1rem 2rem 3rem 2rem;
+  @media screen and (max-width: 450px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

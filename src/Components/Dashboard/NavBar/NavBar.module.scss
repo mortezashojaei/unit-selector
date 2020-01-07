@@ -1,0 +1,42 @@
+@import "~assets/styles/libs/vars";
+
+.navBar {
+  -webkit-box-shadow: 0px 3px 6px 4px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 3px 6px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 3px 6px 4px rgba(0, 0, 0, 0.3);
+  border-top-left-radius: $buttonBorderRadius;
+  border-bottom-right-radius: $buttonBorderRadius;
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .logo {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background-color: #4d4d4d;
+    color: white;
+    border: 3px solid #262626;
+    width: 210px;
+    height: 50px;
+    z-index: 1;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .buttonContainer {
+    position: absolute;
+    right: 0;
+  }
+  .linkContainer {
+    a {
+      margin-left: 2.5em;
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+  }
+}

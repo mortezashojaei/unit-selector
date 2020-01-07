@@ -1,5 +1,8 @@
 @import "~assets/styles/libs/animations";
-
+.signupContainer {
+  width: 100%;
+  overflow: hidden;
+}
 .appear {
   opacity: 0;
   //   display: none;
