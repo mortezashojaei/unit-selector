@@ -1,0 +1,10 @@
+.mainDiv{
+    height: 100%;
+    box-shadow: 0.5px 0.5px 2px 0.5px  rgb(145, 143, 143);
+    border-radius: 2px;
+    .list{
+        padding-top: 5px;
+        width: 100%;
+        overflow: auto;
+    }
+}

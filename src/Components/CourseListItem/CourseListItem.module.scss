@@ -1,0 +1,25 @@
+@import "~assets/styles/libs/vars";
+
+.listItem{
+    padding-left: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button{
+        border: none;
+        color: $basicOrange;
+        background-color: inherit;
+        font-size: 20px;
+    }
+    span{
+        padding-right: 3px;
+        font-size: 15px;
+    }
+    span:hover{
+        cursor: pointer;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+}

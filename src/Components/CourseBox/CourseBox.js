@@ -33,14 +33,16 @@ const CourseBox = props => {
         setType('public')
     }
     return (
-        <div className={styles.mainDivP}>
-                <p className={styles.p}>جستجوگر درس</p>
+        <div className={styles.mainDiv}>
+                <p>جستجوگر درس</p>
                 <input
                 value={searchText}
                 onChange={onInputChange}
                 placeholder=" نام درس را تایپ کنید..."/>
-                <button className={`${styles.button}`} onClick={onChartFilter} >دروس <span>چارت</span></button>
-                <button className={`${styles.button}`} onClick={onPublicFilter}>دروس <span>عمومی</span></button>
+                <div className={styles.buttonContainer}>
+                    <button onClick={onPublicFilter}>دروس <span>عمومی</span></button>
+                    <button onClick={onChartFilter} >دروس <span className={styles.active}>چارت</span></button>
+                </div>
                 <CourseList onSelect={onSelect} courses={filterCourses()}/>
         </div>
     )
