@@ -1,53 +1,49 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import CourseList from '../CourseList/CourseList'
 import styles from './CourseBox.module.scss'
 import axios from 'axios'
 
-class CourseBox extends React.Component {
-    state = {
-        courses: [],
-        searchText: '',
-        type: 'chart'
+const CourseBox = props => {
+    const [courses, setCourses] = useState([])
+    const [searchText, setSearchText] = useState('')
+    const [type, setType] = useState('chart')
+    const filterCourses = () => {
+        return courses.filter(course => 
+                        course.name.toLowerCase().includes(searchText.toLowerCase())).filter(course => 
+                            course.type === type)
     }
-    componentDidMount(){
+    useEffect(() => {
         axios.get('http://localhost:3000/courses').then(res => {
             console.log(res.data)
-            this.setState({courses: res.data})
+            setCourses(res.data)
         }).catch(e => {
             console.log(e)
         })
+    },[])
+    const onInputChange = e => {
+        setSearchText(e.target.value)
     }
-    filterCourses = () => {
-        return this.state.courses.filter(course => 
-            course.name.toLowerCase().includes(this.state.searchText.toLowerCase())).filter(course => 
-                course.type === this.state.type)   
+    const onSelect = (id) => {
+        console.log(courses.find(course => course.id === id))
     }
-    onInputChange = (e) => {
-        this.setState({searchText: e.target.value})
+    const onChartFilter = () => {
+        setType('chart')
     }
-    onChartFilter = () => {
-        this.setState({type: 'chart'})
+    const onPublicFilter = () => {
+        setType('public')
     }
-    onPublicFilter = () => {
-        this.setState({type: 'public'})
-    }
-    onSelect = (id) => {
-        console.log(this.state.courses.find(course => course.id === id))
-    }
-    render(){
-        return (
-            <div className={styles.mainDivP}>
+    return (
+        <div className={styles.mainDivP}>
                 <p className={styles.p}>جستجوگر درس</p>
                 <input
-                value={this.state.searchText}
-                onChange={this.onInputChange}
+                value={searchText}
+                onChange={onInputChange}
                 placeholder=" نام درس را تایپ کنید..."/>
-                <button className={`${styles.button}`} onClick={this.onChartFilter}>دروس <span>چارت</span></button>
-                <button className={`${styles.button}`} onClick={this.onPublicFilter}>دروس <span>عمومی</span></button>
-                <CourseList onSelect={this.onSelect} courses={this.filterCourses()}/>
-            </div>
-        )
-    }
+                <button className={`${styles.button}`} onClick={onChartFilter} >دروس <span>چارت</span></button>
+                <button className={`${styles.button}`} onClick={onPublicFilter}>دروس <span>عمومی</span></button>
+                <CourseList onSelect={onSelect} courses={filterCourses()}/>
+        </div>
+    )
 }
 
 export default CourseBox
