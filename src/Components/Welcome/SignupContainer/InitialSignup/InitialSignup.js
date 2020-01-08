@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import axios from 'axios'
-import { Dialogues } from "../../Utils/Dialogues";
+import { Dialogues } from "../../../../Utils/Dialogues";
 import styles from "./InitialSignup.module.scss";
 import { isEmailValid } from "Utils/formValidators";
 
@@ -22,7 +22,7 @@ const InitialSignup = props => {
 
         //nedd route for check email
 
-        // axios.post('',{userName: email}).then(res => {
+        // axios.post('',{email: email}).then(res => {
         //   if(res.data.statusCode === 200){
         //     setDoesExist(false)
         //     props.submitted()
@@ -33,6 +33,7 @@ const InitialSignup = props => {
         //   }
         // })
         
+        //temperary
         props.submitted(email);
       } else {
         setIsEmailFormatValid(false);

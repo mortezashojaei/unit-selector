@@ -1,56 +1,57 @@
 import React, { useState } from "react";
-import InitialSignup from "../InitialSignup/InitialSignup";
+import InitialSignup from "./InitialSignup/InitialSignup";
 import { CSSTransitionGroup } from "react-transition-group";
-import SignupForm from "../SignupForm/SignupForm";
+import SignupForm from "./SignupForm/SignupForm";
 import styles from "./SignupContainer.module.scss";
 import "./SignupContainerAnimations.scss";
 
 const SignupContainer = props => {
   const [isFirstSignupDone, setIsFirstSignupDone] = useState(false);
-  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [shouldRenderInitialSignup, setShouldRenderInitialSignup] = useState(
     false
   );
-  const initialSubmit = userName => {
+  const initialSubmit = email => {
     setIsFirstSignupDone(true);
-    setUserName(userName);
-    console.log(userName);
+    setEmail(email);
+    console.log(email);
   };
   let form = undefined;
   if (!isFirstSignupDone) {
     form = <InitialSignup key="initialSignUp" submitted={initialSubmit} />;
   } else {
     form = shouldRenderInitialSignup ? (
-      <SignupForm key="signupForm" userName={userName} />
+      <SignupForm key="signupForm" email={email} />
     ) : (
       undefined
     );
 
     setTimeout(() => {
       setShouldRenderInitialSignup(true);
-    }, 400);
+    }, 600);
   }
   return (
     <>
-      <CSSTransitionGroup
-        transitionName="signupContainer"
-        transitionEnterTimeout={400}
-        transitionLeave={true}
-        transitionLeaveTimeout={400}
-        transitionAppearTimeout={400}
-        transitionAppear={true}
-      >
-        {/* {!isFirstSignupDone && (
+      <div className={styles.signupContainer}>
+        <CSSTransitionGroup
+          transitionName="signupContainer"
+          transitionEnterTimeout={600}
+          transitionLeave={true}
+          transitionLeaveTimeout={600}
+          transitionAppearTimeout={600}
+          transitionAppear={true}
+        >
+          {/* {!isFirstSignupDone && (
           <InitialSignup key="initialSignUp" submitted={initialSubmit} />
         )}
         {isFirstSignupDone && (
           <SignupForm key="signupForm" userName={userName} />
         )} */}
 
-        {form}
-      </CSSTransitionGroup>
+          {form}
+        </CSSTransitionGroup>
 
-      {/* <CSSTransitionGroup
+        {/* <CSSTransitionGroup
         transitionName="example"
         transitionEnterTimeout={500}
         transitionLeave={true}
@@ -60,6 +61,7 @@ const SignupContainer = props => {
       >
       
       </CSSTransitionGroup> */}
+      </div>
     </>
   );
 };

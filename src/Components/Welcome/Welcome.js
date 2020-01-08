@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import { CSSTransitionGroup } from "react-transition-group";
-import SignupForm from "Components/SignupForm/SignupForm";
-import SignupContainer from "../../Components/SignupContainer/SignupContainer";
-import LoginForm from "Components/LoginForm/LoginForm";
+import SignupForm from "Components/Welcome/SignupContainer/SignupForm/SignupForm";
+import SignupContainer from "Components/Welcome/SignupContainer/SignupContainer";
+import LoginForm from "Components/Welcome/LoginForm/LoginForm";
 import styles from "./Welcome.module.scss";
-import TabBar from "Components/TabBar/TabBar";
+import TabBar from "Components/Welcome/TabBar/TabBar";
 
 const Welcome = () => {
   return (
@@ -27,8 +27,10 @@ const Welcome = () => {
           </figure>
 
           <TabBar />
-          <Route path="/signup" exact component={SignupContainer} />
-          <Route path="/login" exact component={LoginForm} />
+          <Switch>
+            <Route path="/signup" exact component={SignupContainer} />
+            <Route path="/login" exact component={LoginForm} />
+          </Switch>
         </section>
       </main>
     </>

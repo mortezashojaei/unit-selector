@@ -1,22 +1,31 @@
 @import "~assets/styles/libs/animations";
-
-.loginForm-appear {
+.signupContainer {
+  width: 100%;
+  overflow: hidden;
 }
-.loginForm-appear.loginForm-appear-active {
+.appear {
+  opacity: 0;
+  //   display: none;
+}
+.appearActive {
+  opacity: 1;
   animation: fadeIn 0.5s ease-in-out;
 }
-.loginForm-enter {
+.enter {
   transform: translateX(100%);
 }
-.loginForm-enter.loginForm-enter-active {
+.enterActive {
   transform: translateX(0);
 
   animation: moveIn 0.5s ease-in-out;
 }
 
-.loginForm-leave {
+.leave {
+  //   opacity: 1;
 }
 
-.loginForm-leave.loginForm-leave-active {
+.leaveActive {
+  //   opacity: 0;
+
   animation: moveOut 0.5s ease-in-out;
 }
