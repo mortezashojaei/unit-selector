@@ -30,20 +30,23 @@
             width: 130px;
             border-radius: 0px 15px;
             background-color: white;
-            border-width: 1px;
-            border-color: rgba(163, 160, 160, 0.301);
+            border: none;
+            box-shadow: 0.3px 0.9px 2px 0.1px  $silver;
         }
         button:hover{
             cursor: pointer;
         }
+        .active{
+            box-shadow: 0.4px 1.5px 1.4px   $basicOrange, 0px -0.1px 0.5px $silver;
+            span{
+                color: $basicOrange;
+                font-weight: bold;
+                font-size: 17px;
+                transition: color 0.5s;
+            }
+        }
         span{
             color: $lightGray;
-            font-weight: bold;
-            font-size: 17px;
-        }
-        .active{
-            // color: rgb(240, 156, 77);
-            color: $basicOrange;
             font-weight: bold;
             font-size: 17px;
         }

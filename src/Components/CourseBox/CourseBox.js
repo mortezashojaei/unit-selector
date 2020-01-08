@@ -7,9 +7,13 @@ const CourseBox = props => {
     const [courses, setCourses] = useState([])
     const [searchText, setSearchText] = useState('')
     const [type, setType] = useState('chart')
+    const [toggleType, setToggleType] = useState({
+        chart: 'active',
+        public: ''
+    })
     const filterCourses = () => {
         return courses.filter(course => 
-                        course.name.toLowerCase().includes(searchText.toLowerCase())).filter(course => 
+                        course.name.includes(searchText.trim())).filter(course => 
                             course.type === type)
     }
     useEffect(() => {
@@ -27,9 +31,17 @@ const CourseBox = props => {
         console.log(courses.find(course => course.id === id))
     }
     const onChartFilter = () => {
+        setToggleType({
+            chart: 'active',
+            public: ''
+        })
         setType('chart')
     }
     const onPublicFilter = () => {
+        setToggleType({
+            public: 'active',
+            chart: ''
+        })
         setType('public')
     }
     return (
@@ -40,8 +52,8 @@ const CourseBox = props => {
                 onChange={onInputChange}
                 placeholder=" نام درس را تایپ کنید..."/>
                 <div className={styles.buttonContainer}>
-                    <button onClick={onPublicFilter}>دروس <span>عمومی</span></button>
-                    <button onClick={onChartFilter} >دروس <span className={styles.active}>چارت</span></button>
+                    <button className={styles[toggleType.public]} onClick={onPublicFilter}>دروس <span>عمومی</span></button>
+                    <button className={styles[toggleType.chart]} autoFocus onClick={onChartFilter} >دروس <span>چارت</span></button>
                 </div>
                 <CourseList onSelect={onSelect} courses={filterCourses()}/>
         </div>
