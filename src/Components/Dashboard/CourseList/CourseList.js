@@ -8,6 +8,7 @@ const CourseList = props => {
             <div className={styles.list}>
                 {props.courses.map(course => <CourseListItem key={course.id} onSelect={props.onSelect} {...course}/>)}
             </div>
+            <button>بیش تر...</button>
         </div>
     )
 }

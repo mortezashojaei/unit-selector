@@ -1,10 +1,25 @@
+@import "~assets/styles/libs/vars";
+
 .mainDiv{
+    display: flex;
+    flex-direction: column;
     height: 100%;
     box-shadow: 0.5px 0.5px 2px 0.5px  rgb(145, 143, 143);
     border-radius: 2px;
     .list{
+        height: 90%;
         padding-top: 5px;
         width: 100%;
         overflow: auto;
+    }
+    button{
+        border: none;
+        background-color: inherit;
+        color: $silver;
+        height: 10%;
+        padding-bottom: 10px;
+    }
+    button:hover{
+        cursor: pointer;
     }
 }

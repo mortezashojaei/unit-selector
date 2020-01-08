@@ -1,7 +1,7 @@
 @import "~assets/styles/libs/vars";
 
 .mainDiv{
-    width: 30%;
+    width: 25%;
     height: 420px;
     // height: inherit;
     display: flex;
@@ -30,7 +30,7 @@
             height: 40px;
             width: 130px;
             border-radius: 0px 15px;
-            background-color: white;
+            background-color: inherit;
             border: none;
             box-shadow: 0.3px 0.9px 2px 0.1px  $silver;
         }
