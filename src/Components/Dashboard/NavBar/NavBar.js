@@ -4,9 +4,15 @@ import styles from "./NavBar.module.scss";
 
 const NavBar = ({ history }) => {
   const [isMenuClosed, setIsMenuClosed] = useState(true);
+
   const logout = useCallback(() => {
     history.push("/");
   }, [history]);
+
+  const toggleMenu = useCallback(
+    () => setIsMenuClosed(isMenuClosed => !isMenuClosed),
+    []
+  );
 
   return (
     <nav className={styles.navBar}>
@@ -29,10 +35,7 @@ const NavBar = ({ history }) => {
         <Link to="#">لینک سوم منو</Link>
         <Link to="#">لینک چهارم منو</Link>
       </div>
-      <button
-        className={styles.toggleButton}
-        onClick={() => setIsMenuClosed(isMenuClosed => !isMenuClosed)}
-      >
+      <button className={styles.toggleButton} onClick={toggleMenu}>
         {isMenuClosed ? "open" : "close"}
       </button>
     </nav>
