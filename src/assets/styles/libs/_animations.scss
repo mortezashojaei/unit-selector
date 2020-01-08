@@ -43,3 +43,19 @@
     opacity: 1;
   }
 }
+@keyframes dropDown {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 131.2px;
+  }
+}
+@keyframes rollUp {
+  from {
+    height: 131.2px;
+  }
+  to {
+    height: 0px;
+  }
+}
