@@ -16,14 +16,17 @@ const TabBar = () => {
             <span> ورود </span>
             به سیستم
           </div>
-          <embed src="./assets/images/loginicon.svg" alt="ورود" />
+          {/* <embed src="./assets/images/loginicon.svg" alt="ورود" /> */}
+          <i className="icon ion-md-log-in"></i>
         </Link>
         <Link
           to="/signup"
           className={`${styles.signUp} ${pathname === "/signup" &&
             styles.active}`}
         >
-          <embed src="./assets/images/registericon.svg" alt="ثبت نام" />
+          {/* <embed src="./assets/images/registericon.svg" alt="ثبت نام" /> */}
+          <i className="icon ion-md-person-add"></i>
+
           <div>
             یا
             <span> ثبت نام </span>

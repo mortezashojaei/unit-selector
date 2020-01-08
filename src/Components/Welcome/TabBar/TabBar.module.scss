@@ -14,10 +14,10 @@
   }
   a {
     height: 53px;
-    width: 220px;
+    width: 230px;
     display: flex;
     align-items: center;
-    padding: 5px 15px;
+    padding: 5px 20px;
     font-size: 1.1rem;
     // animation-name: popUp;
     // animation-duration: 0.4s;
@@ -31,10 +31,15 @@
       font-weight: 500;
       font-size: 1.3em;
     }
-    embed {
-      width: 33px;
-      height: auto;
+    i {
+      display: inherit;
+      font-size: 2.55em;
+      color: $basicOrange;
     }
+    // embed {
+    //   width: 33px;
+    //   height: auto;
+    // }
     @media screen and(hover:hover) {
       &:hover {
         text-decoration: none;
@@ -50,7 +55,7 @@
     border-bottom-left-radius: $buttonBorderRadius;
     justify-content: flex-end;
     animation: moveIn 0.5s ease-in-out;
-    embed {
+    i {
       margin-right: 12px;
     }
     .loginIcon {
@@ -66,7 +71,7 @@
     justify-content: flex-start;
     animation: moveRight 0.5s ease-in-out;
 
-    embed {
+    i {
       margin-left: 12px;
     }
     .signupIcon {

@@ -36,7 +36,7 @@ const NavBar = ({ history }) => {
         <Link to="#">لینک چهارم منو</Link>
       </div>
       <button className={styles.toggleButton} onClick={toggleMenu}>
-        {isMenuClosed ? "open" : "close"}
+        <i className={`icon ion-md-${isMenuClosed ? "menu" : "close"}`}></i>
       </button>
     </nav>
   );

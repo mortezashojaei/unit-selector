@@ -11,8 +11,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0 25px;
-  transition: max-height 5s ease-in-out;
+  padding: 10px 25px;
+  // transition:  5s ease-in-out;
 
   @media screen and(max-width:1240px) {
     justify-content: flex-end;
@@ -21,7 +21,7 @@
   @media screen and(max-width:450px) {
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
@@ -43,7 +43,7 @@
   }
   .buttonContainer {
     position: absolute;
-    right: 25px;
+    right: 30px;
     display: flex;
 
     button {
@@ -76,12 +76,21 @@
           }
         }
       }
+      @media screen and(max-width:450px) {
+        justify-content: flex-end;
+        margin-bottom: 0.5em;
+      }
     }
     @media screen and(max-width:450px) {
-      position: relative;
+      position: initial;
+      // display: flex;
+      // right: un;
+      flex-direction: column;
+      justify-content: flex-end;
     }
   }
   .linkContainer {
+    transition: visibility 2s ease-in-out;
     a {
       margin-left: 2.5em;
       &:hover {
@@ -101,19 +110,35 @@
     @media screen and(max-width:850px) {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      // align-items: center;
+      align-items: flex-start;
+
+      margin-left: 2em;
       a {
-        margin: 0;
+        margin: 0 0 0.5em 0;
       }
+    }
+    @media screen and(max-width:450px) {
+      margin-left: 0;
     }
   }
 
   .closed {
     @media screen and(max-width:850px) {
       display: none;
+      // height: 0;
+      // visibility: none;
     }
   }
   .toggleButton {
+    border: none;
+    background: none;
+    font-size: 1.7rem;
+    position: absolute;
+    left: 1rem;
+    i {
+      display: flex;
+    }
     @media screen and(min-width:851px) {
       display: none;
     }
