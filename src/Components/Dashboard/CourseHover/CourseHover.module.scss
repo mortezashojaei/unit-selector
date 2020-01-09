@@ -8,8 +8,9 @@
     color: $silver;
     background-color: white;
     border-radius: 20px;
-    -webkit-animation: fadeIn 4s;
-    animation: fadeIn 4s;
+    box-shadow: 0.4px 0.5px 15px 0.5px $silver;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
     .value{
         color: $basicOrange;
     }

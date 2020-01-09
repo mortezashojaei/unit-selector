@@ -13,13 +13,7 @@ const CourseListItem = props => {
     }
     return (
         <div className={styles.container}>
-        {showHover && 
-            <div className={styles.hoverComponent}>
-                <CourseHover 
-                onMouseLeave={onMouseLeave} 
-                onMouseEnter={onMouseEnter} 
-                {...props}/>
-            </div>}
+        
         <div className={styles.listItem}>
             <span 
             onMouseEnter={onMouseEnter}
@@ -27,7 +21,14 @@ const CourseListItem = props => {
             onClick={() => props.onSelect(props.id)}>{props.name}</span>
             <button onClick={() => props.onSelect(props.id)}>+</button>
         </div>
-        
+        {showHover && 
+            <div className={styles.hoverComponent}>
+                <CourseHover 
+                onMouseLeave={onMouseLeave} 
+                onMouseEnter={onMouseEnter}
+                {...props} 
+            />
+            </div>}
         </div>
     )
 }
