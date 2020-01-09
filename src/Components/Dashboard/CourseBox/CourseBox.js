@@ -1,63 +1,63 @@
-import React from "react";
-import CourseList from "../CourseList/CourseList";
-import styles from "./CourseBox.module.scss";
-import axios from "axios";
+import React, {useState, useEffect} from 'react'
+import CourseList from '../CourseList/CourseList'
+import styles from './CourseBox.module.scss'
+import axios from 'axios'
 
-class CourseBox extends React.Component {
-  state = {
-    courses: [],
-    searchText: "",
-    type: "chart"
-  };
-  componentDidMount() {
-    axios
-      .get("http://localhost:3000/courses")
-      .then(res => {
-        console.log(res.data);
-        this.setState({ courses: res.data });
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-  filterCourses = () => {
-    return this.state.courses
-      .filter(course =>
-        course.name.toLowerCase().includes(this.state.searchText.toLowerCase())
-      )
-      .filter(course => course.type === this.state.type);
-  };
-  onInputChange = e => {
-    this.setState({ searchText: e.target.value });
-  };
-  onChartFilter = () => {
-    this.setState({ type: "chart" });
-  };
-  onPublicFilter = () => {
-    this.setState({ type: "public" });
-  };
-  onSelect = id => {
-    console.log(this.state.courses.find(course => course.id === id));
-  };
-  render() {
+const CourseBox = props => {
+    const [courses, setCourses] = useState([])
+    const [searchText, setSearchText] = useState('')
+    const [type, setType] = useState('chart')
+    const [toggleType, setToggleType] = useState({
+        chart: 'active',
+        public: ''
+    })
+    const filterCourses = () => {
+        return courses.filter(course => 
+                        course.name.includes(searchText.trim())).filter(course => 
+                            course.type === type)
+    }
+    useEffect(() => {
+        axios.get('http://localhost:3000/courses').then(res => {
+            console.log(res.data)
+            setCourses(res.data)
+        }).catch(e => {
+            console.log(e)
+        })
+    },[])
+    const onInputChange = e => {
+        setSearchText(e.target.value)
+    }
+    const onSelect = (id) => {
+        console.log(courses.find(course => course.id === id))
+    }
+    const onChartFilter = () => {
+        setToggleType({
+            chart: 'active',
+            public: ''
+        })
+        setType('chart')
+    }
+    const onPublicFilter = () => {
+        setToggleType({
+            public: 'active',
+            chart: ''
+        })
+        setType('public')
+    }
     return (
-      <div className={styles.mainDivP}>
-        <p className={styles.p}>جستجوگر درس</p>
-        <input
-          value={this.state.searchText}
-          onChange={this.onInputChange}
-          placeholder=" نام درس را تایپ کنید..."
-        />
-        <button className={`${styles.button}`} onClick={this.onChartFilter}>
-          دروس <span>چارت</span>
-        </button>
-        <button className={`${styles.button}`} onClick={this.onPublicFilter}>
-          دروس <span>عمومی</span>
-        </button>
-        <CourseList onSelect={this.onSelect} courses={this.filterCourses()} />
-      </div>
-    );
-  }
+        <div className={styles.mainDiv}>
+                <p>جستجوگر درس</p>
+                <input
+                value={searchText}
+                onChange={onInputChange}
+                placeholder=" نام درس را تایپ کنید..."/>
+                <div className={styles.buttonContainer}>
+                    <button className={styles[toggleType.public]} onClick={onPublicFilter}>دروس <span>عمومی</span></button>
+                    <button className={styles[toggleType.chart]} autoFocus onClick={onChartFilter} >دروس <span>چارت</span></button>
+                </div>
+                <CourseList onSelect={onSelect} courses={filterCourses()}/>
+        </div>
+    )
 }
 
-export default CourseBox;
+export default CourseBox

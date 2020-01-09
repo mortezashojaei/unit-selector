@@ -1,0 +1,26 @@
+@import "~assets/styles/libs/vars";
+
+.mainDiv{
+    width: fit-content;
+    max-width: 250px;
+    padding: 15px;
+    height: fit-content;
+    color: $silver;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0.4px 0.5px 15px 0.5px $silver;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    .value{
+        color: $basicOrange;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
