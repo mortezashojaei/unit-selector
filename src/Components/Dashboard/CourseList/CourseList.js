@@ -10,13 +10,10 @@ const CourseList = props => {
     return (
         <div className={styles.mainDiv}>
             <div className={`${styles.list} ${showMore && styles.scroll}`}>
-                {props.courses.map(course => <CourseListItem key={course.id} onSelect={props.onSelect} {...course}/>)}
+                {props.courses.map(course =>
+                    <CourseListItem key={course.id} onSelect={props.onSelect} {...course}/>)}
             </div>
-            <button 
-            onClick={onMoreClick} 
-            className={`${styles.more} ${showMore && styles.hide}`}>
-            {!showMore && <span>بیش تر...</span>}
-            </button>
+            {!showMore && <button onClick={onMoreClick} className={`${styles.more}`}>بیش تر...</button>}
         </div>
     )
 }

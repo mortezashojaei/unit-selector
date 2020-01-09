@@ -1,6 +1,8 @@
 @import "~assets/styles/libs/vars";
 
 .mainDiv{
+    left: 0;
+    position: absolute;
     width: 25%;
     height: fit-content;
     // height: inherit;
