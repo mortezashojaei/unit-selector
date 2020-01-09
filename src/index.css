@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* customize scroll bar */
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-track{
+  background-color: rgb(240, 239, 240);
+}
+::-webkit-scrollbar-thumb{
+  background-color: rgba(94, 92, 90, 0.445);
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: rgba(128, 126, 125, 0.884);
+  cursor: pointer;
+}
