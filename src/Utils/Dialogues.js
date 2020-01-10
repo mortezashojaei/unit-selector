@@ -16,3 +16,19 @@ export const Dialogues = {
   semesterPlaceholder: "ترم تحصیلی",
   studentNumberPlaceholder: "شماره دانشجویی"
 };
+
+export const weekDays = {
+  1: "شنبه",
+  2: "یک شنبه",
+  3: "دو شنبه",
+  4: "سه شنبه",
+  5: "چهار شنبه",
+  6: "پنج شنبه"
+};
+
+export const dayTimes = {
+  1: "8 تا 10",
+  2: "10 تا 12",
+  3: "13 تا 15",
+  4: "15 تا 17"
+};

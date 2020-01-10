@@ -1,0 +1,24 @@
+@import "~assets/styles/libs/animations";
+
+.popUp-appear {
+  //   opacity: 0;
+}
+.popUp-appear.popUp-appear-active {
+  //   opacity: 1;
+  animation: fadeIn 0.6s ease-in-out;
+}
+.popUp-enter {
+}
+.popUp-enter.popUp-enter-active {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.popUp-leave {
+  //   opacity: 1;
+}
+
+.popUp-leave.popUp-leave-active {
+  //   opacity: 0;
+
+  animation: fadeOut 0.6s ease-in-out;
+}
