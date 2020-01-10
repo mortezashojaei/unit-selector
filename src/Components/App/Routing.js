@@ -18,7 +18,7 @@ function App() {
         <Route path="/login" exact component={Welcome} />
 
         {/*temporary route for test courses component */}
-        <Route path="/courses" exact component={CourseBox} />
+        {/* <Route path="/courses" exact component={CourseBox} /> */}
         <Route path="/dashboard" exact component={Dashboard} />
         <Route component={NotFound} />
       </Switch>
