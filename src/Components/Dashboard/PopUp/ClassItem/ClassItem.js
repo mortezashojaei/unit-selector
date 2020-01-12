@@ -35,7 +35,10 @@ const showClassTimes = classTimes => {
 const ClassItem = ({ professorName, classTimes }) => {
   return (
     <div className={styles.classItem}>
-      <p className={styles.professorName}>{professorName}</p>
+      <p className={styles.professorName}>
+        <span>استاد : </span>
+        {professorName}
+      </p>
       <p className={styles.classTimes}>{showClassTimes(classTimes)}</p>
       {handleCollisions({ professorName, classTimes }) || (
         <button

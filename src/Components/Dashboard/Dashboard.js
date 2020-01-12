@@ -21,10 +21,10 @@ const Dashboard = () => {
         <CourseBox />
         <CSSTransitionGroup
           transitionName="popUp"
-          transitionEnterTimeout={600}
+          transitionEnterTimeout={300}
           transitionLeave={true}
-          transitionLeaveTimeout={600}
-          transitionAppearTimeout={600}
+          transitionLeaveTimeout={300}
+          transitionAppearTimeout={300}
           transitionAppear={true}
         >
           {showPopUp && (

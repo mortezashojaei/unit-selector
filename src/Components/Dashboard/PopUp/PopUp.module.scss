@@ -16,7 +16,7 @@
     width: 90%;
     max-width: 450px;
     height: 280px;
-    overflow: auto;
+    overflow: hidden;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -25,13 +25,49 @@
     border: 3.5px solid #464147;
     border-bottom-left-radius: $popUpBorderRadius;
     border-top-right-radius: $popUpBorderRadius;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    -webkit-transform: translateZ(0);
+    @media screen and(max-width:450px) {
+      padding: 1.75em;
+    }
+
+    i {
+      cursor: pointer;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      font-size: 20px;
+      @media screen and(hover:hover) {
+        &:hover {
+          color: rgb(114, 114, 114);
+        }
+      }
+    }
     .title {
       font-size: 0.9rem;
+
       span {
         font-size: 1.3em;
       }
+
+      @media screen and(max-width:485px) {
+        // text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      @media screen and(max-width:400px) {
+        font-size: 0.85em;
+      }
     }
     .classList {
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       > div:last-child {
         border: none;
       }

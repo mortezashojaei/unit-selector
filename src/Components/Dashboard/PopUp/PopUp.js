@@ -1,19 +1,20 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import styles from "./PopUp.module.scss";
 import ClassItem from "Components/Dashboard/PopUp/ClassItem/ClassItem";
 
-/*
-  our custom Hook that alerts clicks outside of the passed ref
- */
-const useOutsideToggler = (popUpref, togglePopUp) => {
-  /**
-   * toggle the pop up's status if clicked on outside of element
-   */
-  const handleClickOutside = event => {
-    if (popUpref.current && !popUpref.current.contains(event.target)) {
-      togglePopUp();
-    }
-  };
+const PopUp = ({ classList, courseName, togglePopUp }) => {
+  const popUpRef = useRef();
+
+  const handleClickOutside = useCallback(
+    event => {
+      /* run the function when clicked outside of the ref */
+      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+        togglePopUp();
+      }
+    },
+    [togglePopUp]
+  );
+
   useEffect(() => {
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
@@ -21,17 +22,12 @@ const useOutsideToggler = (popUpref, togglePopUp) => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  });
-};
-
-const PopUp = ({ classList, courseName, togglePopUp }) => {
-  const popUpRef = useRef();
-
-  useOutsideToggler(popUpRef, togglePopUp);
+  }, [handleClickOutside]);
 
   return (
     <div className={styles.popUp}>
       <div className={styles.container} ref={popUpRef}>
+        <i onClick={togglePopUp} className="icon ion-md-close"></i>
         <h1 className={styles.title}>
           اخذ درس : <span>{courseName}</span>
         </h1>
