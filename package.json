@@ -6,6 +6,7 @@
     "axios": "latest",
     "json-server": "^0.15.1",
     "node-sass": "^4.13.0",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
