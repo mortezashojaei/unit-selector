@@ -11,13 +11,14 @@ import styles from "./SignupForm.module.scss";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
-  const [studentNumber, setStudentNumber] = useState("");
+  const {isEdit} = props;
+  const [studentNumber, setStudentNumber] = useState(props.studentNumber||"");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState([]);
-  const [major, setMajor] = useState("");
-  const [semester, setSemester] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [major, setMajor] = useState(props.major||"");
+  const [semester, setSemester] = useState(props.semester||"");
+  const [fullName, setFullName] = useState(props.fullName||"");
   const [error, setError] = useState(null);
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
@@ -258,6 +259,7 @@ const SignupForm = props => {
               value={studentNumber}
               onChange={handleStudentNumberChange}
               placeholder={Dialogues.studentNumberPlaceholder}
+              readOnly={ isEdit ?'true':''}
             />
             {emptyFields.studentNumber ? (
               <p>{`${Dialogues.studentNumberPlaceholder} نمی تواند خالی باشد`}</p>
@@ -268,7 +270,7 @@ const SignupForm = props => {
             )}
           </label>
 
-          <label>
+          <label style={{order:isEdit?3:''}}>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
               className={`${(emptyFields.password ||
@@ -288,7 +290,7 @@ const SignupForm = props => {
             )}
           </label>
 
-          <label>
+          <label style={{order:isEdit?4:''}}>
             {passwordConfirm && (
               <span>{Dialogues.passwordConfirmPlaceholder}</span>
             )}
@@ -370,7 +372,7 @@ const SignupForm = props => {
             />
           </label> */}
         </div>
-        <button type="submit">تکمیل عضویت</button>
+        <button type="submit">{isEdit?Dialogues.editSubmit:Dialogues.registerSubmit2}</button>
       </form>
       {/* <Link to="/">خانه</Link> */}
     </div>

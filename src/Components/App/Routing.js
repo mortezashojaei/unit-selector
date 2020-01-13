@@ -5,6 +5,7 @@ import CourseBox from "../Dashboard/CourseBox/CourseBox";
 import Dashboard from "Components/Dashboard/Dashboard";
 import NotFound from "Components/NotFound/NotFound";
 import Calender from "Components/Calender/Calender";
+import Edit from "Components/Welcome/Edit/Edit";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         {/* <Route path="/courses" exact component={CourseBox} /> */}
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/calender" exact component={Calender} />
+        <Route path="/edit" exact component={Edit} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

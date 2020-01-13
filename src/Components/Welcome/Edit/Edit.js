@@ -1,13 +1,17 @@
 import React from "react";
-import "./Edit.Module.scss";
+import styles from "./Edit.Module.scss";
 import SignupForm from "../SignupContainer/SignupForm/SignupForm";
 const Edit = (props) => {
   const data = {
-    
+    studentNumber:1234,
+    major:'camputer',
+    semester:98,
+    fullName:'amir',
+    isEdit:true,
   }
   return (
-    <div className="calender-container">
-      <SignupForm key="signupForm" email={email} />
+<div className={styles.signupContainer}>
+        <SignupForm key="signupForm" {...data} />
     </div>
   );
 };
