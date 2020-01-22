@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { CSSTransitionGroup } from "react-transition-group";
 
-import { Link } from "react-router-dom";
+import { useAuth } from "Utils/Authentication/Auth";
 import styles from "./LoginForm.module.scss";
-import { login } from "Utils/ApiCalls/Auth";
+import { login as loginApiCall } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import { isEmailValid } from "Utils/formValidators";
 import "./LoginFormAnimations.scss";
@@ -21,6 +21,8 @@ const LoginForm = props => {
     email: false,
     password: false
   });
+
+  const { login } = useAuth();
 
   /*  with usecallback hook react remembers this function between rerenders,
   and avoids creating a new function every time the compoenent rerenders,
@@ -77,10 +79,11 @@ const LoginForm = props => {
           email,
           password
         };
-        login(data)
+        loginApiCall(data)
           .then(function(response) {
             if (response.data.StatusCode == 200)
               setMessage(Dialogues.loginokerr);
+            login(response.data.token);
           })
           .catch(function(error) {
             if (error.response) {

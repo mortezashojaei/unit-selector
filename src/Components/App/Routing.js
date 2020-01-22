@@ -6,26 +6,32 @@ import Dashboard from "Components/Dashboard/Dashboard";
 import NotFound from "Components/NotFound/NotFound";
 import Calender from "Components/Calender/Calender";
 import Edit from "Components/Welcome/Edit/Edit";
+import AuthProvider from "Utils/Authentication/AuthProvider";
+import Interceptor from "Utils/Interceptor";
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route
-          path="/"
-          exact
-          render={routeProps => <Redirect {...routeProps} to="/login" />}
-        />
-        <Route path="/signup" exact component={Welcome} />
-        <Route path="/login" exact component={Welcome} />
+      <AuthProvider>
+        <Interceptor>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={routeProps => <Redirect {...routeProps} to="/login" />}
+            />
+            <Route path="/signup" exact component={Welcome} />
+            <Route path="/login" exact component={Welcome} />
 
-        {/*temporary route for test courses component */}
-        {/* <Route path="/courses" exact component={CourseBox} /> */}
-        <Route path="/dashboard" exact component={Dashboard} />
-        <Route path="/calender" exact component={Calender} />
-        <Route path="/edit" exact component={Edit} />
-        <Route component={NotFound} />
-      </Switch>
+            {/*temporary route for test courses component */}
+            {/* <Route path="/courses" exact component={CourseBox} /> */}
+            <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/calender" exact component={Calender} />
+            <Route path="/edit" exact component={Edit} />
+            <Route component={NotFound} />
+          </Switch>
+        </Interceptor>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
