@@ -7,7 +7,7 @@ const Interceptor = ({ children }) => {
 
   useEffect(() => {
     axios.interceptors.response.use(null, error => {
-      if (error.response.data.error == 401) {
+      if (error.response.data.error == 403) {
         logout();
       }
     });
