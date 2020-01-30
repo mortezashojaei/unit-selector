@@ -24,3 +24,4 @@ yarn-error.log*
 
 #design files
 /src/design
+yarn.lock
