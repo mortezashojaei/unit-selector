@@ -132,6 +132,8 @@ const SignupForm = props => {
     setEmptyFields(emptyFields => ({ ...emptyFields, [key]: false }));
   };
   const toSubmit = () => {
+    const type='post';
+    if(isEdit==true) type='put';
     signup({
       password,
       studentNumber,
@@ -139,7 +141,7 @@ const SignupForm = props => {
       major,
       full_name: fullName,
       email: props.email
-    })
+    },type)
       .then(res => {
         let status = res.status;
         if (status === 200 || status === 201) {
@@ -156,6 +158,7 @@ const SignupForm = props => {
           setError("رشته وارد شده صحیح نمیباشد");
         }
       });
+      
   };
 
   const onFormSubmit = e => {
@@ -269,8 +272,10 @@ const SignupForm = props => {
               )
             )}
           </label>
-
-          <label style={{order:isEdit?3:''}}>
+                {(isEdit?''
+                :
+                <React.Fragment>
+                  <label style={{order:isEdit?3:''}}>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
               className={`${(emptyFields.password ||
@@ -312,6 +317,9 @@ const SignupForm = props => {
             )}
           </label>
 
+                </React.Fragment>
+                )}
+          
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
             {/* <Select

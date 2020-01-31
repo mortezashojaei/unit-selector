@@ -31,3 +31,15 @@ export function post(Url,body, params){
         });
     });
   };
+  export function put(Url,body, params){
+    return new Promise((resolve, reject) => {
+      API
+        .put(Url,body,{params})
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  };
