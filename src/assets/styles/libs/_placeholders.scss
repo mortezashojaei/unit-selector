@@ -6,9 +6,9 @@
   box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
 }
 %normalBoxShadow--orange {
-  -webkit-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
-  -moz-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
-  box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px $basicOrange;
+  -moz-box-shadow: 0px 1px 1.5px 0.75px $basicOrange;
+  box-shadow: 0px 1px 1.5px 0.75px $basicOrange;
 }
 
 %inputStyles {
@@ -86,8 +86,12 @@
     }
   }
 }
-
 %gradientButton {
+  background-image: url('/assets/images/unnamed.jpg') !important;
+  background-blend-mode: luminosity;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;;
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
@@ -111,7 +115,7 @@
   //   rgba(252, 129, 74, 1) 80%,
   //   rgba(232, 232, 232, 1) 100%
   // );
-  background: $basicOrange;
+  background: black;
   @media screen and (hover: hover) {
     &:hover {
       // background: linear-gradient(
