@@ -39,10 +39,10 @@ const SignupForm = props => {
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
-    if (password) {
+    if (password || isEdit) {
       setEmptyFieldToFalse("password");
     }
-    if (passwordConfirm) {
+    if (passwordConfirm || isEdit) {
       setEmptyFieldToFalse("passwordConfirm");
     }
     if (fullName) {
@@ -191,8 +191,10 @@ const SignupForm = props => {
     let err;
     if (
       isNaN(studentNumber) ||
+      (
       password.length < 4 ||
       password !== passwordConfirm
+      && !isEdit)
     ) {
       err = true;
     }
@@ -200,10 +202,10 @@ const SignupForm = props => {
       !err &&
       fullName &&
       major &&
-      password &&
+     (password &&
+      passwordConfirm || isEdit)&&
       semester &&
-      studentNumber &&
-      passwordConfirm
+      studentNumber
     ) {
       console.log("submited");
       toSubmit();

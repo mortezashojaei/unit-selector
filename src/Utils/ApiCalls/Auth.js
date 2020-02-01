@@ -5,9 +5,11 @@ export function login(data) {
 }
 
 export function signup(data,type) {
-    if(type=='post')
+    if(type=='put'){
+        delete data['password']
+        return put('users',data)
+    }
     return post('users',data)
-    return put('users',data)
 }
 export function info() { 
     return get('user',null)
