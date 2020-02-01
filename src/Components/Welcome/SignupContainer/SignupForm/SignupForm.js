@@ -39,10 +39,10 @@ const SignupForm = props => {
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
-    if (password) {
+    if (password || isEdit) {
       setEmptyFieldToFalse("password");
     }
-    if (passwordConfirm) {
+    if (passwordConfirm || isEdit) {
       setEmptyFieldToFalse("passwordConfirm");
     }
     if (fullName) {
@@ -132,6 +132,8 @@ const SignupForm = props => {
     setEmptyFields(emptyFields => ({ ...emptyFields, [key]: false }));
   };
   const toSubmit = () => {
+    const type='post';
+    if(isEdit==true) type='put';
     signup({
       password,
       studentNumber,
@@ -139,7 +141,7 @@ const SignupForm = props => {
       major,
       full_name: fullName,
       email: props.email
-    })
+    },type)
       .then(res => {
         let status = res.status;
         if (status === 200 || status === 201) {
@@ -156,6 +158,7 @@ const SignupForm = props => {
           setError("رشته وارد شده صحیح نمیباشد");
         }
       });
+      
   };
 
   const onFormSubmit = e => {
@@ -188,8 +191,10 @@ const SignupForm = props => {
     let err;
     if (
       isNaN(studentNumber) ||
+      (
       password.length < 4 ||
       password !== passwordConfirm
+      && !isEdit)
     ) {
       err = true;
     }
@@ -197,10 +202,10 @@ const SignupForm = props => {
       !err &&
       fullName &&
       major &&
-      password &&
+     (password &&
+      passwordConfirm || isEdit)&&
       semester &&
-      studentNumber &&
-      passwordConfirm
+      studentNumber
     ) {
       console.log("submited");
       toSubmit();
@@ -269,8 +274,10 @@ const SignupForm = props => {
               )
             )}
           </label>
-
-          <label style={{order:isEdit?3:''}}>
+                {(isEdit?''
+                :
+                <React.Fragment>
+                  <label style={{order:isEdit?3:''}}>
             {password && <span>{Dialogues.passwordPlaceholder}</span>}
             <input
               className={`${(emptyFields.password ||
@@ -312,6 +319,9 @@ const SignupForm = props => {
             )}
           </label>
 
+                </React.Fragment>
+                )}
+          
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
             {/* <Select

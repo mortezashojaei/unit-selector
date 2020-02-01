@@ -13,7 +13,7 @@ const Welcome = () => {
       <main className={`${styles.welcome} container`}>
         <section>
           <figure key="figure">
-            <div className={styles.logo}>logo will be here</div>
+            <div className={styles.logo}><img src={process.env.PUBLIC_URL + '/assets/images/logo2.png'}></img></div>
             <figcaption>
               <h1>سیستم شبیه ساز انتخاب واحد</h1>
               <div>
