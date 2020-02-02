@@ -18,8 +18,7 @@ export const useAuth = () => {
     isAuthenticated,
     setIsAuthenticated,
     tokenKey,
-    mainPageUrl,
-    loginUrl
+    mainPageUrl
   } = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
@@ -33,7 +32,6 @@ export const useAuth = () => {
   function logout() {
     setSession(null, tokenKey);
     setIsAuthenticated(false);
-    history.push(loginUrl);
   }
 
   useEffect(() => {
