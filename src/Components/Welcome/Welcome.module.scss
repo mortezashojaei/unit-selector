@@ -23,7 +23,8 @@
     align-items: center;
     figure {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      flex-direction: row-reverse;
       align-items: center;
       text-align: center;
       min-width: 250px;
@@ -31,20 +32,23 @@
       // margin: 4rem 0 2rem 0;
 
       .logo {
-        width: 100%;
-        height: 100px;
+        width: 80%;
+        max-width: 280px;
+        height: auto;
+        margin: 0 auto;
         font-size: 2em;
         font-weight: bold;
         display: flex;
         align-items: center;
         justify-content: center;
         img {
-          max-width: 300px;
-          width: 80%;
+          min-width: 200px;
+          width: 100%;
         }
       }
       figcaption {
-        width: 100%;
+        width: auto;
+        margin: 0 auto;
         font-size: 1.1rem;
         h1 {
           font-weight: 500;
