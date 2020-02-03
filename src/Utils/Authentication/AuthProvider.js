@@ -4,7 +4,7 @@ import React from "react";
 
 const AuthProvider = ({
   children,
-  tokenKey = "jwt",
+  tokenKey = "token",
   mainPageUrl = "/dashboard",
   loginUrl = "/login"
 }) => {

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
 import AuthContext from "./Context";
 import { useContext, useEffect } from "react";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const setSession = (token, tokenKey) => {
   if (token) {
@@ -28,6 +29,11 @@ export const useAuth = () => {
     setIsAuthenticated(true);
     let { from } = location.state || { from: { pathname: mainPageUrl } };
     history.replace(from);
+    Swal.fire({
+      icon: "success",
+      title: "خوش آمدید",
+      text: "به سیستم انتخاب واحد ترمه خوش آمدید"
+    });
   }
   function logout() {
     setSession(null, tokenKey);
