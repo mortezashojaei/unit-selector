@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styles from "./NavBar.module.scss";
+import Gravatar from 'react-gravatar'
 
 const NavBar = ({ history }) => {
   const [isMenuClosed, setIsMenuClosed] = useState(true);
@@ -16,7 +17,9 @@ const NavBar = ({ history }) => {
   return (
     <nav className={`${styles.navBar} `}>
       <div className={styles.logo}><img src={process.env.PUBLIC_URL + '/assets/images/logo2.png'}></img></div>
+      
       <div className={styles.buttonContainer}>
+      <Gravatar email="blah@blah.com" />
         <button onClick={logout}>
           خروج <span className={styles.circle}></span>
         </button>
