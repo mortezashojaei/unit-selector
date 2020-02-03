@@ -1,15 +1,10 @@
 import axios from "axios";
-const API = axios.create({
-  // baseURL: 'http://75b95f0b.ngrok.io/',
-  // baseURL: 'http://localhost:3000',
-  baseURL: "https://2dcfb1c2.ngrok.io",
-  timeout: 10000,
-  headers: { "Content-Type": "text/plain" }
-});
+
+const baseURL = "https://2dcfb1c2.ngrok.io";
 // baseURL: http://75b95f0b.ngrok.io/
 export function get(Url, params) {
   return new Promise((resolve, reject) => {
-    API.get(Url, { params })
+    axios.get(baseURL + Url, { params })
       .then(response => {
         resolve(response);
       })
@@ -21,7 +16,7 @@ export function get(Url, params) {
 
 export function post(Url, body, params) {
   return new Promise((resolve, reject) => {
-    API.post(Url, body, { params })
+    axios.post(baseURL + Url, body, { params })
       .then(response => {
         resolve(response);
       })
@@ -32,7 +27,7 @@ export function post(Url, body, params) {
 }
 export function put(Url, body, params) {
   return new Promise((resolve, reject) => {
-    API.put(Url, body, { params })
+    axios.put(baseURL + Url, body, { params })
       .then(response => {
         resolve(response);
       })
