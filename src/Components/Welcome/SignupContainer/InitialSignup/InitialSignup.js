@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Dialogues } from "../../../../Utils/Dialogues";
 import styles from "./InitialSignup.module.scss";
 import { isEmailValid } from "Utils/formValidators";
+import { doesEmailExist } from "Utils/ApiCalls/Auth";
 
 const InitialSignup = props => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const InitialSignup = props => {
   const onEmailNameChange = useCallback(e => {
     setEmail(e.target.value);
     setIsEmpty(false);
+    setDoesExist(false);
     setIsEmailFormatValid(true);
   }, []);
   const onSubmit = e => {
@@ -19,22 +21,17 @@ const InitialSignup = props => {
     if (email && email.trim().length > 0) {
       setIsEmpty(false);
       if (isEmailValid(email)) {
-
-        //nedd route for check email
-
-        // axios.post('',{email: email}).then(res => {
-        //   if(res.data.statusCode === 200){
-        //     setDoesExist(false)
-        //     props.submitted()
-        //   }
-        // }).catch(e => {
-        //   if(e.data.statusCode === 400){
-        //     setDoesExist(true)
-        //   }
-        // })
-        
-        //temperary
-        props.submitted(email);
+        /* check if the email already exists or not,
+        if not then move to the next step
+        */
+        //  UNCOMMENT THIS SECTION when working with the real api
+        doesEmailExist({ email })
+          .then(() => {
+            props.submitted(email);
+          })
+          .catch(data => {
+            setDoesExist(true);
+          });
       } else {
         setIsEmailFormatValid(false);
       }

@@ -8,6 +8,7 @@ import Calender from "Components/Calender/Calender";
 import Edit from "Components/Welcome/Edit/Edit";
 import AuthProvider from "Utils/Authentication/AuthProvider";
 import Interceptor from "Utils/Interceptor";
+import PrivateRoute from "Utils/Authentication/PrivateRoute";
 
 function App() {
   return (
@@ -25,9 +26,13 @@ function App() {
 
             {/*temporary route for test courses component */}
             {/* <Route path="/courses" exact component={CourseBox} /> */}
-            <Route path="/dashboard" exact component={Dashboard} />
+            <PrivateRoute path="/dashboard" exact>
+              <Dashboard />
+            </PrivateRoute>
             <Route path="/calender" exact component={Calender} />
-            <Route path="/edit" exact component={Edit} />
+            <PrivateRoute path="/edit" exact>
+              <Edit />
+            </PrivateRoute>
             <Route component={NotFound} />
           </Switch>
         </Interceptor>
