@@ -6,12 +6,13 @@ import { fetchCourses } from "Utils/ApiCalls/CourseBox";
 const CourseBox = props => {
   const [courses, setCourses] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [type, setType] = useState("chart");
+  const [type, setType] = useState(1);
   const [toggleType, setToggleType] = useState({
     chart: "active",
     public: ""
   });
   const filterCourses = () => {
+    // console.log(courses);
     return courses
       .filter(course => course.name.includes(searchText.trim()))
       .filter(course => course.type === type);
@@ -19,15 +20,16 @@ const CourseBox = props => {
   useEffect(() => {
     fetchCourses()
       .then(res => {
-        setCourses(res.data);
+        setCourses(res.data.data);
       })
       .catch(e => {});
   }, []);
   const onInputChange = e => {
     setSearchText(e.target.value);
   };
-  const onSelect = id => {
-    console.log(courses.find(course => course.id === id));
+  const onSelect = name => {
+    // console.log(courses.find(course => course.id === id));
+    props.setSelectedCourseName(name);
   };
   const onChartFilter = () => {
     setToggleType({
@@ -63,7 +65,7 @@ const CourseBox = props => {
           دروس <span>چارت</span>
         </button>
       </div>
-      <CourseList onSelect={onSelect} courses={filterCourses()} />
+      <CourseList onSelect={onSelect} courses={courses && filterCourses()} />
     </div>
   );
 };
