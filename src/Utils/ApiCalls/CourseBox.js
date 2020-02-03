@@ -5,5 +5,5 @@ export function fetchCourses() {
 }
 
 export function addCourse(course) {
-  return post("/api/course", course);
+  return post("/api/user/course/", course);
 }

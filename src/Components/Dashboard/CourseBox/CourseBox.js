@@ -30,7 +30,8 @@ const CourseBox = props => {
     setSearchText(e.target.value);
   };
   const onSelect = id => {
-      addCourse(courses.find(course => course.id === id)).then(res => {
+      let course = courses.find(course => course.id === id)
+      addCourse({course_id: course.id}).then(res => {
           console.log('sucseed')
       }).catch(e => {
           console.log('error')
