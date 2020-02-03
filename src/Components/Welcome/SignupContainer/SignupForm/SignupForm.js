@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-// import Select from "react-select";
+import Select from "react-select";
 // import SelectSearch from "react-select-search";
 import { CSSTransitionGroup } from "react-transition-group";
 
@@ -11,6 +11,16 @@ import styles from "./SignupForm.module.scss";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
+
+  //test for select search
+  const [fakeList , setFakeList] = useState([
+    {value: '1', label: 'ریاضی'},
+    {value: '2', label: '2ریاضی'},
+    {value: '3', label: 'ریاضی'}
+  ])
+  const [dars, setDars] = useState()
+
+
   const {isEdit} = props;
   const [studentNumber, setStudentNumber] = useState(props.studentNumber||"");
   const [password, setPassword] = useState("");
@@ -109,11 +119,16 @@ const SignupForm = props => {
     const name = e.target.value;
     setFullName(name);
   }, []);
-  const handleMajorChange = useCallback(e => {
-    const major = e.target.value !== 0 ? e.target.value : e.target.innerHTML;
+  // const handleMajorChange = useCallback(e => {
+  //   const major = e.target.value !== 0 ? e.target.value : e.target.innerHTML;
 
-    setMajor(major);
-  }, []);
+  //   setMajor(major);
+  // }, []);
+  const handleMajorChange = useCallback(e => {
+    setMajor(e.target.value)
+    console.log(major)
+  })
+
 
   const setEmptyFieldToTrue = key => {
     /* we pass a callback to the setState to get the latest state */
@@ -337,12 +352,26 @@ const SignupForm = props => {
               placeholder={Dialogues.majorPlaceholder}
               onChange={handleMajorChange}
             /> */}
-            <SelectSearch
+            {/*<Select
+            className={styles.fakeSelect}
+            options={fakeList}
+            value={fakeList[0]}
+            />*/}
+            {/*<SelectSearch
               value={major}
               options={toSelectForm(majors)}
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
-            />
+            />*/}
+
+            <select 
+            onChange={handleMajorChange}
+            className={`${(emptyFields.major ||
+              wrongCredentials.major) &&
+              styles.error}`}
+            >
+              {fakeList.map(list => <option value={list.value}>{list.label}</option>)}
+            </select>
             {emptyFields.major ? (
               <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
             ) : (
