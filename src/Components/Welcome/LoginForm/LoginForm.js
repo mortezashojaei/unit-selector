@@ -8,6 +8,7 @@ import { login as loginApiCall } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import { isEmailValid } from "Utils/formValidators";
 import "./LoginFormAnimations.scss";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const LoginForm = props => {
   const [email, setEmail] = useState("");
@@ -81,30 +82,32 @@ const LoginForm = props => {
         };
         loginApiCall(data)
           .then(function(response) {
-            if (response.data.StatusCode == 200)
-              setMessage(Dialogues.loginokerr);
-            login(response.data.data.token);
+            if (response.data.StatusCode == 200) {
+              login(response.data.data.token);
+            }
           })
           .catch(function(error) {
             if (error.response) {
-              // The request was made and the server responded with a status code
-              // that falls out of the range of 2xx
-              //console.log(error.response.data);
-              //console.log(error.response.status);
-              //console.log(error.response.headers);
-              if (error.response.status == 403) {
+              if (error.StatusCode == 403) {
                 setMessage(Dialogues.loginfielderr);
+                Swal.fire({
+                  icon: "error",
+                  title: "خطا",
+                  text: "نام کاربری یا رمز عبور شما اشتباه است"
+                });
               }
             } else if (error.request) {
-              // The request was made but no response was received
-              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-              // http.ClientRequest in node.js
-              //console.log(error.request);
-              setMessage(Dialogues.haveproblemerr);
+              Swal.fire({
+                icon: "error",
+                title: "خطا",
+                text: "نام کاربری یا رمز عبور شما اشتباه است"
+              });
             } else {
-              // Something happened in setting up the request that triggered an Error
-              console.log("Error", error.message);
-              setMessage(Dialogues.haveproblemerr);
+              Swal.fire({
+                icon: "error",
+                title: "خطا",
+                text: "نام کاربری یا رمز عبور شما اشتباه است"
+              });
             }
           });
       }
