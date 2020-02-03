@@ -1,5 +1,5 @@
-import {get,post} from './API';
+import { get, post } from "./API";
 
 export function fetchMajors() {
-    return get('majors')
+  return get("/api/major/list/");
 }

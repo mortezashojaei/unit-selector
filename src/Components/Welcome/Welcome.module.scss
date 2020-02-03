@@ -9,12 +9,17 @@
   // flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: $backgroundColor;
+  background-blend-mode: overlay;
+  background-color: #131010;
+  background-size: cover;
+  background-image: url(https://bazaremina.ir/wp-content/uploads/2018/09/shahpasand-5teke_5_s5.jpg);
   user-select: none;
   // figure + * {
   //   // flex-grow: 1;
   // }
   section {
+    background: $backgroundColor;
+    border-radius: 2em;
     width: 650px;
     overflow-x: hidden;
     min-height: 450px;
@@ -33,7 +38,7 @@
 
       .logo {
         width: 80%;
-        max-width: 280px;
+        max-width: 50vh;
         height: auto;
         margin: 0 auto;
         font-size: 2em;
@@ -42,8 +47,8 @@
         align-items: center;
         justify-content: center;
         img {
-          min-width: 200px;
-          width: 100%;
+          width: 350px;
+          max-width: 95%;
         }
       }
       figcaption {
