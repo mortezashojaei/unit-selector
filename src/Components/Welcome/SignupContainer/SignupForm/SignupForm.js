@@ -353,11 +353,12 @@ const SignupForm = props => {
               onBlur={onSelectBlur}
               onChange={handleMajorChange}
             >
-              {majors.map(major => (
-                <option key={major.id} value={major.id}>
-                  {major.name}
-                </option>
-              ))}
+              {majors &&
+                majors.map(major => (
+                  <option key={major.id} value={major.id}>
+                    {major.name}
+                  </option>
+                ))}
             </select>
 
             {emptyFields.major ? (
