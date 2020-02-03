@@ -6,12 +6,12 @@ import NavBar from "../../Dashboard/NavBar/NavBar";
 import SignupForm from "../SignupContainer/SignupForm/SignupForm";
 import { info } from "Utils/ApiCalls/Auth";
 const Edit = props => {
-  const { data, setData } = useState({});
+  const [data,setData] = useState({});
   useEffect(() => {
     info().then(function(response) {
-      if (response.data.StatusCode == 200) setData(response.data);
+      if (response.data.StatusCode == 200) {setData(response.data.data); console.log(data)}
     });
-  }, [true]);
+  },[]);
 
   return (
     <div>
