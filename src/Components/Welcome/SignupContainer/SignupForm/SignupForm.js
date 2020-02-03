@@ -9,9 +9,11 @@ import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import majorList from "Utils/majorFakeData";
 import styles from "./SignupForm.module.scss";
+import { useAuth } from "Utils/Authentication/Auth";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
+  const { login } = useAuth();
   //test for select search
   const [fakeList, setFakeList] = useState([
     { value: "1", label: "ریاضی" },
@@ -161,8 +163,10 @@ const SignupForm = props => {
     )
       .then(res => {
         let status = res.status;
+        alert("done");
+        console.log("res", res.data);
         if (status === 200 || status === 201) {
-          alert("done");
+          login(res.data.data.token);
         }
       })
       .catch(err => {
