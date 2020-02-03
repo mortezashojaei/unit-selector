@@ -14,7 +14,11 @@ const CourseBox = props => {
     const filterCourses = () => {
         return courses.filter(course => 
                         course.name.includes(searchText.trim())).filter(course => 
-                            course.type === type)
+                            {
+                                if(type ==='chart') {
+                                    return course.type === 1
+                                }else { return course.type === 0}
+                            })
     }
     useEffect(() => {
         axios.get('https://2dcfb1c2.ngrok.io/api/course').then(res => {
