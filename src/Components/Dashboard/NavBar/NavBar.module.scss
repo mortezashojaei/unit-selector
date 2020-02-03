@@ -2,9 +2,12 @@
 @import "~assets/styles/libs/animations";
 
 .navBar {
-  -webkit-box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
+  background-blend-mode: screen;
+  background-color: #d2d2d2;
+  background-image: url(/assets/images/unnamed.jpg);
+  -webkit-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
   border-top-left-radius: $buttonBorderRadius;
   border-bottom-right-radius: $buttonBorderRadius;
   display: flex;
@@ -26,15 +29,12 @@
     padding-bottom: 1rem;
   }
 
-  .logo {
+  .logo img {
     position: absolute;
-    top: -47px;
+    top: -85px;
     right: 0;
-    background-color: #4d4d4d;
-    color: white;
-    border: 3px solid #262626;
-    width: 220px;
-    height: 55px;
+    height: 100px;
+    width: auto;
     z-index: 1;
     border-radius: 30px;
     display: flex;
@@ -43,8 +43,9 @@
   }
   .buttonContainer {
     position: absolute;
-    right: 30px;
+    right: 120px;
     display: flex;
+    z-index: 2;
 
     button {
       display: flex;
@@ -146,3 +147,10 @@
     }
   }
 }
+.pageTitle{ h1{
+  background-blend-mode: soft-light;
+  background-color: #e3e5dca1;
+  margin: 0 10px;
+  padding: 5px 40px;
+  border-radius: 5px;
+}}
