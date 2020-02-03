@@ -5,7 +5,7 @@ export function login(data) {
 }
 
 export function signup(data, type) {
-  if (type == "put") {
+  if (type === "put") {
     delete data["password"];
     return put("users", data);
   }
@@ -13,4 +13,8 @@ export function signup(data, type) {
 }
 export function info() {
   return get("user", null);
+}
+
+export function doesEmailExist(data) {
+  return post("/api/user/check/", data);
 }

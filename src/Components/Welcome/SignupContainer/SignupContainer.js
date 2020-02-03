@@ -7,7 +7,7 @@ import "./SignupContainerAnimations.scss";
 
 const SignupContainer = props => {
   const [isFirstSignupDone, setIsFirstSignupDone] = useState(false);
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
   const [shouldRenderSignUpForm, setShouldRenderSignUpForm] = useState(false);
   const animationDuration = 600;
   const initialSubmit = email => {
