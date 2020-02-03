@@ -17,7 +17,7 @@ const CourseBox = props => {
                             course.type === type)
     }
     useEffect(() => {
-        axios.get('https://2dcfb1c2.ngrok.io/api/course').then(res => {
+        axios.get('https://2dcfb1c2.ngrok.io/api/course/').then(res => {
             console.log(res.data)
             setCourses(res.data)
         }).catch(e => {
