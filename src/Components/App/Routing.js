@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Welcome from "../Welcome/Welcome";
 import CourseBox from "../Dashboard/CourseBox/CourseBox";
