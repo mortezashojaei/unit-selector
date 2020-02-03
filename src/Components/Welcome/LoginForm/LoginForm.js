@@ -168,7 +168,6 @@ const LoginForm = props => {
           </button>
           <p>{message}</p>
         </form>
-        {/* <Link to="/">خانه</Link> */}
       </div>
     </CSSTransitionGroup>
   );
