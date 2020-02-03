@@ -84,7 +84,6 @@ const LoginForm = props => {
             if (response.data.StatusCode == 200)
               setMessage(Dialogues.loginokerr);
             login(response.data.data.token);
-            alert("logged in");
           })
           .catch(function(error) {
             if (error.response) {
