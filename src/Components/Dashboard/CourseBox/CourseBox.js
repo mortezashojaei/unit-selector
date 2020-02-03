@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CourseList from "../CourseList/CourseList";
 import styles from "./CourseBox.module.scss";
-import { fetchCourses } from "Utils/ApiCalls/CourseBox";
+import { fetchCourses , addCourse } from "Utils/ApiCalls/CourseBox";
 
 const CourseBox = props => {
   const [courses, setCourses] = useState([]);
@@ -30,6 +30,11 @@ const CourseBox = props => {
     setSearchText(e.target.value);
   };
   const onSelect = id => {
+      addCourse(courses.find(course => course.id === id)).then(res => {
+          console.log('sucseed')
+      }).catch(e => {
+          console.log('error')
+      })
     console.log(courses.find(course => course.id === id));
   };
   const onChartFilter = () => {
