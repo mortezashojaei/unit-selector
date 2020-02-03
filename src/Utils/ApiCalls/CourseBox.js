@@ -1,5 +1,9 @@
-import { get } from "./API";
+import { get, post } from "./API";
 
 export function fetchCourses() {
   return get("/api/course/");
+}
+
+export function addCourse(course) {
+  return post("/api/user/course/", course);
 }
