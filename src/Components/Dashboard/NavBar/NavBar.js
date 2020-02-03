@@ -23,7 +23,7 @@ const NavBar = ({ history }) => {
       </div>
 
       <div className={styles.buttonContainer}>
-        <Gravatar email="blah@blah.com" />
+      <Gravatar email="sooltaniyan@gmail.com" />
         <button onClick={logout}>
           خروج <span className={styles.circle}></span>
         </button>
