@@ -6,7 +6,7 @@ import { fetchCourses, addCourse } from "Utils/ApiCalls/CourseBox";
 const CourseBox = props => {
   const [courses, setCourses] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [type, setType] = useState(1);
+  const [type, setType] = useState("chart");
   const [toggleType, setToggleType] = useState({
     chart: "active",
     public: ""
