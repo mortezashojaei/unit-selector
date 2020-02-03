@@ -32,7 +32,7 @@ const CourseBox = props => {
   const onSelect = id => {
       let course = courses.find(course => course.id === id)
       addCourse({course_id: course.id}).then(res => {
-          console.log('sucseed')
+          console.log(res)
       }).catch(e => {
           console.log('error')
       })
