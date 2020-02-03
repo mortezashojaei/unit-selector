@@ -235,7 +235,6 @@ const SignupForm = props => {
   return (
     <div className={styles.signupForm}>
       <form onSubmit={onFormSubmit}>
-        <h3>{major}</h3>
         <div>
           {error && <p className={styles.error}>{error}</p>}
           <label>
