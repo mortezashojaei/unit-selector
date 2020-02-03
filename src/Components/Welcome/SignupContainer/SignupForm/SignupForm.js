@@ -7,18 +7,19 @@ import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
+import majorList from "Utils/majorFakeData";
 import styles from "./SignupForm.module.scss";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
-  const {isEdit} = props;
-  const [studentNumber, setStudentNumber] = useState(props.studentNumber||"");
+  const { isEdit } = props;
+  const [studentNumber, setStudentNumber] = useState(props.studentNumber || "");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
-  const [majors, setMajors] = useState([]);
-  const [major, setMajor] = useState(props.major||"");
-  const [semester, setSemester] = useState(props.semester||"");
-  const [fullName, setFullName] = useState(props.fullName||"");
+  const [majors, setMajors] = useState(null);
+  const [major, setMajor] = useState(props.major || "");
+  const [semester, setSemester] = useState(props.semester || "");
+  const [fullName, setFullName] = useState(props.fullName || "");
   const [error, setError] = useState(null);
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
@@ -70,7 +71,8 @@ const SignupForm = props => {
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then(response => {
-        setMajors(response.data);
+        console.log("majors", response.data.data);
+        setMajors(response.data.data);
         // console.log(response)
       })
       .catch(err => console.log("couldnt fetch"));
@@ -132,16 +134,19 @@ const SignupForm = props => {
     setEmptyFields(emptyFields => ({ ...emptyFields, [key]: false }));
   };
   const toSubmit = () => {
-    const type='post';
-    if(isEdit==true) type='put';
-    signup({
-      password,
-      studentNumber,
-      semester,
-      major,
-      full_name: fullName,
-      email: props.email
-    },type)
+    let type = "post";
+    if (isEdit === true) type = "put";
+    signup(
+      {
+        password,
+        student_number: studentNumber,
+        semester,
+        major_id: major,
+        full_name: fullName,
+        email: props.email
+      },
+      type
+    )
       .then(res => {
         let status = res.status;
         if (status === 200 || status === 201) {
@@ -158,7 +163,6 @@ const SignupForm = props => {
           setError("رشته وارد شده صحیح نمیباشد");
         }
       });
-      
   };
 
   const onFormSubmit = e => {
@@ -191,10 +195,8 @@ const SignupForm = props => {
     let err;
     if (
       isNaN(studentNumber) ||
-      (
       password.length < 4 ||
-      password !== passwordConfirm
-      && !isEdit)
+      (password !== passwordConfirm && !isEdit)
     ) {
       err = true;
     }
@@ -202,8 +204,7 @@ const SignupForm = props => {
       !err &&
       fullName &&
       major &&
-     (password &&
-      passwordConfirm || isEdit)&&
+      ((password && passwordConfirm) || isEdit) &&
       semester &&
       studentNumber
     ) {
@@ -215,23 +216,9 @@ const SignupForm = props => {
   };
 
   return (
-    // <CSSTransitionGroup
-    //   transitionName={{
-    //     enter: styles.enter,
-    //     enterActive: styles.enterActive,
-    //     appear: styles.appear,
-    //     appearActive: styles.appearActive,
-    //     leave: styles.leave,
-    //     leaveActive: styles.leaveActive
-    //   }}
-    //   transitionEnterTimeout={700}
-    //   transitionLeave={true}
-    //   transitionLeaveTimeout={3000}
-    //   transitionAppearTimeout={1000}
-    //   transitionAppear={true}
-    // >
     <div className={styles.signupForm}>
       <form onSubmit={onFormSubmit}>
+        <h3>{major}</h3>
         <div>
           {error && <p className={styles.error}>{error}</p>}
           <label>
@@ -264,7 +251,7 @@ const SignupForm = props => {
               value={studentNumber}
               onChange={handleStudentNumberChange}
               placeholder={Dialogues.studentNumberPlaceholder}
-              readOnly={ isEdit ?'true':''}
+              readOnly={isEdit ? "true" : ""}
             />
             {emptyFields.studentNumber ? (
               <p>{`${Dialogues.studentNumberPlaceholder} نمی تواند خالی باشد`}</p>
@@ -274,54 +261,54 @@ const SignupForm = props => {
               )
             )}
           </label>
-                {(isEdit?''
-                :
-                <React.Fragment>
-                  <label style={{order:isEdit?3:''}}>
-            {password && <span>{Dialogues.passwordPlaceholder}</span>}
-            <input
-              className={`${(emptyFields.password ||
-                wrongCredentials.password) &&
-                styles.error}`}
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder={Dialogues.passwordPlaceholder}
-            />
-            {emptyFields.password ? (
-              <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
-            ) : (
-              wrongCredentials.password && (
-                <p>{`${Dialogues.passwordPlaceholder} اشتباه است.بیشتر از 4 کاراکتر وارد کنید`}</p>
-              )
-            )}
-          </label>
-
-          <label style={{order:isEdit?4:''}}>
-            {passwordConfirm && (
-              <span>{Dialogues.passwordConfirmPlaceholder}</span>
-            )}
-            <input
-              className={`${(emptyFields.passwordConfirm ||
-                wrongCredentials.passwordConfirm) &&
-                styles.error}`}
-              type="password"
-              value={passwordConfirm}
-              onChange={handlePasswordConfirmChange}
-              placeholder={Dialogues.passwordConfirmPlaceholder}
-            />
-            {emptyFields.passwordConfirm ? (
-              <p>{`${Dialogues.passwordConfirmPlaceholder} نمی تواند خالی باشد`}</p>
-            ) : (
-              wrongCredentials.passwordConfirm && (
-                <p>{`${Dialogues.passwordConfirmPlaceholder} اشتباه است`}</p>
-              )
-            )}
-          </label>
-
-                </React.Fragment>
+          {isEdit ? (
+            ""
+          ) : (
+            <React.Fragment>
+              <label style={{ order: isEdit ? 3 : "" }}>
+                {password && <span>{Dialogues.passwordPlaceholder}</span>}
+                <input
+                  className={`${(emptyFields.password ||
+                    wrongCredentials.password) &&
+                    styles.error}`}
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  placeholder={Dialogues.passwordPlaceholder}
+                />
+                {emptyFields.password ? (
+                  <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+                ) : (
+                  wrongCredentials.password && (
+                    <p>{`${Dialogues.passwordPlaceholder} اشتباه است.بیشتر از 4 کاراکتر وارد کنید`}</p>
+                  )
                 )}
-          
+              </label>
+
+              <label style={{ order: isEdit ? 4 : "" }}>
+                {passwordConfirm && (
+                  <span>{Dialogues.passwordConfirmPlaceholder}</span>
+                )}
+                <input
+                  className={`${(emptyFields.passwordConfirm ||
+                    wrongCredentials.passwordConfirm) &&
+                    styles.error}`}
+                  type="password"
+                  value={passwordConfirm}
+                  onChange={handlePasswordConfirmChange}
+                  placeholder={Dialogues.passwordConfirmPlaceholder}
+                />
+                {emptyFields.passwordConfirm ? (
+                  <p>{`${Dialogues.passwordConfirmPlaceholder} نمی تواند خالی باشد`}</p>
+                ) : (
+                  wrongCredentials.passwordConfirm && (
+                    <p>{`${Dialogues.passwordConfirmPlaceholder} اشتباه است`}</p>
+                  )
+                )}
+              </label>
+            </React.Fragment>
+          )}
+
           <label>
             {major && <span>{Dialogues.majorPlaceholder}</span>}
             {/* <Select
@@ -337,12 +324,26 @@ const SignupForm = props => {
               placeholder={Dialogues.majorPlaceholder}
               onChange={handleMajorChange}
             /> */}
-            <SelectSearch
+            {/* <SelectSearch
               value={major}
               options={toSelectForm(majors)}
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
-            />
+            /> */}
+            <input type="text" />
+            <ul>
+              {majors &&
+                majors.map(({ id, name }) => (
+                  <li key={id} value={id} onClick={handleMajorChange}>
+                    {name}
+                  </li>
+                ))}
+              {/* {majorList.map(({ id, name }) => (
+                <li key={id} value={id} onClick={e => alert(e.target.value)}>
+                  {name}
+                </li>
+              ))} */}
+            </ul>
             {emptyFields.major ? (
               <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
             ) : (
@@ -370,23 +371,12 @@ const SignupForm = props => {
               )
             )}
           </label>
-          {/* looks like we don't need this field right now */}
-          {/* <label>
-            نام کاربری
-            <input
-              type="text"
-              value={username}
-              onChange={handleUsernameChange}
-              placeholder={Dialogues.passwordPlaceholder}
-
-            />
-          </label> */}
         </div>
-        <button type="submit">{isEdit?Dialogues.editSubmit:Dialogues.registerSubmit2}</button>
+        <button type="submit">
+          {isEdit ? Dialogues.editSubmit : Dialogues.registerSubmit2}
+        </button>
       </form>
-      {/* <Link to="/">خانه</Link> */}
     </div>
-    // </CSSTransitionGroup>
   );
 };
 
