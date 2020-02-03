@@ -15,19 +15,19 @@ import { useAuth } from "Utils/Authentication/Auth";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
-
-  const selectRef = useRef(null)
-
+  const selectRef = useRef(null);
+  const { login } = useAuth();
   const onSelectFocus = () => {
-    selectRef.current.size = 10
-  }
+    selectRef.current.size = 10;
+  };
   const onSelectBlur = () => {
-    selectRef.current.size = 1
-  }
-
+    selectRef.current.size = 1;
+  };
 
   const { isEdit } = props;
-  const [studentNumber, setStudentNumber] = useState(props.studentNumber || "");
+  const [studentNumber, setStudentNumber] = useState(
+    props.student_number || ""
+  );
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState(null);
@@ -85,7 +85,7 @@ const SignupForm = props => {
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then(response => {
-        console.log("majors", response.data.data);
+        // console.log("majors", response.data.data);
         setMajors(response.data.data);
         // console.log(response)
       })
@@ -131,12 +131,10 @@ const SignupForm = props => {
   //   setMajor(major);
   // }, []);
   const handleMajorChange = useCallback(e => {
-    setMajor(e.target.value)
-    console.log(major)
-    selectRef.current.size = 1
-    
-  })
-
+    setMajor(e.target.value);
+    // console.log(major)
+    selectRef.current.size = 1;
+  });
 
   const setEmptyFieldToTrue = key => {
     /* we pass a callback to the setState to get the latest state */
@@ -170,8 +168,6 @@ const SignupForm = props => {
     )
       .then(res => {
         let status = res.status;
-        alert("done");
-        console.log("res", res.data);
         if (status === 200 || status === 201) {
           login(res.data.data.token);
         }
@@ -241,7 +237,6 @@ const SignupForm = props => {
   return (
     <div className={styles.signupForm}>
       <form onSubmit={onFormSubmit}>
-        <h3>{major}</h3>
         <div>
           {error && <p className={styles.error}>{error}</p>}
           <label>
@@ -353,15 +348,20 @@ const SignupForm = props => {
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
             /> */}
-            {/*<select
-            ref={selectRef}
-            onFocus={onSelectFocus}
-            onBlur={onSelectBlur}
-            onChange={handleMajorChange}
+            <select
+              ref={selectRef}
+              onFocus={onSelectFocus}
+              onBlur={onSelectBlur}
+              onChange={handleMajorChange}
             >
-              {majors.map(major => <option value={major.id}>{major.name}</option>)}
-            </select>*/}
-            
+              {majors &&
+                majors.map(major => (
+                  <option key={major.id} value={major.id}>
+                    {major.name}
+                  </option>
+                ))}
+            </select>
+
             {emptyFields.major ? (
               <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
             ) : (
