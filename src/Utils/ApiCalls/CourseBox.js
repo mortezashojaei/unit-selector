@@ -1,7 +1,7 @@
 import { get, post } from "./API";
 
-export function fetchCourses() {
-  return get("/api/course/");
+export function fetchCourses(params = "") {
+  return get("/api/course/", params);
 }
 
 export function addCourse(course) {
