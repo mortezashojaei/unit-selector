@@ -25,15 +25,13 @@ const SignupForm = props => {
   };
 
   const { isEdit } = props;
-  const [studentNumber, setStudentNumber] = useState(
-    props.student_number || ""
-  );
+  const [studentNumber, setStudentNumber] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState(null);
-  const [major, setMajor] = useState(props.major || "");
-  const [semester, setSemester] = useState(props.semester || "");
-  const [fullName, setFullName] = useState(props.full_Name || "");
+  const [major, setMajor] = useState("");
+  const [semester, setSemester] = useState("");
+  const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
@@ -51,6 +49,13 @@ const SignupForm = props => {
     studentNumber: false,
     major: false
   });
+  useEffect(()=>{
+    setStudentNumber(props.student_number)
+    setSemester(props.semester)
+    setMajor(props.major)
+    setFullName(props.full_name)
+    
+  },[props.email])
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
