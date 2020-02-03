@@ -5,7 +5,7 @@ import React from "react";
 const AuthProvider = ({
   children,
   tokenKey = "jwt",
-  mainPageUrl = "/dashboard",
+  mainPageUrl = "/",
   loginUrl = "/login"
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
