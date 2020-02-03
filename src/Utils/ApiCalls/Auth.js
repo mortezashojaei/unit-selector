@@ -12,7 +12,7 @@ export function signup(data, type) {
   return post("/api/user/", data);
 }
 export function info() {
-  return get("/api/user/", null);
+  return get("/api/user/");
 }
 
 export function doesEmailExist(data) {

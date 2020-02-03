@@ -9,9 +9,11 @@ import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 import majorList from "Utils/majorFakeData";
 import styles from "./SignupForm.module.scss";
+import { useAuth } from "Utils/Authentication/Auth";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
+  const { login } = useAuth();
   //test for select search
   const [fakeList, setFakeList] = useState([
     { value: "1", label: "ریاضی" },
@@ -21,13 +23,13 @@ const SignupForm = props => {
   const [dars, setDars] = useState();
 
   const { isEdit } = props;
-  const [studentNumber, setStudentNumber] = useState(props.studentNumber || "");
+  const [studentNumber, setStudentNumber] = useState(props.student_number || "");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState(null);
   const [major, setMajor] = useState(props.major || "");
   const [semester, setSemester] = useState(props.semester || "");
-  const [fullName, setFullName] = useState(props.fullName || "");
+  const [fullName, setFullName] = useState(props.full_Name || "");
   const [error, setError] = useState(null);
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
@@ -161,8 +163,10 @@ const SignupForm = props => {
     )
       .then(res => {
         let status = res.status;
+        alert("done");
+        console.log("res", res.data);
         if (status === 200 || status === 201) {
-          alert("done");
+          login(res.data.data.token);
         }
       })
       .catch(err => {
