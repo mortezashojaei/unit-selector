@@ -15,7 +15,7 @@ const NavBar = ({ history }) => {
 
   return (
     <nav className={`${styles.navBar} `}>
-      <div className={styles.logo}>لوگو</div>
+      <div className={styles.logo}><img src={process.env.PUBLIC_URL + '/assets/images/logo2.png'}></img></div>
       <div className={styles.buttonContainer}>
         <button onClick={logout}>
           خروج <span className={styles.circle}></span>
@@ -28,19 +28,26 @@ const NavBar = ({ history }) => {
           ویرایش اطلاعات <span className={styles.circle}></span>
         </button>
       </div>
+      
       <div
-        className={`${styles.linkContainer} ${
+        className={`${styles.linkContainer} ${styles.pageTitle} ${
           isMenuClosed ? styles.closed : styles.open
         }`}
       >
+        <h1>
+          تایتل این پست
+        </h1>
+        {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>
         <Link to="#">لینک سوم منو</Link>
         <Link to="#">لینک چهارم منو</Link>
+        */}
       </div>
       <button className={styles.toggleButton} onClick={toggleMenu}>
         <i className={`icon ion-md-${isMenuClosed ? "menu" : "close"}`}></i>
       </button>
+      
     </nav>
   );
 };
