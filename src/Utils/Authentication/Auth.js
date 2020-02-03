@@ -44,6 +44,8 @@ export const useAuth = () => {
     const token = localStorage.getItem(tokenKey);
     if (!token) {
       logout();
+    } else {
+      setSession(token, tokenKey);
     }
   }, []);
 
