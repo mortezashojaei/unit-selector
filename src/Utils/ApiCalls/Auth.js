@@ -1,18 +1,18 @@
 import { get, post, put } from "./API";
 
 export function login(data) {
-  return post("/api/user/login", data);
+  return post("/api/user/login/", data);
 }
 
 export function signup(data, type) {
   if (type === "put") {
     delete data["password"];
-    return put("users", data);
+    return put("/api/user/", data);
   }
-  return post("users", data);
+  return post("/api/user/", data);
 }
 export function info() {
-  return get("user", null);
+  return get("/api/user/", null);
 }
 
 export function doesEmailExist(data) {

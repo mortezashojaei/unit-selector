@@ -24,14 +24,13 @@ const InitialSignup = props => {
         /* check if the email already exists or not,
         if not then move to the next step
         */
+        //  UNCOMMENT THIS SECTION when working with the real api
         doesEmailExist({ email })
           .then(() => {
             props.submitted(email);
           })
-          .catch(({ status }) => {
-            if (status === 400) {
-              setDoesExist(true);
-            }
+          .catch(data => {
+            setDoesExist(true);
           });
       } else {
         setIsEmailFormatValid(false);

@@ -7,6 +7,7 @@ import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
+import majorList from "Utils/majorFakeData";
 import styles from "./SignupForm.module.scss";
 import "./reactSelect.scss";
 
@@ -15,7 +16,7 @@ const SignupForm = props => {
   const [studentNumber, setStudentNumber] = useState(props.studentNumber || "");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
-  const [majors, setMajors] = useState([]);
+  const [majors, setMajors] = useState(null);
   const [major, setMajor] = useState(props.major || "");
   const [semester, setSemester] = useState(props.semester || "");
   const [fullName, setFullName] = useState(props.fullName || "");
@@ -70,7 +71,8 @@ const SignupForm = props => {
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then(response => {
-        setMajors(response.data);
+        console.log("majors", response.data.data);
+        setMajors(response.data.data);
         // console.log(response)
       })
       .catch(err => console.log("couldnt fetch"));
@@ -137,9 +139,9 @@ const SignupForm = props => {
     signup(
       {
         password,
-        studentNumber,
+        student_number: studentNumber,
         semester,
-        major,
+        major_id: major,
         full_name: fullName,
         email: props.email
       },
@@ -216,6 +218,7 @@ const SignupForm = props => {
   return (
     <div className={styles.signupForm}>
       <form onSubmit={onFormSubmit}>
+        <h3>{major}</h3>
         <div>
           {error && <p className={styles.error}>{error}</p>}
           <label>
@@ -321,12 +324,26 @@ const SignupForm = props => {
               placeholder={Dialogues.majorPlaceholder}
               onChange={handleMajorChange}
             /> */}
-            <SelectSearch
+            {/* <SelectSearch
               value={major}
               options={toSelectForm(majors)}
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
-            />
+            /> */}
+            <input type="text" />
+            <ul>
+              {majors &&
+                majors.map(({ id, name }) => (
+                  <li key={id} value={id} onClick={handleMajorChange}>
+                    {name}
+                  </li>
+                ))}
+              {/* {majorList.map(({ id, name }) => (
+                <li key={id} value={id} onClick={e => alert(e.target.value)}>
+                  {name}
+                </li>
+              ))} */}
+            </ul>
             {emptyFields.major ? (
               <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
             ) : (
