@@ -44,6 +44,14 @@ const CourseBox = props => {
     //           console.log('error')
     //       })
     //     console.log(courses.find(course => course.id === id));
+    //   const onSelect = id => {
+    //       let course = courses.find(course => course.id === id)
+    //       addCourse({course_id: course.id}).then(res => {
+    //           console.log(res)
+    //       }).catch(e => {
+    //           console.log('error')
+    //       })
+    //     console.log(courses.find(course => course.id === id));
   };
   const onChartFilter = () => {
     setToggleType({
