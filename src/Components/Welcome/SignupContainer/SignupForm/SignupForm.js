@@ -23,7 +23,9 @@ const SignupForm = props => {
   const [dars, setDars] = useState();
 
   const { isEdit } = props;
-  const [studentNumber, setStudentNumber] = useState(props.student_number || "");
+  const [studentNumber, setStudentNumber] = useState(
+    props.student_number || ""
+  );
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState(null);
@@ -81,7 +83,7 @@ const SignupForm = props => {
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then(response => {
-        console.log("majors", response.data.data);
+        // console.log("majors", response.data.data);
         setMajors(response.data.data);
         // console.log(response)
       })
@@ -128,7 +130,7 @@ const SignupForm = props => {
   // }, []);
   const handleMajorChange = useCallback(e => {
     setMajor(e.target.value);
-    console.log(major);
+    // console.log(major);
   });
 
   const setEmptyFieldToTrue = key => {
@@ -163,8 +165,6 @@ const SignupForm = props => {
     )
       .then(res => {
         let status = res.status;
-        alert("done");
-        console.log("res", res.data);
         if (status === 200 || status === 201) {
           login(res.data.data.token);
         }
@@ -371,9 +371,12 @@ const SignupForm = props => {
               className={`${(emptyFields.major || wrongCredentials.major) &&
                 styles.error}`}
             >
-              {fakeList.map(list => (
-                <option value={list.value}>{list.label}</option>
-              ))}
+              {majors &&
+                majors.map(({ id, name }) => (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                ))}
             </select>
             {emptyFields.major ? (
               <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
