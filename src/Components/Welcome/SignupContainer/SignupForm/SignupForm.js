@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Select from "react-select";
 // import SelectSearch from "react-select-search";
 import { CSSTransitionGroup } from "react-transition-group";
@@ -13,17 +13,19 @@ import { useAuth } from "Utils/Authentication/Auth";
 import "./reactSelect.scss";
 
 const SignupForm = props => {
+  const selectRef = useRef(null);
   const { login } = useAuth();
-  //test for select search
-  const [fakeList, setFakeList] = useState([
-    { value: "1", label: "ریاضی" },
-    { value: "2", label: "2ریاضی" },
-    { value: "3", label: "ریاضی" }
-  ]);
-  const [dars, setDars] = useState();
+  const onSelectFocus = () => {
+    selectRef.current.size = 10;
+  };
+  const onSelectBlur = () => {
+    selectRef.current.size = 1;
+  };
 
   const { isEdit } = props;
-  const [studentNumber, setStudentNumber] = useState(props.student_number || "");
+  const [studentNumber, setStudentNumber] = useState(
+    props.student_number || ""
+  );
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordCongirm] = useState("");
   const [majors, setMajors] = useState(null);
@@ -81,7 +83,7 @@ const SignupForm = props => {
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then(response => {
-        console.log("majors", response.data.data);
+        // console.log("majors", response.data.data);
         setMajors(response.data.data);
         // console.log(response)
       })
@@ -128,7 +130,8 @@ const SignupForm = props => {
   // }, []);
   const handleMajorChange = useCallback(e => {
     setMajor(e.target.value);
-    console.log(major);
+    // console.log(major)
+    selectRef.current.size = 1;
   });
 
   const setEmptyFieldToTrue = key => {
@@ -163,8 +166,6 @@ const SignupForm = props => {
     )
       .then(res => {
         let status = res.status;
-        alert("done");
-        console.log("res", res.data);
         if (status === 200 || status === 201) {
           login(res.data.data.token);
         }
@@ -234,7 +235,6 @@ const SignupForm = props => {
   return (
     <div className={styles.signupForm}>
       <form onSubmit={onFormSubmit}>
-        <h3>{major}</h3>
         <div>
           {error && <p className={styles.error}>{error}</p>}
           <label>
@@ -340,41 +340,26 @@ const SignupForm = props => {
               placeholder={Dialogues.majorPlaceholder}
               onChange={handleMajorChange}
             /> */}
-            {/*<Select
-            className={styles.fakeSelect}
-            options={fakeList}
-            value={fakeList[0]}
-            />*/}
-            {/*<SelectSearch
+            {/* <SelectSearch
               value={major}
               options={toSelectForm(majors)}
               onChange={handleMajorChange}
               placeholder={Dialogues.majorPlaceholder}
             /> */}
-            {/* <input type="text" />
-            <ul>
-              {majors &&
-                majors.map(({ id, name }) => (
-                  <li key={id} value={id} onClick={handleMajorChange}>
-                    {name}
-                  </li>
-                ))} */}
-            {/* {majorList.map(({ id, name }) => (
-                <li key={id} value={id} onClick={e => alert(e.target.value)}>
-                  {name}
-                </li>
-              ))} */}
-            {/* </ul> */}
-            />*/}
             <select
+              ref={selectRef}
+              onFocus={onSelectFocus}
+              onBlur={onSelectBlur}
               onChange={handleMajorChange}
-              className={`${(emptyFields.major || wrongCredentials.major) &&
-                styles.error}`}
             >
-              {fakeList.map(list => (
-                <option value={list.value}>{list.label}</option>
-              ))}
+              {majors &&
+                majors.map(major => (
+                  <option key={major.id} value={major.id}>
+                    {major.name}
+                  </option>
+                ))}
             </select>
+
             {emptyFields.major ? (
               <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
             ) : (

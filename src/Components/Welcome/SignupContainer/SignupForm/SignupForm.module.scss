@@ -12,8 +12,12 @@
  
 
   form {
+    label{
+      overflow: auto;
+    }
 
     select{
+      z-index: 100;
       border: none;
       border-bottom: 2px solid $labelGray;
       padding: 7px 3px;
