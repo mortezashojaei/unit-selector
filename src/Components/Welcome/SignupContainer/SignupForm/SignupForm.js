@@ -33,6 +33,7 @@ const SignupForm = props => {
   const [semester, setSemester] = useState("");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
+  const [majorName,setMajorName] = useState('')
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
     passwordConfirm: false,
@@ -52,10 +53,18 @@ const SignupForm = props => {
   useEffect(()=>{
     setStudentNumber(props.student_number)
     setSemester(props.semester)
-    setMajor(props.major)
+    setMajorName(props.major)
+    if(majors)
+    for (var i=0 ; i < majors.length ; i++)
+{
+    if (majors[i]['name'] == props.major) {
+        setMajor(majors[i]['id']);
+        console.log(i)
+    }
+}
     setFullName(props.full_name)
     
-  },[props.email])
+  },[props.email,majors])
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
@@ -174,7 +183,7 @@ const SignupForm = props => {
       .then(res => {
         let status = res.status;
         if (status === 200 || status === 201) {
-          login(res.data.data.token);
+          login(res.data.data.token,isEdit);
         }
       })
       .catch(err => {
@@ -219,9 +228,10 @@ const SignupForm = props => {
     let err;
     if (
       isNaN(studentNumber) ||
-      password.length < 4 ||
-      (password !== passwordConfirm && !isEdit)
+      ((password.length < 4 ||
+      password !== passwordConfirm) && !isEdit)
     ) {
+      console.log(1)
       err = true;
     }
     if (
@@ -361,7 +371,7 @@ const SignupForm = props => {
             >
               {majors &&
                 majors.map(major => (
-                  <option key={major.id} value={major.id}>
+                  <option key={major.id} value={major.id} selected={major.name==majorName?'selected':''}>
                     {major.name}
                   </option>
                 ))}
