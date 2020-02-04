@@ -24,11 +24,17 @@ export const useAuth = () => {
   const history = useHistory();
   const location = useLocation();
 
-  function login(token) {
+  function login(token,stateType) {
     setSession(token, tokenKey);
     setIsAuthenticated(true);
     let { from } = location.state || { from: { pathname: mainPageUrl } };
     history.replace(from);
+    if(stateType)
+  return Swal.fire({
+    icon: "success",
+    title: " مشخصات شما به روز شد",
+    text: "مشخصات جدید شما در سیستم به ثبت رسید."
+  });
     Swal.fire({
       icon: "success",
       title: "خوش آمدید",

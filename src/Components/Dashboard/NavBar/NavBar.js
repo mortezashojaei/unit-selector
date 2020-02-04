@@ -1,10 +1,20 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 import Gravatar from "react-gravatar";
 import { useAuth } from "Utils/Authentication/Auth";
+import { info } from "Utils/ApiCalls/Auth";
+
 
 const NavBar = ({ history }) => {
+  const [data,setData] = useState(localStorage.getItem('email'));
+  useEffect(() => {
+    info().then(function(response) {
+     if(response.data) setData(response.data.data.email);
+     localStorage.setItem('email',response.data.data.email)
+  })
+},[]);
+const [toogleProfile,setToogleProfile] = useState(true)
   const [isMenuClosed, setIsMenuClosed] = useState(true);
   const { logout: logoutApi } = useAuth();
   const logout = useCallback(() => {
@@ -15,6 +25,9 @@ const NavBar = ({ history }) => {
   const toggleMenu = useCallback(() => {
     setIsMenuClosed(isMenuClosed => !isMenuClosed);
   }, []);
+  const toggleProfile = useCallback(() => {
+    setToogleProfile(toogleProfile => !toogleProfile);
+  }, []);
 
   return (
     <nav className={`${styles.navBar} `}>
@@ -23,10 +36,12 @@ const NavBar = ({ history }) => {
       </div>
 
       <div className={styles.buttonContainer}>
-      <Gravatar email="sooltaniyan@gmail.com" />
-        <button onClick={logout}>
-          خروج <span className={styles.circle}></span>
-        </button>
+        <a href='#'>
+      <Gravatar email={data} size={60} className={styles.avatar} default="monsterid" onClick={toggleProfile}/>:
+      </a><div className={`${styles.openGroup} ${toogleProfile?styles.nodisplay:''}`}>
+        <span>
+          {data}
+        </span>
         <button
           onClick={() => {
             alert("blah blah blah");
@@ -34,6 +49,12 @@ const NavBar = ({ history }) => {
         >
           ویرایش اطلاعات <span className={styles.circle}></span>
         </button>
+        <button onClick={logout}>
+          خروج <span className={styles.circle}></span>
+        </button>
+        
+
+        </div>
       </div>
 
       <div

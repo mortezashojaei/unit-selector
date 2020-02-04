@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CourseList from "../CourseList/CourseList";
 import styles from "./CourseBox.module.scss";
-import { fetchCourses , addCourse } from "Utils/ApiCalls/CourseBox";
+import { fetchCourses, addCourse } from "Utils/ApiCalls/CourseBox";
 
 const CourseBox = props => {
   const [courses, setCourses] = useState([]);
@@ -12,11 +12,15 @@ const CourseBox = props => {
     public: ""
   });
   const filterCourses = () => {
+    // console.log(courses);
     return courses
       .filter(course => course.name.includes(searchText.trim()))
       .filter(course => {
-          if(type === 'chart') { return course.type === 1}
-          else {return course.type === 0}
+        if (type === "chart") {
+          return course.type === 1;
+        } else {
+          return course.type === 0;
+        }
       });
   };
   useEffect(() => {
@@ -29,14 +33,25 @@ const CourseBox = props => {
   const onInputChange = e => {
     setSearchText(e.target.value);
   };
-  const onSelect = id => {
-      let course = courses.find(course => course.id === id)
-      addCourse({course_id: course.id}).then(res => {
-          console.log(res)
-      }).catch(e => {
-          console.log('error')
-      })
-    console.log(courses.find(course => course.id === id));
+  const onSelect = name => {
+    // console.log(courses.find(course => course.id === id));
+    props.setSelectedCourseName(name);
+    //   const onSelect = id => {
+    //       let course = courses.find(course => course.id === id)
+    //       addCourse({course_id: course.id}).then(res => {
+    //           console.log('sucseed')
+    //       }).catch(e => {
+    //           console.log('error')
+    //       })
+    //     console.log(courses.find(course => course.id === id));
+    //   const onSelect = id => {
+    //       let course = courses.find(course => course.id === id)
+    //       addCourse({course_id: course.id}).then(res => {
+    //           console.log(res)
+    //       }).catch(e => {
+    //           console.log('error')
+    //       })
+    //     console.log(courses.find(course => course.id === id));
   };
   const onChartFilter = () => {
     setToggleType({
@@ -72,7 +87,7 @@ const CourseBox = props => {
           دروس <span>چارت</span>
         </button>
       </div>
-      <CourseList onSelect={onSelect} courses={filterCourses()} />
+      <CourseList onSelect={onSelect} courses={courses && filterCourses()} />
     </div>
   );
 };
