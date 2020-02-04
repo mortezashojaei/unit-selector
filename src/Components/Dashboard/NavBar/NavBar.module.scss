@@ -18,7 +18,7 @@
   padding: 10px 25px;
 
   @media screen and(max-width:1240px) {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   @media screen and(max-width:450px) {
@@ -47,7 +47,17 @@
     display: flex;
     z-index: 2;
 
-    button {
+    button,span {
+      float:right;
+      i{
+        color: $basicGray;
+        font-size: 20px;
+        margin-left: 5px;
+        transition: .2s;
+      }
+      &:hover{i{
+        color:$basicOrange;
+      }}
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
@@ -92,7 +102,13 @@
     overflow: hidden;
     display: flex;
     transition: height 0.5s ease-in-out;
-    a {
+    @media screen and (max-width:1240){
+      &{
+        margin-right: 70px;
+        text-align: right;
+      }
+    }
+   /* a {
       margin-left: 2.5em;
       &:hover {
         text-decoration: none;
@@ -105,7 +121,7 @@
       &:last-child {
         margin-left: 0;
       }
-    }
+    } 
     @media screen and(max-width:850px) {
       flex-direction: column;
       align-items: flex-start;
@@ -129,7 +145,7 @@
   .open {
     @media screen and(max-width:850px) {
       height: 131.2px;
-    }
+    }*/
   }
 
   .toggleButton {

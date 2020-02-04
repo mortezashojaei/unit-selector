@@ -5,16 +5,15 @@ import Gravatar from "react-gravatar";
 import { useAuth } from "Utils/Authentication/Auth";
 import { info } from "Utils/ApiCalls/Auth";
 
-
 const NavBar = ({ history }) => {
-  const [data,setData] = useState(localStorage.getItem('email'));
+  const [data, setData] = useState(localStorage.getItem("email"));
   useEffect(() => {
     info().then(function(response) {
-     if(response.data) setData(response.data.data.email);
-     localStorage.setItem('email',response.data.data.email)
-  })
-},[]);
-const [toogleProfile,setToogleProfile] = useState(true)
+      if (response.data) setData(response.data.data.email);
+      localStorage.setItem("email", response.data.data.email);
+    });
+  }, []);
+  const [toogleProfile, setToogleProfile] = useState(true);
   const [isMenuClosed, setIsMenuClosed] = useState(true);
   const { logout: logoutApi } = useAuth();
   const logout = useCallback(() => {
@@ -36,31 +35,37 @@ const [toogleProfile,setToogleProfile] = useState(true)
       </div>
 
       <div className={styles.buttonContainer}>
-        <a href='#'>
-      <Gravatar email={data} size={60} className={styles.avatar} default="monsterid" onClick={toggleProfile}/>:
-      </a><div className={`${styles.openGroup} ${toogleProfile?styles.nodisplay:''}`}>
-        <span>
-          {data}
-        </span>
-        <button
-          onClick={() => {
-            alert("blah blah blah");
-          }}
+        <button>
+          <Gravatar
+            email={data}
+            size={60}
+            className={styles.avatar}
+            onClick={toggleProfile}
+          />
+          
+        </button>
+        <div
+          className={`${styles.openGroup} ${
+            toogleProfile ? styles.nodisplay : ""
+          }`}
         >
-          ویرایش اطلاعات <span className={styles.circle}></span>
-        </button>
-        <button onClick={logout}>
-          خروج <span className={styles.circle}></span>
-        </button>
-        
-
+          <span>
+          {data} 
+            <i className="icon ion-ios-contact"></i>
+          </span>
+          <button>
+            ویرایش اطلاعات 
+            <i className="icon ion-ios-settings"></i>
+          </button>
+          <button onClick={logout}>
+            خروج 
+            <i className="icon ion-ios-log-out"></i>
+          </button>
         </div>
       </div>
 
       <div
-        className={`${styles.linkContainer} ${styles.pageTitle} ${
-          isMenuClosed ? styles.closed : styles.open
-        }`}
+        className={`${styles.linkContainer}`}
       >
         <h1>تایتل این پست</h1>
         {/*
@@ -70,9 +75,9 @@ const [toogleProfile,setToogleProfile] = useState(true)
         <Link to="#">لینک چهارم منو</Link>
         */}
       </div>
-      <button className={styles.toggleButton} onClick={toggleMenu}>
+     {/* <button className={styles.toggleButton} onClick={toggleMenu}>
         <i className={`icon ion-md-${isMenuClosed ? "menu" : "close"}`}></i>
-      </button>
+      </button> */}
     </nav>
   );
 };
