@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Course from "./Course";
 import "./Calender.Module.scss";
+
 const Calender = ({
   courses = [
     {
@@ -29,6 +30,7 @@ const Calender = ({
       )
     );
   }
+
   return (
     <div className="calender-container">
       <div className="columns-container">

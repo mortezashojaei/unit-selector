@@ -3,7 +3,7 @@ import styles from "./PopUp.module.scss";
 import ClassItem from "Components/Dashboard/PopUp/ClassItem/ClassItem";
 import { fetchCourses } from "Utils/ApiCalls/CourseBox";
 
-const PopUp = ({ courseName, togglePopUp }) => {
+const PopUp = ({ courseName, togglePopUp, setCourses }) => {
   const popUpRef = useRef();
   const [classList, setClassList] = useState([]);
 
@@ -46,8 +46,10 @@ const PopUp = ({ courseName, togglePopUp }) => {
             classList.map(classItem => (
               <ClassItem
                 key={classItem.id}
+                setCourses={setCourses}
                 professorName={classItem["teacher_name"]}
                 classTimes={classItem["class_times"]}
+                classItem={classItem}
               />
             ))}
         </div>

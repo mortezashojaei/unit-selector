@@ -7,7 +7,7 @@ export function login(data) {
 export function signup(data, type) {
   if (type === "put") {
     delete data["password"];
-    console.log(data.full_name)
+    console.log(data.full_name);
     return put("/api/user/", data);
   }
   return post("/api/user/", data);
