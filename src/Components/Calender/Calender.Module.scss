@@ -34,7 +34,7 @@
     border-bottom: 3px solid black;
   }
   .course-box {
-      padding: 3px;
+    padding: 3px;
     height: 20%;
     border-bottom: 1.5px solid black;
   }
@@ -65,12 +65,30 @@
     height: 100%;
     background-color: $lightGray;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 0.8rem;
   }
-  .course-name{
-      text-align: center;
-      font-size: 14px;
-      font-weight: 500;
-      color: $courseNameColor;
+  .course-card:hover {
+    box-shadow: 0.5px 0.9px 2px 1px $silver;
+    height: calc(100%+2rem);
+  }
+  .course-name {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: $courseNameColor;
+  }
+  .course-teacher {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 500;
+    color: black;
+    padding-top: 0.4rem;
+  }
+  .delete-course {
+    float: left;
+    margin: -1.2rem 0 0 -1.2rem;
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
   }
 }
