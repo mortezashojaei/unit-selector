@@ -9,9 +9,9 @@ const Edit = props => {
   const [data,setData] = useState({});
   useEffect(() => {
     info().then(function(response) {
-      if (response.data.StatusCode == 200) {setData(response.data.data); console.log(data)}
-    });
-  },[]);
+     if(response.data) setData(response.data.data);
+  })
+},[]);
 
   return (
     <div>
