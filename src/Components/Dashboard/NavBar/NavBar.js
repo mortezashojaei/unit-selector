@@ -42,7 +42,6 @@ const NavBar = ({ history }) => {
             className={styles.avatar}
             onClick={toggleProfile}
           />
-          
         </button>
         <div
           className={`${styles.openGroup} ${
@@ -50,24 +49,22 @@ const NavBar = ({ history }) => {
           }`}
         >
           <span>
-          {data} 
+            {data}
             <i className="icon ion-ios-contact"></i>
           </span>
           <button>
-            ویرایش اطلاعات 
+            ویرایش اطلاعات
             <i className="icon ion-ios-settings"></i>
           </button>
           <button onClick={logout}>
-            خروج 
+            خروج
             <i className="icon ion-ios-log-out"></i>
           </button>
         </div>
       </div>
 
-      <div
-        className={`${styles.linkContainer}`}
-      >
-        <h1>تایتل این پست</h1>
+      <div className={`${styles.linkContainer}`}>
+        <h1>سیستم انتخاب واحد ترمه</h1>
         {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>
@@ -75,7 +72,7 @@ const NavBar = ({ history }) => {
         <Link to="#">لینک چهارم منو</Link>
         */}
       </div>
-     {/* <button className={styles.toggleButton} onClick={toggleMenu}>
+      {/* <button className={styles.toggleButton} onClick={toggleMenu}>
         <i className={`icon ion-md-${isMenuClosed ? "menu" : "close"}`}></i>
       </button> */}
     </nav>

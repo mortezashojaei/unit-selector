@@ -50,6 +50,7 @@ const PopUp = ({ courseName, togglePopUp, setCourses }) => {
                 professorName={classItem["teacher_name"]}
                 classTimes={classItem["class_times"]}
                 classItem={classItem}
+                togglePopUp={togglePopUp}
               />
             ))}
         </div>

@@ -4,7 +4,7 @@
   height: 26rem;
   width: 50rem;
   border: 3px solid black;
-  margin: 3.5rem;
+  margin: 3.5rem 0 3.5rem 3.5rem;
   border-radius: 0rem 9rem 0rem 0rem;
   direction: rtl;
 
@@ -49,6 +49,7 @@
     text-align: center;
     padding: 0.85rem;
     font-weight: 700;
+    font-size: 13px;
   }
   .day-name {
     width: 100%;
@@ -62,7 +63,7 @@
     color: $basicOrange;
   }
   .course-card {
-    height: 100%;
+    min-height: 100%;
     background-color: $lightGray;
     border-radius: 5px;
     padding: 0.8rem;
@@ -73,7 +74,7 @@
   }
   .course-name {
     text-align: center;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: 500;
     color: $courseNameColor;
   }

@@ -34,7 +34,13 @@ const showClassTimes = classTimes => {
   ));
 };
 
-const ClassItem = ({ professorName, classTimes, setCourses, classItem }) => {
+const ClassItem = ({
+  professorName,
+  classTimes,
+  setCourses,
+  classItem,
+  togglePopUp
+}) => {
   return (
     <div className={styles.classItem}>
       <p className={styles.professorName}>

@@ -75,7 +75,7 @@ const Dashboard = () => {
             />
           )}
         </CSSTransitionGroup>
-        <button onClick={togglePopUp}>show the pop up</button>
+        {/* <button onClick={togglePopUp}>show the pop up</button> */}
       </main>
     </>
   );
