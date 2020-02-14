@@ -34,6 +34,7 @@ const Calender = ({
   return (
     <div className="calender-container">
       <div className="columns-container">
+
         <div className="time-slot-column">
           <div className="time-slots-wrapper">
             <div className="time-slot-box">
@@ -160,6 +161,7 @@ const Calender = ({
             <Course onDelete={onDelete} course={getCourse(6, 4)} />
           </div>
         </div>
+
       </div>
     </div>
   );

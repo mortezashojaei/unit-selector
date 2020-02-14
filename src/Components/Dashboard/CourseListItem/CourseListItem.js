@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CourseListItem.module.scss";
 import CourseHover from "../CourseHover/CourseHover";
+import Item from '../Drag-Drop/Item'
 
 const CourseListItem = props => {
   const [showHover, setShowHover] = useState(false);
@@ -11,6 +12,7 @@ const CourseListItem = props => {
   const onMouseLeave = () => {
     setShowHover(false);
   };
+  
   return (
     <div className={styles.container}>
       <div className={styles.listItem}>
@@ -19,17 +21,17 @@ const CourseListItem = props => {
           onMouseLeave={onMouseLeave}
           onClick={() => props.onSelect(props.name)}
         >
-          {props.name}
+          <Item name={props.name} onSelect={ () => props.onSelect(props.name)}/>
         </span>
         <button onClick={() => props.onSelect(props.id)}>+</button>
       </div>
       {showHover && (
         <div className={styles.hoverComponent}>
-          <CourseHover
+          {/**<CourseHover
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
             {...props}
-          />
+          />**/}
         </div>
       )}
     </div>
