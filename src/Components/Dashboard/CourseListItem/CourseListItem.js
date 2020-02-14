@@ -27,11 +27,11 @@ const CourseListItem = props => {
       </div>
       {showHover && (
         <div className={styles.hoverComponent}>
-          {/**<CourseHover
+          <CourseHover
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
             {...props}
-          />**/}
+          />
         </div>
       )}
     </div>

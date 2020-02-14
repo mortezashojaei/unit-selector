@@ -7,15 +7,10 @@ const CourseList = props => {
   const onMoreClick = () => {
     setShowMore(!showMore);
   };
-  const fakeNames = [
-    {name: "ریاضی", id: 1},
-    {name: "1ریاضی", id: 2},
-    {name: "2ریاضی", id: 3}
-  ]
   return (
     <div className={styles.mainDiv}>
       <div className={`${styles.list} ${showMore && styles.scroll}`}>
-        {fakeNames.map(course => {
+        {props.courses.map(course => {
           //   console.log(course);
           return (
             <CourseListItem
