@@ -13,7 +13,7 @@ const CourseHover = props => {
             )}</span></div>
             <div>{props.type === 0 ? <span>عمومی</span> : <span>تخصصی</span>}</div>
             <div></div>
-        </div>
+            </div>
     )
 }
 

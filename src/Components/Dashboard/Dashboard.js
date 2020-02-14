@@ -8,6 +8,10 @@ import { popUpFakeData } from "Utils/popUpFakeData";
 import "./DashboardAnimations.scss";
 import Calender from "Components/Calender/Calender";
 import { fetchUserCourses, deleteCourse } from "Utils/ApiCalls/CourseBox";
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
+import Menu from './Drag-Drop/Menu'
+
 
 const Dashboard = () => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -52,13 +56,15 @@ const Dashboard = () => {
     }
   }, [selectedCourseName, showPopUp]);
   return (
-    <>
+    <DndProvider backend={Backend}>
       <header className={styles.header}>
         <NavBar />
       </header>
       <main className={styles.main}>
+      <Menu>
         <Calender {...{ courses }} onDelete={onDelete} />
-        <CourseBox setSelectedCourseName={setSelectedCourseName} />
+        </Menu>
+       <CourseBox setSelectedCourseName={setSelectedCourseName} />
         <CSSTransitionGroup
           transitionName="popUp"
           transitionEnterTimeout={300}
@@ -77,7 +83,7 @@ const Dashboard = () => {
         </CSSTransitionGroup>
         {/* <button onClick={togglePopUp}>show the pop up</button> */}
       </main>
-    </>
+    </DndProvider>
   );
 };
 
