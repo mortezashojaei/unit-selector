@@ -1,0 +1,135 @@
+@import "~assets/styles/libs/vars";
+
+%normalBoxShadow {
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+  -moz-box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+  box-shadow: 0px 1px 1.5px 0.75px rgba(0, 0, 0, 0.568);
+}
+%normalBoxShadow--orange {
+  -webkit-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  -moz-box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+  box-shadow: 0px 1px 1.5px 0.75px #fc824ac0;
+}
+
+%inputStyles {
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: start;
+    color: $labelGray;
+    min-height: 72px;
+    width: 260px;
+    position: relative;
+    margin-bottom: 25px;
+    @media screen and (max-width: 610px) {
+      width: 245px;
+    }
+    @media screen and (max-width: 560px) {
+      width: 195px;
+    }
+    @media screen and (max-width: 480px) {
+      width: 185px;
+    }
+    @media screen and (max-width: 415px) {
+      width: 175px;
+    }
+
+    .error {
+      border-color: red;
+    }
+    span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      animation-name: riseToTop;
+      animation-duration: 0.3s;
+      animation-timing-function: ease-out;
+    }
+    p {
+      position: absolute;
+      bottom: -44px;
+      margin: 0.3rem 0 0 0;
+      font-weight: 500;
+      color: black;
+      font-size: 0.68rem;
+      height: 40px;
+    }
+    input {
+      border: none;
+      border-bottom: 2px solid $labelGray;
+      padding: 7px 3px;
+      background: $backgroundColor;
+      font-size: 16px;
+      font-weight: 500;
+      &::placeholder {
+        color: $labelGray;
+      }
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px $backgroundColor inset !important;
+      }
+    }
+
+    input:focus {
+      border-color: $basicOrange;
+    }
+  }
+
+  @keyframes riseToTop {
+    from {
+      transform: translateY(31px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+%gradientButton {
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  margin-top: 25px;
+  border: none;
+  height: 45px;
+  border-radius: 35px;
+  // width: 240px;
+  width: 265px;
+  transition: box-shadow 0.1s linear, background 0.1s linear;
+
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(232, 232, 232, 1) 0%,
+  //   rgba(86, 66, 86, 1) 20%,
+  //   rgba(86, 66, 86, 1) 35%,
+  //   rgba(252, 129, 74, 1) 65%,
+  //   rgba(252, 129, 74, 1) 80%,
+  //   rgba(232, 232, 232, 1) 100%
+  // );
+  background: $basicOrange;
+  @media screen and (hover: hover) {
+    &:hover {
+      // background: linear-gradient(
+      //   90deg,
+      //   rgba(252, 129, 74, 1) 25%,
+      //   rgba(86, 66, 86, 1) 75%
+      // );
+      background: darken($basicOrange, 10%);
+      -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
+    }
+  }
+  @media screen and (max-width: 560px) {
+    width: 195px;
+  }
+
+  // @media screen and(max-width:395px) {
+  //   width: 220px;
+  // }
+}

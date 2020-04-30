@@ -1,0 +1,31 @@
+@import "~assets/styles/libs/animations";
+.signupContainer {
+  width: 100%;
+  overflow: hidden;
+}
+.appear {
+  opacity: 0;
+  //   display: none;
+}
+.appearActive {
+  opacity: 1;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.enter {
+  transform: translateX(100%);
+}
+.enterActive {
+  transform: translateX(0);
+
+  animation: moveIn 0.5s ease-in-out;
+}
+
+.leave {
+  //   opacity: 1;
+}
+
+.leaveActive {
+  //   opacity: 0;
+
+  animation: moveOut 0.5s ease-in-out;
+}

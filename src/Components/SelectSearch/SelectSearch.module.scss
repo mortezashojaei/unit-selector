@@ -1,0 +1,37 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/placeholders";
+
+.majorList {
+  position: absolute;
+  // z-index: 15;
+  display: block;
+  min-height: 35px;
+  max-height: 100px;
+  overflow: auto;
+  top: 100%;
+  // bottom: -125px;
+  // right: 0;
+  // z-index: 1;
+  background: $backgroundColor;
+  width: 100%;
+  display: none;
+  @extend %normalBoxShadow;
+  border-radius: 5px;
+  padding: 0;
+  color: $mainTextColor;
+  padding: 0.1em 3px 0.6em 3px;
+  overflow: auto;
+  li {
+    list-style: none;
+    font-weight: 500;
+    margin-bottom: 0.1em;
+    @media screen and (hover: hover) {
+      &:hover {
+        background: darken($backgroundColor, 10%);
+      }
+    }
+  }
+}
+.visible {
+  display: initial;
+}

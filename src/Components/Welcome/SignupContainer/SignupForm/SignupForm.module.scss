@@ -1,0 +1,71 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/placeholders";
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  // top: -1rem;
+  transition-delay: 500ms;
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  @extend %inputStyles;
+
+  button {
+    @extend %gradientButton;
+    margin-bottom: 25px;
+  }
+  div {
+    border: none;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    // grid-template-rows:
+    //   auto
+    //   auto auto;
+    gap: 15px;
+    @media screen and(max-width:460px) {
+      grid-template-columns: 95%;
+      column-gap: unset;
+      row-gap: 7px;
+    }
+  }
+  .selectSearch {
+    display: flex;
+
+    div {
+      display: block;
+      @extend %inputStyles;
+    }
+  }
+  .selectSearch__control {
+    width: 100%;
+    display: none;
+  }
+}
+
+.appear {
+  opacity: 0;
+  // width: 0;
+  // height: 0;
+  visibility: hidden;
+}
+.appearActive {
+  opacity: 1;
+  visibility: visible;
+  // height: unset;
+  // width: unset;
+  transition: all 0.7s ease-in-out;
+}
+.leave {
+  opacity: 1;
+}
+
+.leaveActive {
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
+}

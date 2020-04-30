@@ -1,0 +1,113 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/placeholders";
+@import "~assets/styles/libs/animations";
+
+.navLink {
+  display: flex;
+  background: $backgroundColor;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0;
+  //   flex-direction: row-reverse;
+  a:last-of-type {
+    margin-right: 0.5rem;
+  }
+  a {
+    height: 53px;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    font-size: 1.1rem;
+    // animation-name: popUp;
+    // animation-duration: 0.4s;
+    // animation-timing-function: ease-out;
+    // border: 1px solid $basicOrange;
+    @extend %normalBoxShadow--orange;
+    transition: box-shadow 0.1s linear;
+    filter: grayscale(100%);
+
+    span {
+      font-weight: 500;
+      font-size: 1.3em;
+    }
+    i {
+      display: inherit;
+      font-size: 2.55em;
+      color: $basicOrange;
+    }
+    // embed {
+    //   width: 33px;
+    //   height: auto;
+    // }
+    @media screen and(hover:hover) {
+      &:hover {
+        text-decoration: none;
+        -webkit-box-shadow: 0px 1px 2.5px 2px #fc824ac0;
+        -moz-box-shadow: 0px 1px 2.5px 2px #fc824ac0;
+        box-shadow: 0px 1px 2.5px 2px #fc824ac0;
+      }
+    }
+  }
+  .logIn {
+    // @extend %normalBoxShadow;
+    border-top-right-radius: $buttonBorderRadius;
+    border-bottom-left-radius: $buttonBorderRadius;
+    justify-content: flex-end;
+    animation: moveIn 0.5s ease-in-out;
+    i {
+      margin-right: 12px;
+    }
+    .loginIcon {
+      background: url("/assets/images/loginicon.svg");
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .signUp {
+    // @extend %normalBoxShadow;
+    border-top-left-radius: $buttonBorderRadius;
+    border-bottom-right-radius: $buttonBorderRadius;
+    justify-content: flex-start;
+    animation: moveRight 0.5s ease-in-out;
+
+    i {
+      margin-left: 12px;
+    }
+    .signupIcon {
+      background: url("/assets/images/registericon.svg");
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    a {
+      height: 47px;
+      width: 182px;
+      font-size: 0.9rem;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+  }
+  @media screen and (max-width: 415px) {
+    a {
+      width: 170px;
+      font-size: 0.8rem;
+    }
+  }
+  @media screen and (max-width: 390px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    a:last-of-type {
+      margin: 1rem 0 0 0;
+    }
+    a {
+      border-radius: $buttonBorderRadius;
+    }
+  }
+  .active {
+    filter: grayscale(0);
+  }
+}

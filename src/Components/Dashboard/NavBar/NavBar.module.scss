@@ -1,0 +1,148 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/animations";
+
+.navBar {
+  -webkit-box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
+  border-top-left-radius: $buttonBorderRadius;
+  border-bottom-right-radius: $buttonBorderRadius;
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px 25px;
+
+  @media screen and(max-width:1240px) {
+    justify-content: flex-end;
+  }
+
+  @media screen and(max-width:450px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .logo {
+    position: absolute;
+    top: -47px;
+    right: 0;
+    background-color: #4d4d4d;
+    color: white;
+    border: 3px solid #262626;
+    width: 220px;
+    height: 55px;
+    z-index: 1;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .buttonContainer {
+    position: absolute;
+    right: 30px;
+    display: flex;
+
+    button {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      &:first-of-type {
+        margin-left: 15px;
+      }
+      .circle {
+        display: inline-block;
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #4d4d4d;
+        border: 3px solid #262626;
+        transition: background 0.1s linear;
+      }
+
+      @media screen and(hover:hover) {
+        &:hover {
+          .circle {
+            background-color: white;
+          }
+        }
+      }
+      @media screen and(max-width:450px) {
+        justify-content: flex-end;
+        margin-bottom: 0.5em;
+      }
+    }
+    @media screen and(max-width:450px) {
+      position: initial;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+  }
+  .linkContainer {
+    overflow: hidden;
+    display: flex;
+    transition: height 0.5s ease-in-out;
+    a {
+      margin-left: 2.5em;
+      &:hover {
+        text-decoration: none;
+      }
+      @media screen and(hover:hover) {
+        &:hover {
+          color: rgb(114, 114, 114);
+        }
+      }
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+    @media screen and(max-width:850px) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 2em;
+      a {
+        margin: 0 0 0.5em 0;
+      }
+    }
+    @media screen and(max-width:450px) {
+      margin-left: 0;
+    }
+    @media screen and(min-width:450px) {
+      align-self: flex-start;
+    }
+  }
+  .closed {
+    @media screen and(max-width:850px) {
+      height: 0;
+    }
+  }
+  .open {
+    @media screen and(max-width:850px) {
+      height: 131.2px;
+    }
+  }
+
+  .toggleButton {
+    border: none;
+    background: none;
+    font-size: 1.7rem;
+    position: absolute;
+    cursor: pointer;
+    left: 1rem;
+    i {
+      display: flex;
+    }
+    @media screen and(min-width:851px) {
+      display: none;
+    }
+  }
+}

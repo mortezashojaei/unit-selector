@@ -1,0 +1,95 @@
+@import "~assets/styles/libs/vars";
+
+.classItem {
+  padding: 0.5rem 2rem;
+  border-bottom: 1.5px solid #a19ea5;
+  position: relative;
+  font-size: 1em;
+  @media screen and (max-width: 485px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p {
+    margin: 0;
+    width: 75%;
+    word-wrap: break-word;
+    @media screen and (max-width: 485px) {
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .professorName {
+    span {
+      font-size: 0.8em;
+    }
+    @media screen and (max-width: 485px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .classTimes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    @media screen and (max-width: 485px) {
+      flex-direction: column;
+      align-items: center;
+    }
+    span {
+      font-size: 0.8em;
+      @media screen and (min-width: 486px) {
+        &:not(:last-child) {
+          position: relative;
+          //   border-left: 1px solid $mainTextColor;
+          padding-left: 5px;
+          margin-left: 5px;
+
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1.5px;
+            height: 60%;
+            margin: auto 0;
+            background-color: $mainTextColor;
+          }
+        }
+      }
+    }
+  }
+  .pickClass {
+    position: absolute;
+    left: 17.5px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background: none;
+    border: 1.5px solid $basicOrange;
+    height: 27px;
+    width: 70px;
+    cursor: pointer;
+    @media screen and(hover:hover) {
+      &:hover {
+        transition: background-color 0.2s linear;
+        border: none;
+        background-color: $basicOrange;
+        color: white;
+      }
+    }
+    @media screen and (max-width: 485px) {
+      position: static;
+      margin-top: 0.4em;
+    }
+  }
+  .collisionError {
+    color: #e51f1f;
+    font-size: 0.9em;
+  }
+}

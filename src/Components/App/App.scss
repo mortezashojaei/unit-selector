@@ -1,0 +1,30 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/mixins";
+@import "~assets/styles/libs/placeholders";
+@import "~assets/styles/base/base";
+@import "~assets/styles/base/fonts";
+
+#root {
+  background: $backgroundColor;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: $mainTextColor;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.container {
+  padding: 1rem 2rem 3rem 2rem;
+  @media screen and (max-width: 600px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media screen and (max-width: 400px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

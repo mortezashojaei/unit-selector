@@ -1,0 +1,50 @@
+@import "~assets/styles/libs/vars";
+@import "~assets/styles/libs/placeholders";
+.majorSelectSearch {
+  display: flex !important;
+  flex-direction: column;
+  // background-color: cyan;
+  outline: none;
+  div {
+    display: initial;
+  }
+}
+.majorSelectSearch__control {
+  background-color: $backgroundColor !important;
+  border-radius: 0;
+  display: flex !important;
+  > div:first-child {
+    width: 100%;
+    height: 100%;
+  }
+  // display: none !important;
+  input {
+    color: red;
+  }
+  input:active {
+    border-color: $basicOrange;
+  }
+  .majorSelectSearch__indicators {
+    display: none;
+  }
+  .majorSelectSearch__value-container {
+    width: 100%;
+    min-height: 38px;
+    padding: 0;
+    > div:nth-child(2) {
+      height: 100%;
+    }
+    input {
+      display: inline-block;
+      height: 36px;
+      border-bottom: 2px solid $labelGray !important;
+      &:active {
+        border-color: $basicOrange !important;
+      }
+    }
+    .majorSelectSearch__input {
+      min-height: 38px;
+      @extend %inputStyles;
+    }
+  }
+}
