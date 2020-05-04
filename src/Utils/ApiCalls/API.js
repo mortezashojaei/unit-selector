@@ -1,7 +1,6 @@
 import axios from 'axios'
 const API = axios.create({
-        // baseURL: 'http://75b95f0b.ngrok.io/',
-        baseURL: 'http://localhost:3000',
+        baseURL: 'http://fast-cove-18027.herokuapp.com/',
         timeout: 10000,
         headers: {'Content-Type': 'text/plain'}
       })
