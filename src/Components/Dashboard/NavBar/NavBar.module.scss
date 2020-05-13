@@ -2,9 +2,12 @@
 @import "~assets/styles/libs/animations";
 
 .navBar {
-  -webkit-box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
+  background-blend-mode: screen;
+  background-color: #d2d2d2;
+  background-image: url(/assets/images/unnamed.jpg);
+  -webkit-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
   border-top-left-radius: $buttonBorderRadius;
   border-bottom-right-radius: $buttonBorderRadius;
   display: flex;
@@ -15,7 +18,7 @@
   padding: 10px 25px;
 
   @media screen and(max-width:1240px) {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   @media screen and(max-width:450px) {
@@ -26,15 +29,12 @@
     padding-bottom: 1rem;
   }
 
-  .logo {
+  .logo img {
     position: absolute;
-    top: -47px;
+    top: -85px;
     right: 0;
-    background-color: #4d4d4d;
-    color: white;
-    border: 3px solid #262626;
-    width: 220px;
-    height: 55px;
+    height: 100px;
+    width: auto;
     z-index: 1;
     border-radius: 30px;
     display: flex;
@@ -43,10 +43,24 @@
   }
   .buttonContainer {
     position: absolute;
-    right: 30px;
+    right: 120px;
     display: flex;
+    z-index: 2;
 
-    button {
+    button,
+    span {
+      float: right;
+      i {
+        color: $basicGray;
+        font-size: 20px;
+        margin-left: 5px;
+        transition: 0.2s;
+      }
+      &:hover {
+        i {
+          color: $basicOrange;
+        }
+      }
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
@@ -91,7 +105,13 @@
     overflow: hidden;
     display: flex;
     transition: height 0.5s ease-in-out;
-    a {
+    @media screen and (max-width: 1240) {
+      & {
+        margin-right: 70px;
+        text-align: right;
+      }
+    }
+    /* a {
       margin-left: 2.5em;
       &:hover {
         text-decoration: none;
@@ -104,7 +124,7 @@
       &:last-child {
         margin-left: 0;
       }
-    }
+    } 
     @media screen and(max-width:850px) {
       flex-direction: column;
       align-items: flex-start;
@@ -128,7 +148,7 @@
   .open {
     @media screen and(max-width:850px) {
       height: 131.2px;
-    }
+    }*/
   }
 
   .toggleButton {
@@ -144,5 +164,41 @@
     @media screen and(min-width:851px) {
       display: none;
     }
+  }
+  .avatar {
+    border-radius: 100%;
+  }
+  .nodisplay {
+    //display: none !important;
+    opacity: 0;
+  }
+  .openGroup {
+    transition: 0.5s;
+    background: #fffcf8;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: -7px;
+    min-width: 180px;
+    right: 70px;
+    &::before {
+      content: "";
+      width: 1px;
+      border: 10px solid transparent;
+      border-left: 10px solid #fffcf8;
+      height: 1px;
+      position: absolute;
+      top: 30px;
+      right: -20px;
+    }
+  }
+}
+.pageTitle {
+  h1 {
+    background-blend-mode: soft-light;
+    background-color: #e3e5dca1;
+    margin: 0 10px;
+    padding: 5px 40px;
+    border-radius: 5px;
   }
 }

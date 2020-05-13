@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { weekDays, dayTimes } from "Utils/Dialogues";
 import { popUpFakeData } from "Utils/popUpFakeData";
+import { addCourse } from "Utils/ApiCalls/CourseBox";
+
 import styles from "./ClassItem.module.scss";
 
 // this function should handle the collisions
@@ -32,7 +34,13 @@ const showClassTimes = classTimes => {
   ));
 };
 
-const ClassItem = ({ professorName, classTimes }) => {
+const ClassItem = ({
+  professorName,
+  classTimes,
+  setCourses,
+  classItem,
+  togglePopUp
+}) => {
   return (
     <div className={styles.classItem}>
       <p className={styles.professorName}>
@@ -44,7 +52,13 @@ const ClassItem = ({ professorName, classTimes }) => {
         <button
           className={styles.pickClass}
           onClick={() => {
-            alert("done");
+            addCourse(classItem)
+              .then(response => {
+                setCourses(courses => [...courses, classItem]);
+              })
+              .catch(error => {
+                alert("something went wrong");
+              });
           }}
         >
           اخذ کلاس

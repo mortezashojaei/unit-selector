@@ -1,9 +1,11 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import styles from "./PopUp.module.scss";
 import ClassItem from "Components/Dashboard/PopUp/ClassItem/ClassItem";
+import { fetchCourses } from "Utils/ApiCalls/CourseBox";
 
-const PopUp = ({ classList, courseName, togglePopUp }) => {
+const PopUp = ({ courseName, togglePopUp, setCourses }) => {
   const popUpRef = useRef();
+  const [classList, setClassList] = useState([]);
 
   const handleClickOutside = useCallback(
     event => {
@@ -24,6 +26,14 @@ const PopUp = ({ classList, courseName, togglePopUp }) => {
     };
   }, [handleClickOutside]);
 
+  useEffect(() => {
+    fetchCourses({ name: courseName })
+      .then(res => {
+        console.log(res);
+        setClassList(res.data.data);
+      })
+      .catch(error => console.log(error));
+  }, [courseName]);
   return (
     <div className={styles.popUp}>
       <div className={styles.container} ref={popUpRef}>
@@ -32,13 +42,17 @@ const PopUp = ({ classList, courseName, togglePopUp }) => {
           اخذ درس : <span>{courseName}</span>
         </h1>
         <div className={styles.classList}>
-          {classList.map(classItem => (
-            <ClassItem
-              key={classItem.professorName}
-              professorName={classItem.professorName}
-              classTimes={classItem.classTimes}
-            />
-          ))}
+          {classList.length > 0 &&
+            classList.map(classItem => (
+              <ClassItem
+                key={classItem.id}
+                setCourses={setCourses}
+                professorName={classItem["teacher_name"]}
+                classTimes={classItem["class_times"]}
+                classItem={classItem}
+                togglePopUp={togglePopUp}
+              />
+            ))}
         </div>
       </div>
     </div>
