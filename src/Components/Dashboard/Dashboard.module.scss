@@ -4,6 +4,10 @@
   margin-right: 5rem;
 }
 .main {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .header {

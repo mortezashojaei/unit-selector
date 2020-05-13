@@ -8,29 +8,7 @@
   position: relative;
   // top: -1rem;
   transition-delay: 500ms;
-
- 
-
   form {
-    label{
-      overflow: auto;
-    }
-
-    select{
-      z-index: 100;
-      border: none;
-      border-bottom: 2px solid $labelGray;
-      padding: 7px 3px;
-      background: $backgroundColor;
-      font-size: 16px;
-      font-weight: 500;
-      &::placeholder {
-        color: $labelGray;
-      }
-    }
-
-    
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -43,10 +21,6 @@
     margin-bottom: 25px;
   }
   div {
-
-    
-
-
     border: none;
     display: grid;
     grid-template-columns: 50% 50%;

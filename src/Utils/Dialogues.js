@@ -14,7 +14,9 @@ export const Dialogues = {
   passwordPlaceholder: "گذرواژه",
   majorPlaceholder: " رشته تحصیلی",
   semesterPlaceholder: "ترم تحصیلی",
-  studentNumberPlaceholder: "شماره دانشجویی"
+  studentNumberPlaceholder: "شماره دانشجویی",
+  editSubmit: "ویرایش اطلاعات",
+  registerSubmit2: "تکمیل عضویت"
 };
 
 export const weekDays = {

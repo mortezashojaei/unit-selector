@@ -7,60 +7,45 @@ import "./SignupContainerAnimations.scss";
 
 const SignupContainer = props => {
   const [isFirstSignupDone, setIsFirstSignupDone] = useState(false);
-  const [email, setEmail] = useState();
-  const [shouldRenderInitialSignup, setShouldRenderInitialSignup] = useState(
-    false
-  );
+  const [email, setEmail] = useState("");
+  const [shouldRenderSignUpForm, setShouldRenderSignUpForm] = useState(false);
+  const animationDuration = 600;
   const initialSubmit = email => {
     setIsFirstSignupDone(true);
     setEmail(email);
     console.log(email);
   };
   let form = undefined;
+
   if (!isFirstSignupDone) {
     form = <InitialSignup key="initialSignUp" submitted={initialSubmit} />;
   } else {
-    form = shouldRenderInitialSignup ? (
+    // reder the sign up form based on the state
+    form = shouldRenderSignUpForm ? (
       <SignupForm key="signupForm" email={email} />
     ) : (
       undefined
     );
-
+    /*  change the state only after the animation has finished
+    WITHOUT THIS TIMEOUT , the two sign up forms would collapse into 
+    each other and break the layout */
     setTimeout(() => {
-      setShouldRenderInitialSignup(true);
-    }, 600);
+      setShouldRenderSignUpForm(true);
+    }, animationDuration);
   }
   return (
     <>
       <div className={styles.signupContainer}>
         <CSSTransitionGroup
           transitionName="signupContainer"
-          transitionEnterTimeout={600}
+          transitionEnterTimeout={animationDuration}
           transitionLeave={true}
-          transitionLeaveTimeout={600}
-          transitionAppearTimeout={600}
+          transitionLeaveTimeout={animationDuration}
+          transitionAppearTimeout={animationDuration}
           transitionAppear={true}
         >
-          {/* {!isFirstSignupDone && (
-          <InitialSignup key="initialSignUp" submitted={initialSubmit} />
-        )}
-        {isFirstSignupDone && (
-          <SignupForm key="signupForm" userName={userName} />
-        )} */}
-
           {form}
         </CSSTransitionGroup>
-
-        {/* <CSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={500}
-        transitionLeave={true}
-        transitionLeaveTimeout={700}
-        transitionAppearTimeout={1000}
-        transitionAppear={true}
-      >
-      
-      </CSSTransitionGroup> */}
       </div>
     </>
   );

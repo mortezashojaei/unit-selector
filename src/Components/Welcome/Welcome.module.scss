@@ -9,12 +9,17 @@
   // flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: $backgroundColor;
+  background-blend-mode: overlay;
+  background-color: #1b1717;
+  background-size: cover;
+  background-image: url("/assets/images/terme.jpg");
   user-select: none;
   // figure + * {
   //   // flex-grow: 1;
   // }
   section {
+    background: $backgroundColor;
+    border-radius: 2em;
     width: 650px;
     overflow-x: hidden;
     min-height: 450px;
@@ -23,7 +28,8 @@
     align-items: center;
     figure {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      flex-direction: row-reverse;
       align-items: center;
       text-align: center;
       min-width: 250px;
@@ -31,16 +37,23 @@
       // margin: 4rem 0 2rem 0;
 
       .logo {
-        width: 100%;
-        height: 100px;
+        width: 80%;
+        max-width: 50vh;
+        height: auto;
+        margin: 0 auto;
         font-size: 2em;
         font-weight: bold;
         display: flex;
         align-items: center;
         justify-content: center;
+        img {
+          width: 350px;
+          max-width: 95%;
+        }
       }
       figcaption {
-        width: 100%;
+        width: auto;
+        margin: 0 auto;
         font-size: 1.1rem;
         h1 {
           font-weight: 500;
