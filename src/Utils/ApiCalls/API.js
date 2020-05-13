@@ -1,9 +1,9 @@
 import axios from "axios";
 const API = axios.create({
-  baseURL: "http://fast-cove-18027.herokuapp.com/",
-  timeout: 10000,
-  headers: { "Content-Type": "text/plain" },
-});
+        baseURL: 'https://fast-cove-18027.herokuapp.com/',
+        timeout: 10000,
+        headers: {'Content-Type': 'text/plain'}
+      })
 // baseURL: http://75b95f0b.ngrok.io/
 export function get(Url, params) {
   return new Promise((resolve, reject) => {
