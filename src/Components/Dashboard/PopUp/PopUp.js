@@ -8,7 +8,7 @@ const PopUp = ({ courseName, togglePopUp, setCourses }) => {
   const [classList, setClassList] = useState([]);
 
   const handleClickOutside = useCallback(
-    event => {
+    (event) => {
       /* run the function when clicked outside of the ref */
       if (popUpRef.current && !popUpRef.current.contains(event.target)) {
         togglePopUp();
@@ -28,11 +28,10 @@ const PopUp = ({ courseName, togglePopUp, setCourses }) => {
 
   useEffect(() => {
     fetchCourses({ name: courseName })
-      .then(res => {
-        console.log(res);
+      .then((res) => {
         setClassList(res.data.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, [courseName]);
   return (
     <div className={styles.popUp}>
@@ -43,7 +42,7 @@ const PopUp = ({ courseName, togglePopUp, setCourses }) => {
         </h1>
         <div className={styles.classList}>
           {classList.length > 0 &&
-            classList.map(classItem => (
+            classList.map((classItem) => (
               <ClassItem
                 key={classItem.id}
                 setCourses={setCourses}

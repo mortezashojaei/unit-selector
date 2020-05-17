@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { weekDays, dayTimes } from "Utils/Dialogues";
 import { popUpFakeData } from "Utils/popUpFakeData";
 import { addCourse } from "Utils/ApiCalls/CourseBox";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 import styles from "./ClassItem.module.scss";
 
@@ -25,8 +26,8 @@ const handleCollisions = (currentClass, weeklySchedule) => {
   return false;
 };
 
-const showClassTimes = classTimes => {
-  return classTimes.map(classItem => (
+const showClassTimes = (classTimes) => {
+  return classTimes.map((classItem) => (
     <span>
       {" "}
       {weekDays[classItem.day]} : {dayTimes[classItem.time]}{" "}
@@ -39,7 +40,7 @@ const ClassItem = ({
   classTimes,
   setCourses,
   classItem,
-  togglePopUp
+  togglePopUp,
 }) => {
   return (
     <div className={styles.classItem}>
@@ -53,11 +54,20 @@ const ClassItem = ({
           className={styles.pickClass}
           onClick={() => {
             addCourse(classItem)
-              .then(response => {
-                setCourses(courses => [...courses, classItem]);
+              .then((response) => {
+                Swal.fire({
+                  icon: "success",
+                  title: "",
+                  text: "با موفقیت افزوده شد",
+                });
+                setCourses((courses) => [...courses, classItem]);
               })
-              .catch(error => {
-                alert("something went wrong");
+              .catch((error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: "",
+                  text: "امکان اخذ این درس وجود ندارد",
+                });
               });
           }}
         >
@@ -70,7 +80,7 @@ const ClassItem = ({
 
 ClassItem.propTypes = {
   professorName: PropTypes.string.isRequired,
-  classTimes: PropTypes.array.isRequired
+  classTimes: PropTypes.array.isRequired,
 };
 
 export default ClassItem;
