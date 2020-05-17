@@ -1,5 +1,5 @@
 import axios from "axios";
-const API = axios.create({
+export const API = axios.create({
         baseURL: 'https://fast-cove-18027.herokuapp.com/',
         timeout: 10000,
         headers: {'Content-Type': 'text/plain'}
