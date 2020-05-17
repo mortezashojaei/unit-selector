@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useAuth } from "./Authentication/Auth";
-import axios from "axios";
+import { API } from "./ApiCalls/API";
 
 const Interceptor = ({ children }) => {
   const { logout } = useAuth();
 
   useEffect(() => {
-    axios.interceptors.response.use(null, error => {
+    API.interceptors.response.use(null, (error) => {
       if (error.response.data.error == 403) {
         logout();
       }
