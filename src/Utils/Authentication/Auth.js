@@ -44,6 +44,11 @@ export const useAuth = () => {
   function logout() {
     setSession(null, tokenKey);
     setIsAuthenticated(false);
+    Swal.fire({
+      icon: "success",
+      title: "خروج",
+      text: "با موفقیت خارج شدید",
+    });
   }
 
   useEffect(() => {

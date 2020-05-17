@@ -8,45 +8,56 @@ import { popUpFakeData } from "Utils/popUpFakeData";
 import "./DashboardAnimations.scss";
 import Calender from "Components/Calender/Calender";
 import { fetchUserCourses, deleteCourse } from "Utils/ApiCalls/CourseBox";
-import { DndProvider } from 'react-dnd'
-import Backend from 'react-dnd-html5-backend'
-import Menu from './Drag-Drop/Menu'
-
+import { DndProvider } from "react-dnd";
+import Backend from "react-dnd-html5-backend";
+import Menu from "./Drag-Drop/Menu";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const Dashboard = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [courses, setCourses] = useState([]);
   const [selectedCourseName, setSelectedCourseName] = useState("");
   const togglePopUp = () => {
-    setShowPopUp(showPopUp => {
+    setShowPopUp((showPopUp) => {
       if (showPopUp) {
         setSelectedCourseName("");
-        setShowPopUp(false);
       } else {
         setShowPopUp(true);
       }
     });
   };
-  const onDelete = useCallback(id => {
-    // alert(id);
+  const onDelete = useCallback((id) => {
     deleteCourse(id)
-      .then(response => {
+      .then((response) => {
         return fetchUserCourses();
       })
-      .then(response => {
+      .then((response) => {
         setCourses(response.data.data);
+        Swal.fire({
+          icon: "success",
+          title: "",
+          text: "با موفقیت حذف شد",
+        });
       })
       .catch(() => {
-        alert(`couldn't delete `);
+        Swal.fire({
+          icon: "error",
+          title: "خطا",
+          text: "مشکلی در حذف پیش آمد",
+        });
       });
   }, []);
   useEffect(() => {
     fetchUserCourses()
-      .then(response => {
+      .then((response) => {
         setCourses(response.data.data);
       })
       .catch(() => {
-        alert("something went wrong while trying to fetch user's schedule");
+        Swal.fire({
+          icon: "error",
+          title: "خطا",
+          text: "مشکلی پیش آمد",
+        });
       });
   }, []);
 
@@ -55,16 +66,24 @@ const Dashboard = () => {
       setShowPopUp(true);
     }
   }, [selectedCourseName, showPopUp]);
+
+  // close popup if user select  course in the popup
+
+  useEffect(() => {
+    setShowPopUp(false);
+    setSelectedCourseName("");
+  }, [courses]);
+
   return (
     <DndProvider backend={Backend}>
       <header className={styles.header}>
         <NavBar />
       </header>
       <main className={styles.main}>
-      <Menu>
-        <Calender {...{ courses }} onDelete={onDelete} />
+        <Menu>
+          <Calender {...{ courses }} onDelete={onDelete} />
         </Menu>
-       <CourseBox setSelectedCourseName={setSelectedCourseName} />
+        <CourseBox setSelectedCourseName={setSelectedCourseName} />
         <CSSTransitionGroup
           transitionName="popUp"
           transitionEnterTimeout={300}
@@ -81,7 +100,6 @@ const Dashboard = () => {
             />
           )}
         </CSSTransitionGroup>
-        {/* <button onClick={togglePopUp}>show the pop up</button> */}
       </main>
     </DndProvider>
   );
