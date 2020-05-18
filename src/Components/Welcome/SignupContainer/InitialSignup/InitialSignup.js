@@ -4,6 +4,7 @@ import { Dialogues } from "../../../../Utils/Dialogues";
 import styles from "./InitialSignup.module.scss";
 import { isEmailValid } from "Utils/formValidators";
 import { doesEmailExist } from "Utils/ApiCalls/Auth";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const InitialSignup = props => {
   const [email, setEmail] = useState("");
@@ -31,12 +32,27 @@ const InitialSignup = props => {
           })
           .catch(data => {
             setDoesExist(true);
+            Swal.fire({
+              icon: "error",
+              title: "خطا",
+              text: "کاربر دیگری با این نام وجود دارد"
+            });
           });
       } else {
         setIsEmailFormatValid(false);
+        Swal.fire({
+          icon: "error",
+          title: "خطا",
+          text: "فرمت پست الکترونیکی وارد شده نادرست است"
+        });
       }
     } else if (!email || (email && !email.trim().length > 0)) {
       setIsEmpty(true);
+      Swal.fire({
+        icon: "error",
+        title: "خطا",
+        text: "پست الکترونیکی نمی تواند خالی باشد"
+      });
     }
   };
   return (
