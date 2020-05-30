@@ -10,17 +10,17 @@ import { isEmailValid } from "Utils/formValidators";
 import "./LoginFormAnimations.scss";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [wrongCredentials, setWrongCredentials] = useState({
     email: false,
-    password: false
+    password: false,
   });
   const [emptyFields, setEmptyFields] = useState({
     email: false,
-    password: false
+    password: false,
   });
 
   const { login } = useAuth();
@@ -28,85 +28,85 @@ const LoginForm = props => {
   /*  with usecallback hook react remembers this function between rerenders,
   and avoids creating a new function every time the compoenent rerenders,
   therefore the rerendering of the child components are avoided */
-  const onEmailChange = useCallback(e => {
+  const onEmailChange = useCallback((e) => {
     setEmail(e.target.value);
-    setWrongCredentials(wrongCredentials => ({
+    setWrongCredentials((wrongCredentials) => ({
       ...wrongCredentials,
-      email: false
+      email: false,
     }));
   }, []);
 
-  const onPasswordChange = useCallback(e => {
+  const onPasswordChange = useCallback((e) => {
     setPassword(e.target.value);
   }, []);
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
     if (email) {
-      setEmptyFields(emptyFields => ({
+      setEmptyFields((emptyFields) => ({
         ...emptyFields,
-        email: false
+        email: false,
       }));
     }
     if (password) {
-      setEmptyFields(emptyFields => ({
+      setEmptyFields((emptyFields) => ({
         ...emptyFields,
-        password: false
+        password: false,
       }));
     }
   }, [email, password]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.persist();
     e.preventDefault();
     if (!email) {
-      setEmptyFields(emptyFields => ({ ...emptyFields, email: true }));
+      setEmptyFields((emptyFields) => ({ ...emptyFields, email: true }));
     }
     if (!password) {
-      setEmptyFields(emptyFields => ({ ...emptyFields, password: true }));
+      setEmptyFields((emptyFields) => ({ ...emptyFields, password: true }));
     }
     if (password && email) {
       setEmptyFields({ email: false, password: false });
       const isEmailFormattedCorrectly = isEmailValid(email);
 
       if (!isEmailFormattedCorrectly) {
-        setWrongCredentials(wrongCredentials => ({
+        setWrongCredentials((wrongCredentials) => ({
           ...wrongCredentials,
-          email: true
+          email: true,
         }));
       } else {
         setWrongCredentials({ email: false, password: false });
         const data = {
           email,
-          password
+          password,
         };
         loginApiCall(data)
-          .then(function(response) {
+          .then(function (response) {
             if (response.data.StatusCode == 200) {
               login(response.data.data.token);
             }
           })
-          .catch(function(error) {
+          .catch(function (error) {
             if (error.response) {
               if (error.StatusCode == 403) {
                 setMessage(Dialogues.loginfielderr);
                 Swal.fire({
                   icon: "error",
-                  title: "خطا",
-                  text: "نام کاربری یا رمز عبور شما اشتباه است"
+                  title: Dialogues.error,
+                  text: Dialogues.wrongUsernameOrPassword,
                 });
               }
             } else if (error.request) {
               Swal.fire({
                 icon: "error",
-                title: "خطا",
-                text: "نام کاربری یا رمز عبور شما اشتباه است"
+                title: Dialogues.error,
+                text: Dialogues.wrongUsernameOrPassword,
               });
             } else {
               Swal.fire({
                 icon: "error",
-                title: "خطا",
-                text: "نام کاربری یا رمز عبور شما اشتباه است"
+                title: Dialogues.error,
+                text: Dialogues.wrongUsernameOrPassword,
               });
             }
           });
@@ -129,8 +129,9 @@ const LoginForm = props => {
             <label>
               {email && <span>{Dialogues.emailPlaceholder}</span>}
               <input
-                className={`${(emptyFields.email || wrongCredentials.email) &&
-                  styles.error}`}
+                className={`${
+                  (emptyFields.email || wrongCredentials.email) && styles.error
+                }`}
                 id="usernme"
                 value={email}
                 placeholder={Dialogues.emailPlaceholder}
@@ -139,7 +140,7 @@ const LoginForm = props => {
               ></input>
 
               {emptyFields.email ? (
-                <p>{`${Dialogues.emailPlaceholder} نمی تواند خالی باشد`}</p>
+                <p>{`${Dialogues.emailPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
               ) : (
                 wrongCredentials.email && <p>{Dialogues.emailFormatError}</p>
               )}
@@ -147,9 +148,10 @@ const LoginForm = props => {
             <label>
               {password && <span>{Dialogues.passwordPlaceholder}</span>}
               <input
-                className={`${(emptyFields.password ||
-                  wrongCredentials.password) &&
-                  styles.error}`}
+                className={`${
+                  (emptyFields.password || wrongCredentials.password) &&
+                  styles.error
+                }`}
                 id="password"
                 value={password}
                 placeholder={Dialogues.passwordPlaceholder}
@@ -158,10 +160,10 @@ const LoginForm = props => {
               ></input>
 
               {emptyFields.password ? (
-                <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+                <p>{`${Dialogues.passwordPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
               ) : (
                 wrongCredentials.password && (
-                  <p>{`${Dialogues.passwordPlaceholder} اشتباه است`}</p>
+                  <p>{`${Dialogues.passwordPlaceholder} ${Dialogues.isWrong}`}</p>
                 )
               )}
             </label>

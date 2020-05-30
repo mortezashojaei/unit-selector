@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SelectSearch.module.scss";
+import { Dialogues } from "Utils/Dialogues";
 
 const SelectSearch = ({
   placeholder,
   options,
   onChange,
-  value: inputValue
+  value: inputValue,
 }) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   console.log(onChange);
@@ -30,7 +31,7 @@ const SelectSearch = ({
         placeholder={placeholder}
         onChange={onChange}
         onFocus={() =>
-          setIsInputFocused(isInputFocused => {
+          setIsInputFocused((isInputFocused) => {
             if (!isInputFocused) return true;
           })
         }
@@ -38,7 +39,7 @@ const SelectSearch = ({
         id="majorInput"
       />
       {options.length === 0 ? (
-        <p>loading...</p>
+        <p>{Dialogues.loading}...</p>
       ) : (
         <ul
           className={`${styles.majorList} ${isInputFocused && styles.visible}`}
@@ -49,7 +50,7 @@ const SelectSearch = ({
               return (
                 <li
                   key={value}
-                  onClick={e => {
+                  onClick={(e) => {
                     onChange(e);
                     setIsInputFocused(false);
                   }}

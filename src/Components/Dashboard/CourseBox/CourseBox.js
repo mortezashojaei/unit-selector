@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import CourseList from "../CourseList/CourseList";
 import styles from "./CourseBox.module.scss";
 import { fetchCourses, addCourse } from "Utils/ApiCalls/CourseBox";
+import { Dialogues } from "Utils/Dialogues";
 
-const CourseBox = props => {
+const CourseBox = (props) => {
   const [courses, setCourses] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [type, setType] = useState("chart");
   const [toggleType, setToggleType] = useState({
     chart: "active",
-    public: ""
+    public: "",
   });
   const filterCourses = () => {
     // console.log(courses);
     return courses
-      .filter(course => course.name.includes(searchText.trim()))
-      .filter(course => {
+      .filter((course) => course.name.includes(searchText.trim()))
+      .filter((course) => {
         if (type === "chart") {
           return course.type === 1;
         } else {
@@ -25,15 +26,15 @@ const CourseBox = props => {
   };
   useEffect(() => {
     fetchCourses()
-      .then(res => {
+      .then((res) => {
         setCourses(res.data.data);
       })
-      .catch(e => {});
+      .catch((e) => {});
   }, []);
-  const onInputChange = e => {
+  const onInputChange = (e) => {
     setSearchText(e.target.value);
   };
-  const onSelect = name => {
+  const onSelect = (name) => {
     // console.log(courses.find(course => course.id === id));
     props.setSelectedCourseName(name);
     //   const onSelect = id => {
@@ -56,35 +57,35 @@ const CourseBox = props => {
   const onChartFilter = () => {
     setToggleType({
       chart: "active",
-      public: ""
+      public: "",
     });
     setType("chart");
   };
   const onPublicFilter = () => {
     setToggleType({
       public: "active",
-      chart: ""
+      chart: "",
     });
     setType("public");
   };
   return (
     <div className={styles.mainDiv}>
-      <p>جستجوگر درس</p>
+      <p>{Dialogues.courseSearcher}</p>
       <input
         value={searchText}
         onChange={onInputChange}
-        placeholder=" نام درس را تایپ کنید..."
+        placeholder={`${Dialogues.typeTheCourseName}...`}
       />
       <div className={styles.buttonContainer}>
         <button className={styles[toggleType.public]} onClick={onPublicFilter}>
-          دروس <span>عمومی</span>
+          {Dialogues.courses} <span>{Dialogues.general}</span>
         </button>
         <button
           className={styles[toggleType.chart]}
           autoFocus
           onClick={onChartFilter}
         >
-          دروس <span>چارت</span>
+          {Dialogues.courses} <span>{Dialogues.chart}</span>
         </button>
       </div>
       <CourseList onSelect={onSelect} courses={courses && filterCourses()} />

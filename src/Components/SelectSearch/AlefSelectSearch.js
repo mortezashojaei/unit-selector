@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AlefSelectSearch.module.scss";
+import { Dialogues } from "Utils/Dialogues";
 const AlefSelectSearch = (props) => {
   const {
     onChange,
@@ -9,7 +10,7 @@ const AlefSelectSearch = (props) => {
     className,
     openDivClassName,
   } = props;
-  const { placeholder } = props || "جستجو کنید یا انتخاب کنید";
+  const { placeholder } = props || Dialogues.searchOrChoose;
   const [isSelect, setIsSelect] = useState(false);
   const [localVal, setLocalVal] = useState("");
   const [listVisibale, setListVisible] = useState(false);
@@ -72,9 +73,7 @@ const AlefSelectSearch = (props) => {
             .map((filteredItem) => (
               <li
                 key={filteredItem.id}
-                className={
-                  (filteredItem.id == value ? " active" : "")
-                }
+                className={filteredItem.id == value ? " active" : ""}
                 onClick={() => {
                   handleClick(filteredItem.name, filteredItem.id);
                 }}

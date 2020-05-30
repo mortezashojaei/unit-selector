@@ -6,18 +6,18 @@ import { isEmailValid } from "Utils/formValidators";
 import { doesEmailExist } from "Utils/ApiCalls/Auth";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
-const InitialSignup = props => {
+const InitialSignup = (props) => {
   const [email, setEmail] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
   const [doesExist, setDoesExist] = useState(false);
   const [isEmailFormatValid, setIsEmailFormatValid] = useState(true);
-  const onEmailNameChange = useCallback(e => {
+  const onEmailNameChange = useCallback((e) => {
     setEmail(e.target.value);
     setIsEmpty(false);
     setDoesExist(false);
     setIsEmailFormatValid(true);
   }, []);
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (email && email.trim().length > 0) {
       setIsEmpty(false);
@@ -30,28 +30,28 @@ const InitialSignup = props => {
           .then(() => {
             props.submitted(email);
           })
-          .catch(data => {
+          .catch((data) => {
             setDoesExist(true);
             Swal.fire({
               icon: "error",
-              title: "خطا",
-              text: "کاربر دیگری با این نام وجود دارد"
+              title: Dialogues.error,
+              text: Dialogues.userAlreadyExists,
             });
           });
       } else {
         setIsEmailFormatValid(false);
         Swal.fire({
           icon: "error",
-          title: "خطا",
-          text: "فرمت پست الکترونیکی وارد شده نادرست است"
+          title: Dialogues.error,
+          text: Dialogues.wrongEmailFormat,
         });
       }
     } else if (!email || (email && !email.trim().length > 0)) {
       setIsEmpty(true);
       Swal.fire({
         icon: "error",
-        title: "خطا",
-        text: "پست الکترونیکی نمی تواند خالی باشد"
+        title: Dialogues.error,
+        text: Dialogues.emailCantBeEmpty,
       });
     }
   };
@@ -60,19 +60,20 @@ const InitialSignup = props => {
       <label>
         {email && <span>{Dialogues.emailPlaceholder}</span>}
         <input
-          className={`${(isEmpty || doesExist || !isEmailFormatValid) &&
-            styles.error}`}
+          className={`${
+            (isEmpty || doesExist || !isEmailFormatValid) && styles.error
+          }`}
           value={email}
           onChange={onEmailNameChange}
           placeholder={Dialogues.emailPlaceholder}
           type="text"
         />
         {isEmpty ? (
-          <p>{`${Dialogues.emailPlaceholder} نمیتواند خالی باشد`}</p>
+          <p>{`${Dialogues.emailPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
         ) : !isEmailFormatValid ? (
           <p>{Dialogues.emailFormatError}</p>
         ) : (
-          doesExist && <p>'کاربر با این ایمیل موجود است'</p>
+          doesExist && <p>{Dialogues.userWithThisEmailAlreadyExists}</p>
         )}
       </label>
       <button>{Dialogues.signup}</button>

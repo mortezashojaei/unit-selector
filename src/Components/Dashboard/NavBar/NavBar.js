@@ -4,11 +4,12 @@ import styles from "./NavBar.module.scss";
 import Gravatar from "react-gravatar";
 import { useAuth } from "Utils/Authentication/Auth";
 import { info } from "Utils/ApiCalls/Auth";
+import { Dialogues } from "Utils/Dialogues";
 
 const NavBar = ({ history }) => {
   const [data, setData] = useState(localStorage.getItem("email"));
   useEffect(() => {
-    info().then(function(response) {
+    info().then(function (response) {
       if (response.data) setData(response.data.data.email);
       localStorage.setItem("email", response.data.data.email);
     });
@@ -22,10 +23,10 @@ const NavBar = ({ history }) => {
   }, [logoutApi]);
 
   const toggleMenu = useCallback(() => {
-    setIsMenuClosed(isMenuClosed => !isMenuClosed);
+    setIsMenuClosed((isMenuClosed) => !isMenuClosed);
   }, []);
   const toggleProfile = useCallback(() => {
-    setToogleProfile(toogleProfile => !toogleProfile);
+    setToogleProfile((toogleProfile) => !toogleProfile);
   }, []);
 
   return (
@@ -53,18 +54,18 @@ const NavBar = ({ history }) => {
             <i className="icon ion-ios-contact"></i>
           </span>
           <button>
-            ویرایش اطلاعات
+            {Dialogues.editInfo}
             <i className="icon ion-ios-settings"></i>
           </button>
           <button onClick={logout}>
-            خروج
+            {Dialogues.exit}
             <i className="icon ion-ios-log-out"></i>
           </button>
         </div>
       </div>
 
       <div className={`${styles.linkContainer}`}>
-        <h1>سیستم انتخاب واحد ترمه</h1>
+        <h1>{Dialogues.termeUnitSelectorSystem}</h1>
         {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>

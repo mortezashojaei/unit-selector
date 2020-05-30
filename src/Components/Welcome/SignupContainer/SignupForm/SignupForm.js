@@ -143,11 +143,14 @@ const SignupForm = (props) => {
 
   //   setMajor(major);
   // }, []);
-  const handleMajorChange = useCallback((e) => {
-    setMajor(e.target.value);
-    console.log(major);
-    //   selectRef.current.size = 1;
-  });
+  const handleMajorChange = useCallback(
+    (e) => {
+      setMajor(e.target.value);
+      console.log(major);
+      //   selectRef.current.size = 1;
+    },
+    [major]
+  );
 
   const setEmptyFieldToTrue = (key) => {
     /* we pass a callback to the setState to get the latest state */
@@ -188,11 +191,11 @@ const SignupForm = (props) => {
       .catch((err) => {
         let status = err.status;
         if (status === 409) {
-          setError("حساب کاربری با این نام کاربری موجود است");
+          setError(Dialogues.userWithThisUsernameAlreadyExists);
         } else if (status === 406) {
-          setError("خطا در سرور ! لطفا بعدا اقدام کنید");
+          setError(Dialogues.serverError);
         } else if (status === 404 || status === 400) {
-          setError("رشته وارد شده صحیح نمیباشد");
+          setError(Dialogues.wrongMajor);
         }
       });
   };
@@ -265,10 +268,10 @@ const SignupForm = (props) => {
               placeholder={Dialogues.fullnamePlaceholder}
             />
             {emptyFields.fullName ? (
-              <p>{`${Dialogues.fullnamePlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.fullnamePlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.fullName && (
-                <p>{`${Dialogues.fullnamePlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.fullnamePlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
@@ -287,10 +290,10 @@ const SignupForm = (props) => {
               readOnly={isEdit ? "true" : ""}
             />
             {emptyFields.studentNumber ? (
-              <p>{`${Dialogues.studentNumberPlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.studentNumberPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.studentNumber && (
-                <p>{`${Dialogues.studentNumberPlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.studentNumberPlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
@@ -311,10 +314,10 @@ const SignupForm = (props) => {
                   placeholder={Dialogues.passwordPlaceholder}
                 />
                 {emptyFields.password ? (
-                  <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+                  <p>{`${Dialogues.passwordPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
                 ) : (
                   wrongCredentials.password && (
-                    <p>{`${Dialogues.passwordPlaceholder} اشتباه است.بیشتر از 4 کاراکتر وارد کنید`}</p>
+                    <p>{`${Dialogues.passwordPlaceholder} ${Dialogues.shouldBeMoreThanFourCharacters}`}</p>
                   )
                 )}
               </label>
@@ -335,10 +338,10 @@ const SignupForm = (props) => {
                   placeholder={Dialogues.passwordConfirmPlaceholder}
                 />
                 {emptyFields.passwordConfirm ? (
-                  <p>{`${Dialogues.passwordConfirmPlaceholder} نمی تواند خالی باشد`}</p>
+                  <p>{`${Dialogues.passwordConfirmPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
                 ) : (
                   wrongCredentials.passwordConfirm && (
-                    <p>{`${Dialogues.passwordConfirmPlaceholder} اشتباه است`}</p>
+                    <p>{`${Dialogues.passwordConfirmPlaceholder} ${Dialogues.isWrong}`}</p>
                   )
                 )}
               </label>
@@ -393,10 +396,10 @@ const SignupForm = (props) => {
             )}
 
             {emptyFields.major ? (
-              <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.majorPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.major && (
-                <p>{`${Dialogues.majorPlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.majorPlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
@@ -413,10 +416,10 @@ const SignupForm = (props) => {
               placeholder={Dialogues.semesterPlaceholder}
             />
             {emptyFields.semester ? (
-              <p>{`${Dialogues.semesterPlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.semesterPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.semester && (
-                <p>{`${Dialogues.semesterPlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.semesterPlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>

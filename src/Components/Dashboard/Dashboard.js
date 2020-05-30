@@ -12,6 +12,7 @@ import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import Menu from "./Drag-Drop/Menu";
 import Swal from "sweetalert2/dist/sweetalert2.js";
+import { Dialogues } from "Utils/Dialogues";
 
 const Dashboard = () => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -36,14 +37,14 @@ const Dashboard = () => {
         Swal.fire({
           icon: "success",
           title: "",
-          text: "با موفقیت حذف شد",
+          text: Dialogues.wasDeletedSuccessfully,
         });
       })
       .catch(() => {
         Swal.fire({
           icon: "error",
-          title: "خطا",
-          text: "مشکلی در حذف پیش آمد",
+          title: Dialogues.error,
+          text: Dialogues.errorHappenedWhileDeleting,
         });
       });
   }, []);
@@ -55,8 +56,8 @@ const Dashboard = () => {
       .catch(() => {
         Swal.fire({
           icon: "error",
-          title: "خطا",
-          text: "مشکلی پیش آمد",
+          title: Dialogues.error,
+          text: Dialogues.somethingWentWrong,
         });
       });
   }, []);

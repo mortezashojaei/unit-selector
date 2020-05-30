@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback, useState } from "react";
 import styles from "./PopUp.module.scss";
 import ClassItem from "Components/Dashboard/PopUp/ClassItem/ClassItem";
 import { fetchCourses } from "Utils/ApiCalls/CourseBox";
+import { Dialogues } from "Utils/Dialogues";
 
 const PopUp = ({ courseName, togglePopUp, setCourses }) => {
   const popUpRef = useRef();
@@ -38,7 +39,7 @@ const PopUp = ({ courseName, togglePopUp, setCourses }) => {
       <div className={styles.container} ref={popUpRef}>
         <i onClick={togglePopUp} className="icon ion-md-close"></i>
         <h1 className={styles.title}>
-          اخذ درس : <span>{courseName}</span>
+          {Dialogues.takeTheCourse} : <span>{courseName}</span>
         </h1>
         <div className={styles.classList}>
           {classList.length > 0 &&
