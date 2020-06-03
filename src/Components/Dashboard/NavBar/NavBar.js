@@ -1,37 +1,37 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 import Gravatar from "react-gravatar";
 import { useAuth } from "Utils/Authentication/Auth";
 import { info } from "Utils/ApiCalls/Auth";
+import { Dialogues } from "Utils/Dialogues";
 
 const NavBar = ({ history }) => {
   const [data, setData] = useState(localStorage.getItem("email"));
   useEffect(() => {
-    info().then(function(response) {
+    info().then(function (response) {
       if (response.data) setData(response.data.data.email);
       localStorage.setItem("email", response.data.data.email);
     });
   }, []);
   const [toogleProfile, setToogleProfile] = useState(true);
-  const [isMenuClosed, setIsMenuClosed] = useState(true);
   const { logout: logoutApi } = useAuth();
   const logout = useCallback(() => {
     // history.push("/");
     logoutApi();
   }, [logoutApi]);
 
-  const toggleMenu = useCallback(() => {
-    setIsMenuClosed(isMenuClosed => !isMenuClosed);
-  }, []);
   const toggleProfile = useCallback(() => {
-    setToogleProfile(toogleProfile => !toogleProfile);
+    setToogleProfile((toogleProfile) => !toogleProfile);
   }, []);
 
   return (
     <nav className={`${styles.navBar} `}>
       <div className={styles.logo}>
-        <img src={process.env.PUBLIC_URL + "/assets/images/logo2.png"}></img>
+        <img
+          src={process.env.PUBLIC_URL + "/assets/images/logo2.png"}
+          alt="terme"
+        ></img>
       </div>
 
       <div className={styles.buttonContainer}>
@@ -53,18 +53,18 @@ const NavBar = ({ history }) => {
             <i className="icon ion-ios-contact"></i>
           </span>
           <button>
-            ویرایش اطلاعات
+            {Dialogues.editInfo}
             <i className="icon ion-ios-settings"></i>
           </button>
           <button onClick={logout}>
-            خروج
+            {Dialogues.exit}
             <i className="icon ion-ios-log-out"></i>
           </button>
         </div>
       </div>
 
       <div className={`${styles.linkContainer}`}>
-        <h1>سیستم انتخاب واحد ترمه</h1>
+        <h1>{Dialogues.termeUnitSelectorSystem}</h1>
         {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>

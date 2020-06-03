@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import CourseListItem from "../CourseListItem/CourseListItem";
 import styles from "./CourseList.module.scss";
+import { Dialogues } from "Utils/Dialogues";
 
-const CourseList = props => {
+const CourseList = (props) => {
   const [showMore, setShowMore] = useState(false);
   const onMoreClick = () => {
     setShowMore(!showMore);
@@ -10,7 +11,7 @@ const CourseList = props => {
   return (
     <div className={styles.mainDiv}>
       <div className={`${styles.list} ${showMore && styles.scroll}`}>
-        {props.courses.map(course => {
+        {props.courses.map((course) => {
           //   console.log(course);
           return (
             <CourseListItem
@@ -23,7 +24,7 @@ const CourseList = props => {
       </div>
       {!showMore && (
         <button onClick={onMoreClick} className={`${styles.more}`}>
-          بیش تر...
+          {Dialogues.more}...
         </button>
       )}
     </div>

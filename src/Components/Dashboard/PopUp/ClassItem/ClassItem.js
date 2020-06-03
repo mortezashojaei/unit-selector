@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { weekDays, dayTimes } from "Utils/Dialogues";
+import { weekDays, dayTimes, Dialogues } from "Utils/Dialogues";
 import { popUpFakeData } from "Utils/popUpFakeData";
 import { addCourse } from "Utils/ApiCalls/CourseBox";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -18,7 +18,7 @@ const handleCollisions = (currentClass, weeklySchedule) => {
     collidedClass = "معماری کامپیوتر";
     return (
       <p className={styles.collisionError}>
-        تداخل زمانی با درس
+        {Dialogues.hasConflictWith}
         {" " + collidedClass}
       </p>
     );
@@ -45,7 +45,7 @@ const ClassItem = ({
   return (
     <div className={styles.classItem}>
       <p className={styles.professorName}>
-        <span>استاد : </span>
+        <span>{Dialogues.teacher} : </span>
         {professorName}
       </p>
       <p className={styles.classTimes}>{showClassTimes(classTimes)}</p>
@@ -58,7 +58,7 @@ const ClassItem = ({
                 Swal.fire({
                   icon: "success",
                   title: "",
-                  text: "با موفقیت افزوده شد",
+                  text: Dialogues.wasAddedSuccessfully,
                 });
                 setCourses((courses) => [...courses, classItem]);
               })
@@ -66,12 +66,12 @@ const ClassItem = ({
                 Swal.fire({
                   icon: "error",
                   title: "",
-                  text: "امکان اخذ این درس وجود ندارد",
+                  text: Dialogues.cantTakeThisCourse,
                 });
               });
           }}
         >
-          اخذ کلاس
+          {Dialogues.takeTheCourse}
         </button>
       )}
     </div>

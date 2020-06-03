@@ -1,8 +1,9 @@
 import { useHistory, useLocation } from "react-router-dom";
 import AuthContext from "./Context";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useCallback } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { API } from "Utils/ApiCalls/API";
+import { Dialogues } from "Utils/Dialogues";
 
 const setSession = (token, tokenKey) => {
   if (token) {
@@ -32,24 +33,24 @@ export const useAuth = () => {
     if (stateType)
       return Swal.fire({
         icon: "success",
-        title: " مشخصات شما به روز شد",
-        text: "مشخصات جدید شما در سیستم به ثبت رسید.",
+        title: Dialogues.updatedYourInfoSuccessfully,
+        text: Dialogues.yourInfoIsSubmitted,
       });
     Swal.fire({
       icon: "success",
-      title: "خوش آمدید",
-      text: "به سیستم انتخاب واحد ترمه خوش آمدید",
+      title: Dialogues.Wellcome,
+      text: Dialogues.welcomeToTerme,
     });
   }
-  function logout() {
+  const logout = useCallback(() => {
     setSession(null, tokenKey);
     setIsAuthenticated(false);
     Swal.fire({
       icon: "success",
-      title: "خروج",
-      text: "با موفقیت خارج شدید",
+      title: Dialogues.exit,
+      text: Dialogues.exitedSuccessfully,
     });
-  }
+  }, [setIsAuthenticated, tokenKey]);
 
   useEffect(() => {
     const token = localStorage.getItem(tokenKey);
@@ -58,7 +59,7 @@ export const useAuth = () => {
     } else {
       setSession(token, tokenKey);
     }
-  }, []);
+  }, [logout, tokenKey]);
 
   return { login, logout, isAuthenticated };
 };

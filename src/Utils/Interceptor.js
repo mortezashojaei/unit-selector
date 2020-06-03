@@ -7,11 +7,11 @@ const Interceptor = ({ children }) => {
 
   useEffect(() => {
     API.interceptors.response.use(null, (error) => {
-      if (error.response.data.error == 403) {
+      if (error.response.data.error === 403) {
         logout();
       }
     });
-  }, []);
+  }, [logout]);
   return children;
 };
 

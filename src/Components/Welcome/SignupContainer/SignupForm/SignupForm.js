@@ -1,29 +1,22 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { login } from "Utils/ApiCalls/Auth";
+import React, { useState, useEffect, useCallback } from "react";
 
-import Select from "react-select";
-// import SelectSearch from "react-select-search";
-import { CSSTransitionGroup } from "react-transition-group";
-
-import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
-import majorList from "Utils/majorFakeData";
 import styles from "./SignupForm.module.scss";
 import { useAuth } from "Utils/Authentication/Auth";
 import "./reactSelect.scss";
 import AlefSelectSearch from "Components/SelectSearch/AlefSelectSearch";
 
 const SignupForm = (props) => {
-  const selectRef = useRef(null);
+  // const selectRef = useRef(null);
   const { login } = useAuth();
-  const onSelectFocus = () => {
-    selectRef.current.size = 10;
-  };
-  const onSelectBlur = () => {
-    selectRef.current.size = 1;
-  };
+  // const onSelectFocus = () => {
+  //   selectRef.current.size = 10;
+  // };
+  // const onSelectBlur = () => {
+  //   selectRef.current.size = 1;
+  // };
 
   const { isEdit } = props;
   const [studentNumber, setStudentNumber] = useState("");
@@ -34,7 +27,6 @@ const SignupForm = (props) => {
   const [semester, setSemester] = useState("");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
-  const [majorName, setMajorName] = useState("");
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
     passwordConfirm: false,
@@ -54,16 +46,22 @@ const SignupForm = (props) => {
   useEffect(() => {
     setStudentNumber(props.student_number);
     setSemester(props.semester);
-    setMajorName(props.major);
     if (majors)
       for (var i = 0; i < majors.length; i++) {
-        if (majors[i]["name"] == props.major) {
+        if (majors[i]["name"] === props.major) {
           setMajor(majors[i]["id"]);
           console.log(i);
         }
       }
     setFullName(props.full_name);
-  }, [props.email, majors]);
+  }, [
+    props.email,
+    majors,
+    props.major,
+    props.semester,
+    props.full_name,
+    props.student_number,
+  ]);
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
@@ -82,19 +80,8 @@ const SignupForm = (props) => {
     if (semester) {
       setEmptyFieldToFalse("semester");
     }
-  }, [password, passwordConfirm, fullName, semester, studentNumber]);
+  }, [password, passwordConfirm, fullName, semester, isEdit, studentNumber]);
 
-  const toSelectForm = (majors) => {
-    const majorsCopy = [];
-    majors.forEach((major) => {
-      console.log(majorsCopy);
-      return majorsCopy.push({
-        name: major.persianName,
-        value: major.id,
-      });
-    });
-    return majorsCopy;
-  };
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then((response) => {
@@ -102,7 +89,7 @@ const SignupForm = (props) => {
         setMajors(response.data.data);
         // console.log(response)
       })
-      .catch((err) => console.log("couldnt fetch"));
+      .catch((err) => console.log("couldn't fetch"));
   }
 
   useEffect(() => {
@@ -143,11 +130,14 @@ const SignupForm = (props) => {
 
   //   setMajor(major);
   // }, []);
-  const handleMajorChange = useCallback((e) => {
-    setMajor(e.target.value);
-    console.log(major);
-    //   selectRef.current.size = 1;
-  });
+  const handleMajorChange = useCallback(
+    (e) => {
+      setMajor(e.target.value);
+      console.log(major);
+      //   selectRef.current.size = 1;
+    },
+    [major]
+  );
 
   const setEmptyFieldToTrue = (key) => {
     /* we pass a callback to the setState to get the latest state */
@@ -188,11 +178,11 @@ const SignupForm = (props) => {
       .catch((err) => {
         let status = err.status;
         if (status === 409) {
-          setError("حساب کاربری با این نام کاربری موجود است");
+          setError(Dialogues.userWithThisUsernameAlreadyExists);
         } else if (status === 406) {
-          setError("خطا در سرور ! لطفا بعدا اقدام کنید");
+          setError(Dialogues.serverError);
         } else if (status === 404 || status === 400) {
-          setError("رشته وارد شده صحیح نمیباشد");
+          setError(Dialogues.wrongMajor);
         }
       });
   };
@@ -265,10 +255,10 @@ const SignupForm = (props) => {
               placeholder={Dialogues.fullnamePlaceholder}
             />
             {emptyFields.fullName ? (
-              <p>{`${Dialogues.fullnamePlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.fullnamePlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.fullName && (
-                <p>{`${Dialogues.fullnamePlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.fullnamePlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
@@ -287,10 +277,10 @@ const SignupForm = (props) => {
               readOnly={isEdit ? "true" : ""}
             />
             {emptyFields.studentNumber ? (
-              <p>{`${Dialogues.studentNumberPlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.studentNumberPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.studentNumber && (
-                <p>{`${Dialogues.studentNumberPlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.studentNumberPlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
@@ -311,10 +301,10 @@ const SignupForm = (props) => {
                   placeholder={Dialogues.passwordPlaceholder}
                 />
                 {emptyFields.password ? (
-                  <p>{`${Dialogues.passwordPlaceholder} نمی تواند خالی باشد`}</p>
+                  <p>{`${Dialogues.passwordPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
                 ) : (
                   wrongCredentials.password && (
-                    <p>{`${Dialogues.passwordPlaceholder} اشتباه است.بیشتر از 4 کاراکتر وارد کنید`}</p>
+                    <p>{`${Dialogues.passwordPlaceholder} ${Dialogues.shouldBeMoreThanFourCharacters}`}</p>
                   )
                 )}
               </label>
@@ -335,10 +325,10 @@ const SignupForm = (props) => {
                   placeholder={Dialogues.passwordConfirmPlaceholder}
                 />
                 {emptyFields.passwordConfirm ? (
-                  <p>{`${Dialogues.passwordConfirmPlaceholder} نمی تواند خالی باشد`}</p>
+                  <p>{`${Dialogues.passwordConfirmPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
                 ) : (
                   wrongCredentials.passwordConfirm && (
-                    <p>{`${Dialogues.passwordConfirmPlaceholder} اشتباه است`}</p>
+                    <p>{`${Dialogues.passwordConfirmPlaceholder} ${Dialogues.isWrong}`}</p>
                   )
                 )}
               </label>
@@ -347,41 +337,6 @@ const SignupForm = (props) => {
 
           <label className="o-v">
             {major && <span>{Dialogues.majorPlaceholder}</span>}
-            {/* <Select
-              className={"majorSelectSearch"}
-              classNamePrefix={"majorSelectSearch"}
-              options={toSelectForm(majors)}
-              onChange={handleMajorChange}
-              placeholder={Dialogues.majorPlaceholder}
-            /> */}
-            {/* <SelectSearch
-              className={"majorSelectSearch"}
-              options={toSelectForm(majors)}
-              placeholder={Dialogues.majorPlaceholder}
-              onChange={handleMajorChange}
-            /> */}
-            {/* <SelectSearch
-              value={major}
-              options={toSelectForm(majors)}
-              onChange={handleMajorChange}
-              placeholder={Dialogues.majorPlaceholder}
-            /> */}
-
-            {/*  alefseen
-         <select
-              ref={selectRef}
-              onFocus={onSelectFocus}
-              onBlur={onSelectBlur}
-              onChange={handleMajorChange}
-            >
-              {majors &&
-                majors.map(major => (
-                  <option key={major.id} value={major.id} selected={major.name==majorName?'selected':''}>
-                    {major.name}
-                  </option>
-                ))}
-            </select>
-                */}
 
             {majors && (
               <AlefSelectSearch
@@ -393,10 +348,10 @@ const SignupForm = (props) => {
             )}
 
             {emptyFields.major ? (
-              <p>{`${Dialogues.majorPlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.majorPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.major && (
-                <p>{`${Dialogues.majorPlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.majorPlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
@@ -413,10 +368,10 @@ const SignupForm = (props) => {
               placeholder={Dialogues.semesterPlaceholder}
             />
             {emptyFields.semester ? (
-              <p>{`${Dialogues.semesterPlaceholder} نمی تواند خالی باشد`}</p>
+              <p>{`${Dialogues.semesterPlaceholder} ${Dialogues.cantBeEmpty}`}</p>
             ) : (
               wrongCredentials.semester && (
-                <p>{`${Dialogues.semesterPlaceholder} اشتباه است`}</p>
+                <p>{`${Dialogues.semesterPlaceholder} ${Dialogues.isWrong}`}</p>
               )
             )}
           </label>
