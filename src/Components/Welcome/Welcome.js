@@ -1,7 +1,5 @@
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
-import { CSSTransitionGroup } from "react-transition-group";
-import SignupForm from "Components/Welcome/SignupContainer/SignupForm/SignupForm";
+import { Route, Switch } from "react-router-dom";
 import SignupContainer from "Components/Welcome/SignupContainer/SignupContainer";
 import LoginForm from "Components/Welcome/LoginForm/LoginForm";
 import styles from "./Welcome.module.scss";
@@ -17,6 +15,7 @@ const Welcome = () => {
             <div className={styles.logo}>
               <img
                 src={process.env.PUBLIC_URL + "/assets/images/logo2.png"}
+                alt={"terme"}
               ></img>
             </div>
             <figcaption>

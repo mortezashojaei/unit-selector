@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./SelectSearch.module.scss";
 import { Dialogues } from "Utils/Dialogues";
 
@@ -11,19 +11,6 @@ const SelectSearch = ({
   const [isInputFocused, setIsInputFocused] = useState(false);
   console.log(onChange);
   console.log("selectsearch ", options);
-  // useEffect(() => {
-  //   const majorInputParent = document.getElementById("majorInput")
-  //     .parentElement;
-  //   const changeFocus = () => {
-  //     setIsInputFocused(isInputFocused => !isInputFocused);
-  //   };
-  //   majorInputParent.addEventListener("focusin", changeFocus);
-  //   majorInputParent.addEventListener("focusout", changeFocus);
-  //   return () => {
-  //     majorInputParent.removeEventListener("focusin", changeFocus);
-  //     majorInputParent.removeEventListener("focusout", changeFocus);
-  //   };
-  // }, []);
   return (
     <>
       <input

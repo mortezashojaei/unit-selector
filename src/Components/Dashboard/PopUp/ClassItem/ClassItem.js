@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { weekDays, dayTimes, Dialogues } from "Utils/Dialogues";
 import { popUpFakeData } from "Utils/popUpFakeData";

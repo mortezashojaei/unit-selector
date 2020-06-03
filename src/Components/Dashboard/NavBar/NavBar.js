@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 import Gravatar from "react-gravatar";
 import { useAuth } from "Utils/Authentication/Auth";
@@ -15,16 +15,12 @@ const NavBar = ({ history }) => {
     });
   }, []);
   const [toogleProfile, setToogleProfile] = useState(true);
-  const [isMenuClosed, setIsMenuClosed] = useState(true);
   const { logout: logoutApi } = useAuth();
   const logout = useCallback(() => {
     // history.push("/");
     logoutApi();
   }, [logoutApi]);
 
-  const toggleMenu = useCallback(() => {
-    setIsMenuClosed((isMenuClosed) => !isMenuClosed);
-  }, []);
   const toggleProfile = useCallback(() => {
     setToogleProfile((toogleProfile) => !toogleProfile);
   }, []);
@@ -32,7 +28,10 @@ const NavBar = ({ history }) => {
   return (
     <nav className={`${styles.navBar} `}>
       <div className={styles.logo}>
-        <img src={process.env.PUBLIC_URL + "/assets/images/logo2.png"}></img>
+        <img
+          src={process.env.PUBLIC_URL + "/assets/images/logo2.png"}
+          alt="terme"
+        ></img>
       </div>
 
       <div className={styles.buttonContainer}>

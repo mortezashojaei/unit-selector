@@ -82,13 +82,13 @@ const LoginForm = (props) => {
         };
         loginApiCall(data)
           .then(function (response) {
-            if (response.data.StatusCode == 200) {
+            if (response.data.StatusCode === 200) {
               login(response.data.data.token);
             }
           })
           .catch(function (error) {
             if (error.response) {
-              if (error.StatusCode == 403) {
+              if (error.StatusCode === 403) {
                 setMessage(Dialogues.loginfielderr);
                 Swal.fire({
                   icon: "error",

@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import axios from "axios";
 import { Dialogues } from "../../../../Utils/Dialogues";
 import styles from "./InitialSignup.module.scss";
 import { isEmailValid } from "Utils/formValidators";

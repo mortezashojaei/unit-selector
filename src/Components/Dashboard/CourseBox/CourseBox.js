@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CourseList from "../CourseList/CourseList";
 import styles from "./CourseBox.module.scss";
-import { fetchCourses, addCourse } from "Utils/ApiCalls/CourseBox";
+import { fetchCourses } from "Utils/ApiCalls/CourseBox";
 import { Dialogues } from "Utils/Dialogues";
 
 const CourseBox = (props) => {

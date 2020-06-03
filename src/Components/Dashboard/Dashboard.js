@@ -4,7 +4,6 @@ import styles from "./Dashboard.module.scss";
 import CourseBox from "./CourseBox/CourseBox";
 import PopUp from "./PopUp/PopUp";
 import { CSSTransitionGroup } from "react-transition-group";
-import { popUpFakeData } from "Utils/popUpFakeData";
 import "./DashboardAnimations.scss";
 import Calender from "Components/Calender/Calender";
 import { fetchUserCourses, deleteCourse } from "Utils/ApiCalls/CourseBox";

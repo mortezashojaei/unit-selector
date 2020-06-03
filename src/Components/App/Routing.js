@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Welcome from "../Welcome/Welcome";
 import Dashboard from "Components/Dashboard/Dashboard";

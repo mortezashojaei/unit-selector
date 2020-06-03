@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Course from "./Course";
 import "./Calender.Module.scss";
 import { Dialogues } from "Utils/Dialogues";
@@ -27,7 +27,7 @@ const Calender = ({
   function getCourse(day, time) {
     return courses.find((course) =>
       course.class_times.find(
-        (dayTime) => dayTime.time == time && dayTime.day == day
+        (dayTime) => dayTime.time === time && dayTime.day === day
       )
     );
   }

@@ -1,6 +1,6 @@
 import { useHistory, useLocation } from "react-router-dom";
 import AuthContext from "./Context";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useCallback } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { API } from "Utils/ApiCalls/API";
 import { Dialogues } from "Utils/Dialogues";
@@ -42,7 +42,7 @@ export const useAuth = () => {
       text: Dialogues.welcomeToTerme,
     });
   }
-  function logout() {
+  const logout = useCallback(() => {
     setSession(null, tokenKey);
     setIsAuthenticated(false);
     Swal.fire({
@@ -50,7 +50,7 @@ export const useAuth = () => {
       title: Dialogues.exit,
       text: Dialogues.exitedSuccessfully,
     });
-  }
+  }, [setIsAuthenticated, tokenKey]);
 
   useEffect(() => {
     const token = localStorage.getItem(tokenKey);
@@ -59,7 +59,7 @@ export const useAuth = () => {
     } else {
       setSession(token, tokenKey);
     }
-  }, []);
+  }, [logout, tokenKey]);
 
   return { login, logout, isAuthenticated };
 };

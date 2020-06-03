@@ -1,29 +1,22 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { login } from "Utils/ApiCalls/Auth";
+import React, { useState, useEffect, useCallback } from "react";
 
-import Select from "react-select";
-// import SelectSearch from "react-select-search";
-import { CSSTransitionGroup } from "react-transition-group";
-
-import SelectSearch from "Components/SelectSearch/SelectSearch";
 import { fetchMajors } from "Utils/ApiCalls/FetchList";
 import { signup } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
-import majorList from "Utils/majorFakeData";
 import styles from "./SignupForm.module.scss";
 import { useAuth } from "Utils/Authentication/Auth";
 import "./reactSelect.scss";
 import AlefSelectSearch from "Components/SelectSearch/AlefSelectSearch";
 
 const SignupForm = (props) => {
-  const selectRef = useRef(null);
+  // const selectRef = useRef(null);
   const { login } = useAuth();
-  const onSelectFocus = () => {
-    selectRef.current.size = 10;
-  };
-  const onSelectBlur = () => {
-    selectRef.current.size = 1;
-  };
+  // const onSelectFocus = () => {
+  //   selectRef.current.size = 10;
+  // };
+  // const onSelectBlur = () => {
+  //   selectRef.current.size = 1;
+  // };
 
   const { isEdit } = props;
   const [studentNumber, setStudentNumber] = useState("");
@@ -34,7 +27,6 @@ const SignupForm = (props) => {
   const [semester, setSemester] = useState("");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
-  const [majorName, setMajorName] = useState("");
   const [wrongCredentials, setWrongCredentials] = useState({
     password: false,
     passwordConfirm: false,
@@ -54,16 +46,22 @@ const SignupForm = (props) => {
   useEffect(() => {
     setStudentNumber(props.student_number);
     setSemester(props.semester);
-    setMajorName(props.major);
     if (majors)
       for (var i = 0; i < majors.length; i++) {
-        if (majors[i]["name"] == props.major) {
+        if (majors[i]["name"] === props.major) {
           setMajor(majors[i]["id"]);
           console.log(i);
         }
       }
     setFullName(props.full_name);
-  }, [props.email, majors]);
+  }, [
+    props.email,
+    majors,
+    props.major,
+    props.semester,
+    props.full_name,
+    props.student_number,
+  ]);
 
   /* change the empty fields whenever the inputs change */
   useEffect(() => {
@@ -82,19 +80,8 @@ const SignupForm = (props) => {
     if (semester) {
       setEmptyFieldToFalse("semester");
     }
-  }, [password, passwordConfirm, fullName, semester, studentNumber]);
+  }, [password, passwordConfirm, fullName, semester, isEdit, studentNumber]);
 
-  const toSelectForm = (majors) => {
-    const majorsCopy = [];
-    majors.forEach((major) => {
-      console.log(majorsCopy);
-      return majorsCopy.push({
-        name: major.persianName,
-        value: major.id,
-      });
-    });
-    return majorsCopy;
-  };
   function setMajorsInSelectSearch() {
     fetchMajors()
       .then((response) => {
@@ -102,7 +89,7 @@ const SignupForm = (props) => {
         setMajors(response.data.data);
         // console.log(response)
       })
-      .catch((err) => console.log("couldnt fetch"));
+      .catch((err) => console.log("couldn't fetch"));
   }
 
   useEffect(() => {
@@ -350,41 +337,6 @@ const SignupForm = (props) => {
 
           <label className="o-v">
             {major && <span>{Dialogues.majorPlaceholder}</span>}
-            {/* <Select
-              className={"majorSelectSearch"}
-              classNamePrefix={"majorSelectSearch"}
-              options={toSelectForm(majors)}
-              onChange={handleMajorChange}
-              placeholder={Dialogues.majorPlaceholder}
-            /> */}
-            {/* <SelectSearch
-              className={"majorSelectSearch"}
-              options={toSelectForm(majors)}
-              placeholder={Dialogues.majorPlaceholder}
-              onChange={handleMajorChange}
-            /> */}
-            {/* <SelectSearch
-              value={major}
-              options={toSelectForm(majors)}
-              onChange={handleMajorChange}
-              placeholder={Dialogues.majorPlaceholder}
-            /> */}
-
-            {/*  alefseen
-         <select
-              ref={selectRef}
-              onFocus={onSelectFocus}
-              onBlur={onSelectBlur}
-              onChange={handleMajorChange}
-            >
-              {majors &&
-                majors.map(major => (
-                  <option key={major.id} value={major.id} selected={major.name==majorName?'selected':''}>
-                    {major.name}
-                  </option>
-                ))}
-            </select>
-                */}
 
             {majors && (
               <AlefSelectSearch
