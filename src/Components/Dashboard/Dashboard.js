@@ -80,10 +80,10 @@ const Dashboard = () => {
         <NavBar />
       </header>
       <main className={styles.main}>
-        <Menu>
+        <Menu style={{width: '70%'}}>
           <Calender {...{ courses }} onDelete={onDelete} />
         </Menu>
-        <CourseBox setSelectedCourseName={setSelectedCourseName} />
+        <CourseBox setSelectedCourseName={ setSelectedCourseName} />
         <CSSTransitionGroup
           transitionName="popUp"
           transitionEnterTimeout={300}

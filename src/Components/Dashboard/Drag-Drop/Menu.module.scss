@@ -1,0 +1,11 @@
+.mainDiv{
+    width: 100%;
+    overflow-x: auto;
+    @media screen and (min-width: 860px){
+        width: 70%;
+        overflow-x: hidden;
+        display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    }
+}

@@ -11,7 +11,7 @@ const Item = ({ name , onSelect }) => {
         end: (item, monitor) => {
           const dropResult = monitor.getDropResult()
           if (item && dropResult) {
-            onSelect()
+            onSelect(name)
           }
         },
         collect: monitor => ({

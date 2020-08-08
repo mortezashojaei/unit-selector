@@ -1,9 +1,10 @@
 import React from "react";
 import { useDrop } from "react-dnd";
 import ItemTypes from "../ItemTypes";
+import style from './Menu.module.scss'
 
 const Menu = (props) => {
-  const [drop] = useDrop({
+  const [collectedProps, drop] = useDrop({
     accept: ItemTypes.BOX,
     drop: () => ({ name: "Dustbin" }),
     collect: (monitor) => ({
@@ -13,7 +14,7 @@ const Menu = (props) => {
   });
   // const isActive = canDrop && isOver;
 
-  return <div ref={drop}>{props.children}</div>;
+  return <div className={style.mainDiv} ref={drop}>{props.children}</div>;
 };
 
 export default Menu;

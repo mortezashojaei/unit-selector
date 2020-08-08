@@ -37,6 +37,7 @@ const Calender = ({
       <div className="columns-container">
         <div className="time-slot-column">
           <div className="time-slots-wrapper">
+          <div className="time-slot-box hidden"></div>
             <div className="time-slot-box">
               <div className="orange">8</div>
               <div>{Dialogues.till}</div>
