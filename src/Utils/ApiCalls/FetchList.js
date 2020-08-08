@@ -1,4 +1,4 @@
-import { get, post } from "./API";
+import { get } from "./API";
 
 export function fetchMajors() {
   return get("/api/major/list/");

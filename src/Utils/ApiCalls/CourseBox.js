@@ -1,4 +1,4 @@
-import { get, post, deleteMethod } from "./API";
+import { get, post } from "./API";
 
 export function fetchCourses(params = "") {
   return get("/api/course/", params);

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Dialogues } from "Utils/Dialogues";
 
 const NotFound = () => {
   return (
     <div>
-      <h3>sorry the thing you're looking for doesn't exist</h3>
-      <Link to="/">صفحه اصلی</Link>
+      <h3>{Dialogues.notFoundPage}</h3>
+      <Link to="/">{Dialogues.homePage}</Link>
     </div>
   );
 };
