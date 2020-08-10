@@ -26,56 +26,49 @@ const NavBar = ({ history }) => {
   }, []);
 
   return (
-    <nav className={`${styles.navBar} `}>
-      <div className={styles.logo}>
-        <img
-          src={process.env.PUBLIC_URL + "/assets/images/logo2.png"}
-          alt="terme"
-        ></img>
-      </div>
-
-      <div className={styles.buttonContainer}>
-        <button>
-          <Gravatar
-            email={data}
-            size={60}
-            className={styles.avatar}
-            onClick={toggleProfile}
-          />
-        </button>
-        <div
-          className={`${styles.openGroup} ${
-            toogleProfile ? styles.nodisplay : ""
-          }`}
-        >
-          <span>
-            {data}
-            <i className="icon ion-ios-contact"></i>
-          </span>
+      <nav className={`${styles.navBar} `}>
+        <div className={styles.buttonContainer}>
           <button>
-            {Dialogues.editInfo}
-            <i className="icon ion-ios-settings"></i>
+            <Gravatar
+              email={data}
+              size={60}
+              className={styles.avatar}
+              onClick={toggleProfile}
+            />
           </button>
-          <button onClick={logout}>
-            {Dialogues.exit}
-            <i className="icon ion-ios-log-out"></i>
-          </button>
+          <div
+            className={`${styles.openGroup} ${
+              toogleProfile ? styles.nodisplay : ""
+            }`}
+          >
+            <span>
+              {data}
+              <i className="icon ion-ios-contact"></i>
+            </span>
+            <button>
+              {Dialogues.editInfo}
+              <i className="icon ion-ios-settings"></i>
+            </button>
+            <button onClick={logout}>
+              {Dialogues.exit}
+              <i className="icon ion-ios-log-out"></i>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className={`${styles.linkContainer}`}>
-        <h1>{Dialogues.termeUnitSelectorSystem}</h1>
-        {/*
+        <div className={`${styles.linkContainer}`}>
+          <h1>{Dialogues.termeUnitSelectorSystem}</h1>
+          {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>
         <Link to="#">لینک سوم منو</Link>
         <Link to="#">لینک چهارم منو</Link>
         */}
-      </div>
-      {/* <button className={styles.toggleButton} onClick={toggleMenu}>
+        </div>
+        {/* <button className={styles.toggleButton} onClick={toggleMenu}>
         <i className={`icon ion-md-${isMenuClosed ? "menu" : "close"}`}></i>
       </button> */}
-    </nav>
+      </nav>
   );
 };
 
