@@ -6,7 +6,7 @@ import { useAuth } from "Utils/Authentication/Auth";
 import { info } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
 
-const NavBar = ({ history }) => {
+const NavBar = ({ history , pageName}) => {
   const [data, setData] = useState(localStorage.getItem("email"));
   useEffect(() => {
     info().then(function (response) {
@@ -58,6 +58,14 @@ const NavBar = ({ history }) => {
 
         <div className={`${styles.linkContainer}`}>
           <h1>{Dialogues.termeUnitSelectorSystem}</h1>
+          {
+            pageName && (
+              <React.Fragment>
+                <span> / </span>
+            <h2>{pageName}</h2>
+              </React.Fragment>
+            )
+          }
           {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Layout.module.scss";
 import NavBar from "../NavBar/NavBar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children,pageName }) => {
   return (
     <div className={styles.layout}>
       <div className={styles.container}>
@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
               alt="terme"
             ></img>
           </div>
-          <NavBar />
+          <NavBar pageName={pageName} />
         </header>
         {children}
       </div>

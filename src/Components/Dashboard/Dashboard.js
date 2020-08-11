@@ -76,7 +76,7 @@ const Dashboard = () => {
 
   return (
     <DndProvider backend={Backend}>
-      <Layout>
+      <Layout pageName="میز کار">
       <main className={styles.main}>
         <Menu style={{width: '70%'}}>
           <Calender {...{ courses }} onDelete={onDelete} />
