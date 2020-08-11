@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "latest",
+    "enzyme": "^3.11.0",
     "json-server": "^0.15.1",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "enzyme-adapter-react-16": "^1.15.3",
     "eslint-plugin-react-hooks": "^2.3.0",
     "workbox-build": "^5.1.3"
   }
