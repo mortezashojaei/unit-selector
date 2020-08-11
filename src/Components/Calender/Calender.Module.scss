@@ -4,8 +4,10 @@
 	height: fit-content;
 	width: fit-content;
 	max-width: 100%;
-	border: 3px solid black;
-	margin: 3.5rem 0 3.5rem 3.5rem;
+	//border: 3px solid black;
+	//margin: 3.5rem 0 3.5rem 3.5rem;
+	margin: 10px;
+    box-shadow: #9a9a9a6b 1px 0px 7px 4px;
 	// border-radius: 0rem 9rem 0rem 0rem;
 	direction: rtl;
 
@@ -21,31 +23,33 @@
 		height: 100%;
 		// margin-top: 4%;
 		// padding-top: 20px;
-		border-left: 3px solid black;
+		//border-left: 3px solid black;
 	}
 	.main-column {
 		width: 100px;
 		height: fit-content;
 
-		border-left: 2px solid black;
+		//border-left: 2px solid black;
 		display: flex;
 		flex-direction: column;
 	}
 	.day-name-box {
 		// height: 100px;
-		border-bottom: 3px solid black;
+		border-bottom: 1px solid #3571a31f;
+		//border-bottom: 3px solid black;
 	}
 	.course-box {
 		padding: 3px;
 		height: 100px;
-		border-bottom: 1.5px solid black;
+		//border-bottom: 1.5px solid black;
 	}
 	.time-slots-wrapper {
 		// margin-top: 2.7rem;
 		height: 100%;
 	}
 	.time-slot-box {
-		border-top: 3px solid black;
+		//border-top: 3px solid black;
+		border-left: 1px solid #3571a31f;
 		height: 100px;
 		margin: auto;
 		text-align: center;
@@ -72,9 +76,11 @@
 	}
 	.course-card {
 		min-height: 100%;
-		background-color: $lightGray;
+		//background-color: $lightGray;
 		border-radius: 5px;
 		padding: 0.3rem 0.8rem;
+		transition: .2s;
+		box-shadow: #8080805e -1px -1px 2px 1px;
 		}
 	.course-card:hover {
 		box-shadow: 0.5px 0.9px 2px 1px $silver;
@@ -104,7 +110,7 @@
 		height: fit-content;
 		border-radius: 0rem 110px 0rem 0rem;
 		width: 100%;
-		margin: 0;
+		//margin: 0;
 		
     .day-name{
       height: 70px;
@@ -142,7 +148,7 @@
 		.course-box {
 			padding: 3px;
 			height: 70px;
-			border-bottom: 1.5px solid black;
+			//border-bottom: 1.5px solid black;
 		}
 	}
 }
