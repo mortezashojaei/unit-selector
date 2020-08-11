@@ -9,22 +9,23 @@ display: block !important;
     position: absolute;
     display: block;
     z-index: 100;
-
+    overflow-x: hidden;
+    padding: 5px;
+    border-bottom-right-radius: 15px;
     background: #f7f7f7;
-
     width: 100%;
-
-    border-radius: 2px;
-
-    padding: 5px 5px 0 5px;
-
     max-height: 115px;
-
-    overflow: scroll;
-
+    overflow-y: scroll;
     margin-top: 4px;
     & > li {
         width: 100%;
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        padding: 5px 10px;
+        &:last-child{
+          border-bottom: none;
+        }
     }
+    
   }
 }

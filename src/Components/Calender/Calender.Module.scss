@@ -74,8 +74,8 @@
 		min-height: 100%;
 		background-color: $lightGray;
 		border-radius: 5px;
-		padding: 0.8rem;
-	}
+		padding: 0.3rem 0.8rem;
+		}
 	.course-card:hover {
 		box-shadow: 0.5px 0.9px 2px 1px $silver;
 		height: calc(100%+2rem);
@@ -95,7 +95,7 @@
 	}
 	.delete-course {
 		float: left;
-		margin: -1.2rem 0 0 -1.2rem;
+		margin: -.8rem 0 0 -1.2rem;
 		cursor: pointer;
 		color: red;
 		font-size: 20px;

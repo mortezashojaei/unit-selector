@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import NavBar from "./NavBar/NavBar";
 import styles from "./Dashboard.module.scss";
 import CourseBox from "./CourseBox/CourseBox";
 import PopUp from "./PopUp/PopUp";
@@ -12,6 +11,7 @@ import Backend from "react-dnd-html5-backend";
 import Menu from "./Drag-Drop/Menu";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { Dialogues } from "Utils/Dialogues";
+import Layout from "./Layout/Layout";
 
 const Dashboard = () => {
   const [showPopUp, setShowPopUp] = useState(false);
@@ -76,9 +76,7 @@ const Dashboard = () => {
 
   return (
     <DndProvider backend={Backend}>
-      <header className={styles.header}>
-        <NavBar />
-      </header>
+      <Layout>
       <main className={styles.main}>
         <Menu style={{width: '70%'}}>
           <Calender {...{ courses }} onDelete={onDelete} />
@@ -101,6 +99,7 @@ const Dashboard = () => {
           )}
         </CSSTransitionGroup>
       </main>
+      </Layout>
     </DndProvider>
   );
 };

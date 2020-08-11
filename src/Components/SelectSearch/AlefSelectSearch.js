@@ -68,6 +68,8 @@ const AlefSelectSearch = (props) => {
         style={{ display: "block" }}
       >
         {items &&
+        items.filter((item) => item.name.includes(localVal.toLowerCase()))
+          .length > 0 ? (
           items
             .filter((item) => item.name.includes(localVal.toLowerCase()))
             .map((filteredItem) => (
@@ -80,7 +82,10 @@ const AlefSelectSearch = (props) => {
               >
                 {filteredItem.name}
               </li>
-            ))}
+            ))
+        ) : (
+          <span>نتیجه ای یافت نشد</span>
+        )}
       </div>
     </div>
   );
