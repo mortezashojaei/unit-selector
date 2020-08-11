@@ -1,5 +1,4 @@
-.main,
-.header {
+.main {
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -11,7 +10,7 @@
   justify-content: space-between;
   // flex-wrap: wrap;
 
-  @media screen and (min-width: 860px){
+  @media screen and (min-width: 860px) {
     flex-direction: row;
   }
 }
@@ -22,4 +21,6 @@
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }

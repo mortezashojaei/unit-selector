@@ -19,7 +19,7 @@ export const useAuth = () => {
   const {
     isAuthenticated,
     setIsAuthenticated,
-    tokenKey,
+    tokenKey, 
     mainPageUrl,
   } = useContext(AuthContext);
   const history = useHistory();
@@ -42,10 +42,10 @@ export const useAuth = () => {
       text: Dialogues.welcomeToTerme,
     });
   }
-  const logout = useCallback(() => {
+  const logout = useCallback((notFire) => {
     setSession(null, tokenKey);
     setIsAuthenticated(false);
-    Swal.fire({
+    !notFire && Swal.fire({
       icon: "success",
       title: Dialogues.exit,
       text: Dialogues.exitedSuccessfully,
@@ -55,7 +55,7 @@ export const useAuth = () => {
   useEffect(() => {
     const token = localStorage.getItem(tokenKey);
     if (!token) {
-      logout();
+      logout(true);
     } else {
       setSession(token, tokenKey);
     }

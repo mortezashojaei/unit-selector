@@ -1,0 +1,42 @@
+@import '~assets/styles/libs/vars';
+
+.layout{
+    width: 100%;
+    min-height: 100%;
+    display: inline-block;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-blend-mode: overlay;
+    background-color: #1b1717;
+    background-size: cover;
+    background-image: url("/assets/images/terme.jpg");
+    user-select: none;
+    .logo {
+        width: 100%;
+        height: 0;
+        margin: auto;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        img{
+          position: absolute;
+          top: -80px;
+          display: flex;
+          height: 100px;
+        }
+      }
+    .container{
+        background: #ddd;
+        margin:1em 10%;
+        border-radius: 10px;
+        filter: drop-shadow(-1px 1px 2px #2d2d2d40);
+    }
+}
+
+.header {
+    margin-top: 5.5rem;
+    margin-bottom: 4rem;
+    width: 100%;
+  }

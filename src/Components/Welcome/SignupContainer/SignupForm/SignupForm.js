@@ -46,11 +46,12 @@ const SignupForm = (props) => {
   useEffect(() => {
     setStudentNumber(props.student_number);
     setSemester(props.semester);
+    console.log('major= '+props.major)
     if (majors)
       for (var i = 0; i < majors.length; i++) {
         if (majors[i]["name"] === props.major) {
           setMajor(majors[i]["id"]);
-          console.log(i);
+          console.log(majors[i]["id"]);
         }
       }
     setFullName(props.full_name);
@@ -336,7 +337,7 @@ const SignupForm = (props) => {
           )}
 
           <label className="o-v">
-            {major && <span>{Dialogues.majorPlaceholder}</span>}
+            {majors && <span>{Dialogues.majorPlaceholder}</span>}
 
             {majors && (
               <AlefSelectSearch
