@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "latest",
     "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.5.0",
     "json-server": "^0.15.1",
     "node-sass": "^4.13.0",
     "prop-types": "^15.7.2",
@@ -33,6 +34,18 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
   },
   "browserslist": {
     "production": [

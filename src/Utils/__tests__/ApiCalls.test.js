@@ -1,6 +1,5 @@
 const { fetchMajors } = require("Utils/ApiCalls/FetchList");
 const { doesEmailExist } = require("Utils/ApiCalls/Auth");
-const { fetchCourses } = require("Utils/ApiCalls/CourseBox");
 
 test("majors fetches successfully", async (done) => {
   const response = await fetchMajors();
