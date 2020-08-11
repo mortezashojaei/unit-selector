@@ -127,6 +127,15 @@ This set of fonts are used in this project under the license: (.....)
     url("/assets/fonts/Vazir/Vazir.ttf") format("truetype");
   font-weight: normal;
 }
+/* mahboube mehravar fonts */
+@font-face {
+  font-family: 'Mahboube';
+  src: url('/assets/fonts/MahboubeMehravar/mahboubeh_mehravar.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/MahboubeMehravar/mahboubeh_mehravar.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/assets/fonts/MahboubeMehravar/mahboubeh_mehravar.woff2') format('woff2'), /* Modern Browsers */
+  url('/assets/fonts/MahboubeMehravar/mahboubeh_mehravar.woff') format('woff'), /* Modern Browsers */
+  url('/assets/fonts/MahboubeMehravar/Mahboubeh_mehravar.ttf') format('truetype'); /* Safari, Android, iOS */
+}
 
 /* basic font styles */
 * {

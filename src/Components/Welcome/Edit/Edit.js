@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../SignupContainer/SignupContainer.module.scss";
 import styles2 from "../../Dashboard/Dashboard.module.scss";
 import NavBar from "../../Dashboard/NavBar/NavBar";
+import Layout from "../../Dashboard/Layout/Layout";
 import SignupForm from "../SignupContainer/SignupForm/SignupForm";
 import { info } from "Utils/ApiCalls/Auth";
 const Edit = (props) => {
@@ -13,14 +14,11 @@ const Edit = (props) => {
   }, []);
 
   return (
-    <div>
-      <header className={styles2.header}>
-        <NavBar />
-      </header>
+      <Layout pageName="ویرایش مشخصات">
       <div className={styles.signupContainer}>
         <SignupForm key="signupForm" isEdit={true} {...data} />
       </div>
-    </div>
+      </Layout> 
   );
 };
 

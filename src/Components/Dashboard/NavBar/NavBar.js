@@ -5,8 +5,8 @@ import Gravatar from "react-gravatar";
 import { useAuth } from "Utils/Authentication/Auth";
 import { info } from "Utils/ApiCalls/Auth";
 import { Dialogues } from "Utils/Dialogues";
-
-const NavBar = ({ history }) => {
+import {Link} from "react-router-dom";
+const NavBar = ({ history , pageName}) => {
   const [data, setData] = useState(localStorage.getItem("email"));
   useEffect(() => {
     info().then(function (response) {
@@ -45,10 +45,12 @@ const NavBar = ({ history }) => {
               {data}
               <i className="icon ion-ios-contact"></i>
             </span>
+            <Link to="/edit">
             <button>
               {Dialogues.editInfo}
               <i className="icon ion-ios-settings"></i>
             </button>
+            </Link>
             <button onClick={logout}>
               {Dialogues.exit}
               <i className="icon ion-ios-log-out"></i>
@@ -58,6 +60,14 @@ const NavBar = ({ history }) => {
 
         <div className={`${styles.linkContainer}`}>
           <h1>{Dialogues.termeUnitSelectorSystem}</h1>
+          {
+            pageName && (
+              <React.Fragment>
+                <span> / </span>
+            <h2>{pageName}</h2>
+              </React.Fragment>
+            )
+          }
           {/*
         <Link to="#">لینک اول منو</Link>
         <Link to="#">لینک دوم منو</Link>

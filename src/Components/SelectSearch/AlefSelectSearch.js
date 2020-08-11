@@ -14,16 +14,21 @@ const AlefSelectSearch = (props) => {
   const [isSelect, setIsSelect] = useState(false);
   const [localVal, setLocalVal] = useState("");
   const [listVisibale, setListVisible] = useState(false);
-  // const nameFromId = (id) => {
-  //   for (let i in items) {
-  //     let x = items[i];
-  //     if (x.id === id) {
-  //       return x.name;
-  //     }
-  //   }
-  //   return "";
-  // };
+  const nameFromId = (id) => {
+    for (let i in items) {
+      let x = items[i];
+      if (x.id === id) {
+        return x.name;
+      }
+    }
+    return "";
+  };
 
+  useEffect(() => {
+    if (value) {
+      setLocalVal(nameFromId(value));
+    }
+  }, [value]);
   useEffect(() => {
     if (localVal.length === 0) onChange({ target: { value: "" } });
   }, [localVal, onChange]);
