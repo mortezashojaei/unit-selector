@@ -77,28 +77,29 @@ const Dashboard = () => {
   return (
     <DndProvider backend={Backend}>
       <Layout pageName="میز کار">
-      <main className={styles.main}>
-        <Menu style={{width: '70%'}}>
-          <Calender {...{ courses }} onDelete={onDelete} />
-        </Menu>
-        <CourseBox setSelectedCourseName={ setSelectedCourseName} />
-        <CSSTransitionGroup
-          transitionName="popUp"
-          transitionEnterTimeout={300}
-          transitionLeave={true}
-          transitionLeaveTimeout={300}
-          transitionAppearTimeout={300}
-          transitionAppear={true}
-        >
-          {showPopUp && (
-            <PopUp
-              setCourses={setCourses}
-              courseName={selectedCourseName}
-              togglePopUp={togglePopUp}
-            />
-          )}
-        </CSSTransitionGroup>
-      </main>
+        <main className={styles.main}>
+          <Menu style={{ width: "70%" }}>
+            <Calender {...{ courses }} onDelete={onDelete} />
+          </Menu>
+          <CourseBox setSelectedCourseName={setSelectedCourseName} />
+          <CSSTransitionGroup
+            transitionName="popUp"
+            transitionEnterTimeout={300}
+            transitionLeave={true}
+            transitionLeaveTimeout={300}
+            transitionAppearTimeout={300}
+            transitionAppear={true}
+          >
+            {showPopUp && (
+              <PopUp
+                courses={courses}
+                setCourses={setCourses}
+                courseName={selectedCourseName}
+                togglePopUp={togglePopUp}
+              />
+            )}
+          </CSSTransitionGroup>
+        </main>
       </Layout>
     </DndProvider>
   );
