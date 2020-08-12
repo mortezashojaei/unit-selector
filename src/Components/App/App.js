@@ -7,7 +7,7 @@ import "./App.scss";
 
 function App() {
   return (
-    <Provider store={store}>5
+    <Provider store={store}>
       <Routing />
     </Provider>
   );
