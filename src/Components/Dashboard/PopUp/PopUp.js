@@ -4,7 +4,7 @@ import ClassItem from "Components/Dashboard/PopUp/ClassItem/ClassItem";
 import { fetchCourses } from "Utils/ApiCalls/CourseBox";
 import { Dialogues } from "Utils/Dialogues";
 
-const PopUp = ({ courseName, togglePopUp, setCourses }) => {
+const PopUp = ({ courseName, togglePopUp, setCourses, courses }) => {
   const popUpRef = useRef();
   const [classList, setClassList] = useState([]);
 
@@ -51,6 +51,7 @@ const PopUp = ({ courseName, togglePopUp, setCourses }) => {
                 classTimes={classItem["class_times"]}
                 classItem={classItem}
                 togglePopUp={togglePopUp}
+                courses={courses}
               />
             ))}
         </div>
