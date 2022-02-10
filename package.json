@@ -7,7 +7,7 @@
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.5.0",
     "json-server": "^0.15.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dnd": "^10.0.2",
